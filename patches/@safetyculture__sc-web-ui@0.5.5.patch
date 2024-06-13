@@ -1,0 +1,224 @@
+diff --git a/package.json b/package.json
+index d77913dc61cf887d13991e6dbd9a89c6feffcea2..6098111b5a64a2dc1477fc8ab505b6eaacb08604 100644
+--- a/package.json
++++ b/package.json
+@@ -4,6 +4,18 @@
+   "license": "MIT",
+   "main": "cjs/packages/index.js",
+   "module": "packages/index.js",
++  "exports": {
++    ".": {
++      "types": "./packages/index.d.ts",
++      "module": "./packages/index.js",
++      "require": "./cjs/packages/index.js"
++    },
++    "./react": {
++      "types": "./packages/react/index.d.ts",
++      "module": "./packages/react/index.js",
++      "require": "./cjs/packages/react/index.js"
++    }
++  },
+   "sideEffects": false,
+   "files": [
+     "*",
+diff --git a/packages/react/divider/divider.js b/packages/react/divider/divider.js
+index 281ec203da979b5c4ea5fa06752ab59a20e43dc8..ecf1c7b469f3600c87d03fe71ae02f2c68a10316 100644
+--- a/packages/react/divider/divider.js
++++ b/packages/react/divider/divider.js
+@@ -1,3 +1,4 @@
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import styled from "../styled";
+ export const Divider = styled.div
+     .attrs({
+@@ -6,7 +7,7 @@ export const Divider = styled.div
+     "aria-orientation": "horizontal",
+ })
+     .withConfig({
+-    shouldForwardProp: (props, defaultValidator) => defaultValidator(props),
++    shouldForwardProp: (props) => emotionIsPropValid(props),
+ }) `
+   width: 100%;
+   border-top: 1px solid
+diff --git a/packages/react/grid/grid-styled.js b/packages/react/grid/grid-styled.js
+index 844012830b93e7b19153fe83f1c04ab2f99908b3..5defd22c96f3afd9803e440f7a279c4381a2cf7f 100644
+--- a/packages/react/grid/grid-styled.js
++++ b/packages/react/grid/grid-styled.js
+@@ -2,7 +2,7 @@ import styled, { css } from "../styled";
+ import { generateSpacing } from "../utils/generate-spacing";
+ import BaseGrid from "./grid";
+ export const Grid = styled(BaseGrid).withConfig({
+-    shouldForwardProp: (props, defaultValidator) => defaultValidator(props),
++    shouldForwardProp: (props) => emotionIsPropValid(props),
+ }) `
+   display: grid;
+   width: 100%;
+diff --git a/packages/react/modal/modal.styled.js b/packages/react/modal/modal.styled.js
+index c7bc876feeda055eb853443b6dd90394e2e87789..3506737bf555e01f2872c3385e997a462674be1e 100644
+--- a/packages/react/modal/modal.styled.js
++++ b/packages/react/modal/modal.styled.js
+@@ -1,3 +1,4 @@
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import { css } from "styled-components";
+ import styled from "../styled";
+ import { getDefaultZIndex } from "../styles";
+@@ -10,7 +11,7 @@ const sizes = {
+     xl: pxToRem(780),
+ };
+ export const ModalWrapper = styled.div.withConfig({
+-    shouldForwardProp: (props, defaultValidator) => defaultValidator(props),
++    shouldForwardProp: (props) => emotionIsPropValid(props),
+ }) `
+   ${({ isOpen }) => !isOpen &&
+     css `
+diff --git a/packages/react/overlay/overlay-styled.js b/packages/react/overlay/overlay-styled.js
+index 9fda22033a731ead5301cda7cb0b150771000d70..a44927190f1ca9a69fc5a3804ffbe157a4f8bfa9 100644
+--- a/packages/react/overlay/overlay-styled.js
++++ b/packages/react/overlay/overlay-styled.js
+@@ -1,17 +1,18 @@
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import styled, { css } from "../styled";
+ import { getDefaultZIndex } from "../styles";
+ import UnstyledOverlay from "./overlay";
+ const excludeProps = ["isFullscreen", "zIndex"];
+ const includeProps = ["isVisible"];
+ const StyledOverlay = styled(UnstyledOverlay).withConfig({
+-    shouldForwardProp: (prop, defaultValidator) => {
++    shouldForwardProp: (prop) => {
+         if (excludeProps.includes(prop)) {
+             return false;
+         }
+         if (includeProps.includes(prop)) {
+             return true;
+         }
+-        return defaultValidator(prop);
++        return emotionIsPropValid(prop);
+     },
+ }) `
+   z-index: ${(props) => { var _a; return (_a = props.zIndex) !== null && _a !== void 0 ? _a : getDefaultZIndex("overlay"); }};
+diff --git a/packages/react/skeleton/skeleton-styled.js b/packages/react/skeleton/skeleton-styled.js
+index e96643ebd8bb88d4e351a7fcd83d9c64d7d498d2..15a79a21d9941836aa4a2b1331c70c625960dc60 100644
+--- a/packages/react/skeleton/skeleton-styled.js
++++ b/packages/react/skeleton/skeleton-styled.js
+@@ -1,3 +1,4 @@
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import styled, { keyframes } from "../styled";
+ import { Skeleton } from "./skeleton";
+ export const skeletonLoadingAnimation = keyframes `
+@@ -20,14 +21,14 @@ const FORWARDED_PROP_EXCLUDES = [
+ ];
+ const FORWARDED_PROP_INCLUDES = ["animate"];
+ export const SkeletonStyled = styled(Skeleton).withConfig({
+-    shouldForwardProp: (prop, defaultValidator) => {
++    shouldForwardProp: (prop) => {
+         if (FORWARDED_PROP_EXCLUDES.includes(prop)) {
+             return false;
+         }
+         if (FORWARDED_PROP_INCLUDES.includes(prop)) {
+             return true;
+         }
+-        return defaultValidator(prop);
++        return emotionIsPropValid(prop);
+     },
+ }) `
+   background-color: ${(p) => p.theme._ui.colors.surface.border.disabled};
+diff --git a/packages/react/stack/styled-stack.js b/packages/react/stack/styled-stack.js
+index 056414a48791ecfdd8dbb5027c3f16ef3ee41e36..2d6b3a8abee979e38dca975834bfdc2b8fb1aedf 100644
+--- a/packages/react/stack/styled-stack.js
++++ b/packages/react/stack/styled-stack.js
+@@ -1,4 +1,4 @@
+-// eslint-disable-next-line lodash/import-scope
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import get from "lodash.get";
+ import styled from "../styled";
+ import { Stack as BaseStack } from "./stack";
+@@ -11,14 +11,14 @@ const spaceSelector = ({ spacing, theme }) => {
+     return `gap: ${selectedSpace};`;
+ };
+ export const Stack = styled(BaseStack).withConfig({
+-    shouldForwardProp: (prop, defaultValidator) => {
++    shouldForwardProp: (prop) => {
+         if (["spacing", "direction"].includes(prop)) {
+             return false;
+         }
+         if (["component"].includes(prop)) {
+             return true;
+         }
+-        return defaultValidator(prop);
++        return emotionIsPropValid(prop);
+     },
+ }) `
+   width: 100%;
+diff --git a/packages/react/tablist/tablist-styled.js b/packages/react/tablist/tablist-styled.js
+index dd4274857eaa594e3a7ec511a6a50331ebdc3ae9..ce0757db66f7ab5ac652bb8a14352001e13feb5c 100644
+--- a/packages/react/tablist/tablist-styled.js
++++ b/packages/react/tablist/tablist-styled.js
+@@ -1,3 +1,4 @@
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import styled, { css } from "../styled";
+ import { Text } from "../typography";
+ import { DEFAULT_FILL, DEFAULT_VARIANT, DEFAULT_WRAP } from "./constants";
+@@ -72,14 +73,14 @@ const baseStyles = css `
+ const FORWARDED_PROP_EXCLUDES = ["fill", "wrap", "variant"];
+ const FORWARDED_PROP_INCLUDES = ["component", "className"];
+ export const StyledTabList = styled(BaseTabList).withConfig({
+-    shouldForwardProp: (prop, defaultValidator) => {
++    shouldForwardProp: (prop) => {
+         if (FORWARDED_PROP_EXCLUDES.includes(prop)) {
+             return false;
+         }
+         if (FORWARDED_PROP_INCLUDES.includes(prop)) {
+             return true;
+         }
+-        return defaultValidator(prop);
++        return emotionIsPropValid(prop);
+     },
+ }) `
+   ${baseStyles}
+diff --git a/packages/react/tooltip/tooltip-styled.js b/packages/react/tooltip/tooltip-styled.js
+index 8dd1754ba0b601adcc4e0725b384dbd20d6e457b..3f04e565085fe90fd174bd1d888a2996e58558c4 100644
+--- a/packages/react/tooltip/tooltip-styled.js
++++ b/packages/react/tooltip/tooltip-styled.js
+@@ -1,3 +1,4 @@
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import { Popover } from "../popover";
+ import styled, { css } from "../styled";
+ import { getDefaultZIndex } from "../styles";
+@@ -16,14 +17,14 @@ const containerStyles = ({ theme }) => {
+ const FORWARDED_PROP_EXCLUDES = ["zIndex"];
+ const FORWARDED_PROP_INCLUDES = ["disableFocus"];
+ export const TooltipContainer = styled(Popover.Content).withConfig({
+-    shouldForwardProp: (prop, defaultValidator) => {
++    shouldForwardProp: (prop) => {
+         if (FORWARDED_PROP_EXCLUDES.includes(prop)) {
+             return false;
+         }
+         if (FORWARDED_PROP_INCLUDES.includes(prop)) {
+             return true;
+         }
+-        return defaultValidator(prop);
++        return emotionIsPropValid(prop);
+     },
+ }) `
+   ${containerStyles};
+diff --git a/packages/react/typography/text-styled.js b/packages/react/typography/text-styled.js
+index c01206311090f6d999e05db4da2b191b5cbbaf74..ce0f76a9e872935ff8282c17a75dce123378259b 100644
+--- a/packages/react/typography/text-styled.js
++++ b/packages/react/typography/text-styled.js
+@@ -1,4 +1,4 @@
+-// eslint-disable-next-line lodash/import-scope
++import emotionIsPropValid from "@emotion/is-prop-valid";
+ import get from "lodash.get";
+ import styled from "../styled";
+ import { Text } from "./text";
+@@ -169,9 +169,9 @@ const textAlignSelector = ({ textAlign }) => {
+ const EXLUDED_PROPS = ["clamp", "color", "variant", "textAlign"];
+ const INCLUDED_PROPS = ["component"];
+ export const StyledText = styled(Text).withConfig({
+-    shouldForwardProp: (prop, defaultValidator) => {
++    shouldForwardProp: (prop) => {
+         return (INCLUDED_PROPS.includes(prop) ||
+-            (!EXLUDED_PROPS.includes(prop) && defaultValidator(prop)));
++            (!EXLUDED_PROPS.includes(prop) && emotionIsPropValid(prop)));
+     },
+ }) `
+   ${variantSelector}
