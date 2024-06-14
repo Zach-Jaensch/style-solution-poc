@@ -1,0 +1,26 @@
+name: Semgrep
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    # Runs every day at 00:00.
+    - cron: "0 0 * * *"
+
+jobs:
+  semgrep:
+    name: Scan
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    # Don't run on Dependabot PRs.
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - name: Run Semgrep
+        run: semgrep ci
