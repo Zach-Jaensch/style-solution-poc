@@ -6,7 +6,49 @@ env:
   CC_TEST_REPORTER_ID: "${CC_TEST_REPORTER_ID}"
 
 steps:
-  - label: "Echo"
-    command: "echo 'Passing build. Good job.'"
+  - label: ":pnpm: Install dependencies"
+    command: .buildkite/run-with-docker.sh
+    key: install
+    plugins:
+      - cache#v1.0.1:
+          backend: s3
+          compression: tgz
+          manifest: pnpm-lock.yaml
+          path: .pnpm-store
+          restore: pipeline
+          save: file
+    agents:
+      queue: general-sandpit-us-east-1
+
+  # On branches, the cache is saved at the branch level.
+  - label: ":jest: Run unit tests"
+    branches: "!main"
+    depends_on: install
+    command: .buildkite/run-with-docker.sh "pnpm test"
+    plugins:
+      - cache#v1.0.1:
+          backend: s3
+          compression: tgz
+          manifest: pnpm-lock.yaml
+          path: .pnpm-store
+          restore: file
+          save: branch
+    agents:
+      queue: general-sandpit-us-east-1
+
+  # On main, the cache is saved at the pipeline level.
+  - label: ":jest: Run unit tests"
+    branches: "main"
+    depends_on: install
+    command: |
+      .buildkite/run-with-docker.sh "pnpm test"
+    plugins:
+      - cache#v1.0.1:
+          backend: s3
+          compression: tgz
+          manifest: pnpm-lock.yaml
+          path: .pnpm-store
+          restore: file
+          save: pipeline
     agents:
       queue: general-sandpit-us-east-1

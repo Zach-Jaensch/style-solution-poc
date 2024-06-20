@@ -8,6 +8,7 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["@safetyculture/sc-web-ui"],
   },
+  pageExtensions: ["page.tsx"],
   reactStrictMode: true,
 };
 

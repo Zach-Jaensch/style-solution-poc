@@ -81,18 +81,6 @@ running Prettier:
 pnpm prettier
 ```
 
-### Troubleshooting
-
-#### Temporary ESLint issue
-
-There's an issue with the ESLint extension for VS Code that should be patched
-in the next major release. For now, use the pre-release version.
-
-To do that, click on the extension in the "Extensions" panel, and then click
-"Switch to Pre-Release Version".
-
-For more, follow: https://github.com/microsoft/vscode-eslint/issues/1644
-
 ## Using this repository
 
 ### Running commands from packages

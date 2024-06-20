@@ -1,6 +1,8 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import jsdoc from "eslint-plugin-jsdoc";
+import jest from "eslint-plugin-jest";
+import { TEST_GLOB } from "./utils/constants.js";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export const baseConfig = [
@@ -25,6 +27,11 @@ export const baseConfig = [
       "jsdoc/require-description": "error",
       "jsdoc/check-values": "error",
     },
+  },
+  // Jest rules
+  {
+    files: [TEST_GLOB],
+    ...jest.configs["flat/recommended"],
   },
 ];
 

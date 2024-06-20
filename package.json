@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "eslint": "pnpm -r --no-bail eslint --max-warnings=0",
     "prepare": "husky",
-    "prettier": "prettier -c ."
+    "prettier": "prettier -c .",
+    "test": "pnpm -r --no-bail test"
   },
   "dependencies": {
     "husky": "^9.0.11",

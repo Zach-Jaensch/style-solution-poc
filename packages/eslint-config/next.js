@@ -4,7 +4,9 @@ import tseslint from "typescript-eslint";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
+import testingLibrary from "eslint-plugin-testing-library";
 import { baseConfig } from "./base.js";
+import { TEST_GLOB } from "./utils/constants.js";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 const nextConfig = [
@@ -47,6 +49,16 @@ const nextConfig = [
       "jsx-a11y": jsxA11y,
     },
     rules: jsxA11y.configs.recommended.rules,
+  },
+  // Testing Library rules
+  {
+    files: [TEST_GLOB],
+    plugins: {
+      "testing-library": fixupPluginRules({
+        rules: testingLibrary.rules,
+      }),
+    },
+    rules: testingLibrary.configs.react.rules,
   },
 ];
 
