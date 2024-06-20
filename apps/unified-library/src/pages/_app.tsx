@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={maggie}>
           <main className={notoSans.className}>
             <Component {...pageProps} />
-          </main>{" "}
+          </main>
         </ThemeProvider>
       </ConfigProvider>
     </>

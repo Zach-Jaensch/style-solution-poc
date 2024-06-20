@@ -1,0 +1,12 @@
+env:
+  BUILDKITE_BRANCH: "${BUILDKITE_BRANCH}"
+  BUILDKITE_COMMIT: "${BUILDKITE_COMMIT}"
+  BUILDKITE_PLUGIN_S3_CACHE_BUCKET: "sc-buildkite-build-cache-sandpit-us-east-2"
+  BUILDKITE_PLUGIN_S3_CACHE_PREFIX: "frontend-unified-library"
+  CC_TEST_REPORTER_ID: "${CC_TEST_REPORTER_ID}"
+
+steps:
+  - label: "Echo"
+    command: "echo 'Passing build. Good job.'"
+    agents:
+      queue: general-sandpit-us-east-1
