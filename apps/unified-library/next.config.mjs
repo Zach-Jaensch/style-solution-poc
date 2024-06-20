@@ -19,6 +19,7 @@ export default withSentryConfig(nextConfig, {
   org: "safetyculture-gw",
   project: "unified-library",
   authToken: process.env.SENTRY_AUTH_TOKEN,
+  release: process.env.VERCEL_GIT_COMMIT_SHA,
 
   // For all available options, see:
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/

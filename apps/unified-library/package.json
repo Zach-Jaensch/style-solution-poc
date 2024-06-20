@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "SENTRY_RELEASE=$(git rev-parse HEAD) next build",
+    "build": "next build",
     "dev": "next dev",
     "eslint": "eslint",
     "start": "next start",
