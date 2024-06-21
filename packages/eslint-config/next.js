@@ -5,6 +5,7 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import testingLibrary from "eslint-plugin-testing-library";
+import tanstackQuery from "@tanstack/eslint-plugin-query";
 import { baseConfig } from "./base.js";
 import { TEST_GLOB } from "./utils/constants.js";
 
@@ -59,6 +60,13 @@ const nextConfig = [
       }),
     },
     rules: testingLibrary.configs.react.rules,
+  },
+  // Tanstack Query
+  {
+    plugins: {
+      "tanstack-query": tanstackQuery,
+    },
+    rules: tanstackQuery.configs.recommended.rules,
   },
 ];
 

@@ -1,9 +1,18 @@
+import { useState } from "react";
 import type { AppProps } from "next/app";
 import { Noto_Sans } from "next/font/google";
 import Head from "next/head";
 import { ConfigProvider, defaultConfig } from "@safetyculture/sc-web-ui/react";
 import { GlobalStyle, maggie } from "@safetyculture/sc-web-ui";
 import { ThemeProvider } from "styled-components";
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { TransportProvider } from "@bufbuild/connect-query";
+import { publicTransport } from "#/utils/s12/transport";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -12,6 +21,8 @@ const notoSans = Noto_Sans({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <>
       <Head>
@@ -20,12 +31,21 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <GlobalStyle />
+
       <ConfigProvider config={defaultConfig}>
         <ThemeProvider theme={maggie}>
-          <main className={notoSans.className}>
-            <Component {...pageProps} />
-          </main>
+          <TransportProvider transport={publicTransport}>
+            <QueryClientProvider client={queryClient}>
+              <HydrationBoundary state={pageProps.dehydratedState}>
+                <main className={notoSans.className}>
+                  <Component {...pageProps} />
+                </main>
+              </HydrationBoundary>
+              <ReactQueryDevtools />
+            </QueryClientProvider>
+          </TransportProvider>
         </ThemeProvider>
       </ConfigProvider>
     </>

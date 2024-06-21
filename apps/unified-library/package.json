@@ -13,16 +13,24 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@bufbuild/connect-query": "^0.4.1",
+    "@bufbuild/connect-web": "^0.9.1",
+    "@emotion/is-prop-valid": "^1.2.2",
+    "@safetyculture/s12-apis-connect-web": "^1.241.1",
     "@safetyculture/sc-web-ui": "^0.5.5",
     "@sentry/nextjs": "^8.10.0",
+    "@tanstack/react-query": "^5.45.1",
+    "http-proxy-middleware": "^3.0.0",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc-bf3a29d097-20240603",
     "react-dom": "19.0.0-rc-bf3a29d097-20240603",
     "styled-components": "^5.3.11"
   },
   "devDependencies": {
+    "@bufbuild/protobuf": "^1.10.0",
     "@internal/eslint-config": "workspace:*",
     "@internal/typescript-config": "workspace:*",
+    "@tanstack/react-query-devtools": "^5.45.1",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",

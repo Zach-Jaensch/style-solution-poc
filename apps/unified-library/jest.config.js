@@ -8,6 +8,9 @@ const config = {
   resetMocks: true,
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "^#/(.*)$": "<rootDir>/src/$1",
+  },
 };
 
 export default createJestConfig(config);

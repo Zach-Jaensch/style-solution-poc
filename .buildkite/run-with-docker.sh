@@ -19,7 +19,7 @@ docker run --rm --network host \
     -c " \
       corepack enable
       pnpm config set store-dir .pnpm-store
-      pnpm config set \"//npm.pkg.github.com/:_authToken\" \"${GITHUB_TOKEN}\"
+      pnpm config set \"//npm.pkg.github.com/:_authToken\" \"$\{GITHUB_TOKEN\}\"
       pnpm install
       $command \
     "
