@@ -6,6 +6,7 @@ import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import testingLibrary from "eslint-plugin-testing-library";
 import tanstackQuery from "@tanstack/eslint-plugin-query";
+import lingui from "eslint-plugin-lingui";
 import { baseConfig } from "./base.js";
 import { TEST_GLOB } from "./utils/constants.js";
 
@@ -67,6 +68,21 @@ const nextConfig = [
       "tanstack-query": tanstackQuery,
     },
     rules: tanstackQuery.configs.recommended.rules,
+  },
+  // Lingui rules
+  // NOTE: these rules are experimental and can be removed if found to be problematic
+  {
+    plugins: {
+      lingui: fixupPluginRules(lingui),
+    },
+    rules: {
+      "lingui/no-unlocalized-strings": "error",
+      "lingui/t-call-in-function": "error",
+      "lingui/no-single-variables-to-translate": "error",
+      "lingui/no-expression-in-message": "error",
+      "lingui/no-single-tag-to-translate": "error",
+      "lingui/no-trans-inside-trans": "error",
+    },
   },
 ];
 

@@ -13,6 +13,9 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TransportProvider } from "@bufbuild/connect-query";
 import { publicTransport } from "#/utils/s12/transport";
+import { i18n } from "@lingui/core";
+import { I18nProvider } from "@lingui/react";
+import { useLinguiInit } from "../pagesRouterI18n";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -22,6 +25,7 @@ const notoSans = Noto_Sans({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
+  useLinguiInit(pageProps.translation);
 
   return (
     <>
@@ -34,20 +38,22 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <GlobalStyle />
 
-      <ConfigProvider config={defaultConfig}>
-        <ThemeProvider theme={maggie}>
-          <TransportProvider transport={publicTransport}>
-            <QueryClientProvider client={queryClient}>
-              <HydrationBoundary state={pageProps.dehydratedState}>
-                <main className={notoSans.className}>
-                  <Component {...pageProps} />
-                </main>
-              </HydrationBoundary>
-              <ReactQueryDevtools />
-            </QueryClientProvider>
-          </TransportProvider>
-        </ThemeProvider>
-      </ConfigProvider>
+      <I18nProvider i18n={i18n}>
+        <ConfigProvider config={defaultConfig}>
+          <ThemeProvider theme={maggie}>
+            <TransportProvider transport={publicTransport}>
+              <QueryClientProvider client={queryClient}>
+                <HydrationBoundary state={pageProps.dehydratedState}>
+                  <main className={notoSans.className}>
+                    <Component {...pageProps} />
+                  </main>
+                </HydrationBoundary>
+                <ReactQueryDevtools />
+              </QueryClientProvider>
+            </TransportProvider>
+          </ThemeProvider>
+        </ConfigProvider>
+      </I18nProvider>
     </>
   );
 }

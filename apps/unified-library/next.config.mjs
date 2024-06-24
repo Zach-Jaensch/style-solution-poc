@@ -7,6 +7,16 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ["@safetyculture/sc-web-ui"],
+    swcPlugins: [["@lingui/swc-plugin", {}]],
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.po$/,
+      use: {
+        loader: "@lingui/loader",
+      },
+    });
+    return config;
   },
   pageExtensions: ["page.tsx"],
   reactStrictMode: true,
