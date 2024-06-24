@@ -1,6 +1,7 @@
+import { env } from "node:process";
 import { withSentryConfig } from "@sentry/nextjs";
 
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   compiler: {
     styledComponents: true,
@@ -9,7 +10,8 @@ const nextConfig = {
     optimizePackageImports: ["@safetyculture/sc-web-ui"],
     swcPlugins: [["@lingui/swc-plugin", {}]],
   },
-  webpack: (config) => {
+
+  webpack: (/** @type {import("webpack").Configuration} */ config) => {
     config.module.rules.push({
       test: /\.po$/,
       use: {
@@ -28,8 +30,8 @@ export default withSentryConfig(nextConfig, {
 
   org: "safetyculture-gw",
   project: "unified-library",
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-  release: process.env.VERCEL_GIT_COMMIT_SHA,
+  authToken: env.SENTRY_AUTH_TOKEN,
+  release: env.VERCEL_GIT_COMMIT_SHA,
 
   // For all available options, see:
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/

@@ -1,7 +1,8 @@
-import { i18n, Messages } from "@lingui/core";
-import { useEffect } from "react";
+import type { Messages } from "@lingui/core";
+import { i18n } from "@lingui/core";
 import { usePathname } from "next/navigation";
-import { defaultLocale, supportedLocales } from "./consts/i18n";
+import { useEffect } from "react";
+import { defaultLocale, supportedLocales } from "./constants/i18n";
 
 export async function loadCatalog(
   locale: (typeof supportedLocales)[number] = defaultLocale,
@@ -11,7 +12,9 @@ export async function loadCatalog(
   }
 
   try {
-    const catalog = await import(`#/locales/${locale}.po`);
+    const catalog = (await import(`#/locales/${locale}.po`)) as {
+      messages: Messages;
+    };
     return catalog.messages;
   } catch {
     return null;
@@ -21,7 +24,7 @@ export async function loadCatalog(
 export function useLinguiInit(messages: Messages) {
   const isClient = typeof window !== "undefined";
   const pathname = usePathname();
-  const locale = pathname?.split("/")[1] ?? defaultLocale;
+  const locale = pathname.split("/")[1] ?? defaultLocale;
 
   if (!isClient && locale !== i18n.locale) {
     // there is single instance of i18n on the server
@@ -39,7 +42,7 @@ export function useLinguiInit(messages: Messages) {
     if (localeDidChange) {
       i18n.loadAndActivate({ locale, messages });
     }
-  }, [locale]);
+  }, [locale, messages]);
 
   return i18n;
 }

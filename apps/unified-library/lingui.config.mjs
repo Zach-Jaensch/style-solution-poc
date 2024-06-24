@@ -1,10 +1,10 @@
 import {
-  supportedLocales,
   defaultLocale,
   pseudoLocale,
-} from "./src/consts/i18n";
+  supportedLocales,
+} from "./src/constants/i18n";
 
-/** @type {import('@lingui/conf').LinguiConfig} */
+/** @type {import("@lingui/conf").LinguiConfig} */
 export default {
   // Lingui configuration expects a string[] for locales
   locales: [...supportedLocales],

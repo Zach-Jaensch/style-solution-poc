@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
-import Home from "./index.page";
 import { render } from "#/utils/test-utils";
+import Home from "./index.page";
 
 describe("example test", () => {
   it("renders a heading", () => {

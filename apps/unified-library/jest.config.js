@@ -4,11 +4,11 @@ const createJestConfig = nextJest({
   dir: "./",
 });
 
-/** @type {import('jest').Config} */
+/** @type {import("jest").Config} */
 const config = {
   coverageProvider: "v8",
   resetMocks: true,
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testEnvironment: "jsdom",
   moduleNameMapper: {
     "^#/(.*)$": "<rootDir>/src/$1",

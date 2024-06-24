@@ -2,14 +2,11 @@
  * For more info see
  * https://nextjs.org/docs/app/building-your-application/routing/internationalization
  * */
-import { type NextRequest, NextResponse } from "next/server";
-
 import Negotiator from "negotiator";
-import {
-  supportedLocales,
-  defaultLocale,
-  SupportedLocale,
-} from "./consts/i18n";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import type { SupportedLocale } from "./constants/i18n";
+import { defaultLocale, supportedLocales } from "./constants/i18n";
 
 const LOCALE_COOKIE = "S12_LOCALE";
 
@@ -46,7 +43,7 @@ function getRequestLocale(request: NextRequest): SupportedLocale {
     return cookieLocale.value;
   }
 
-  const langHeader = request.headers.get("accept-language") || undefined;
+  const langHeader = request.headers.get("accept-language") ?? undefined;
   const language = new Negotiator({
     headers: { "accept-language": langHeader },
   }).language(supportedLocales.slice());

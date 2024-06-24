@@ -1,13 +1,15 @@
-import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import { Text, TextProps } from "@safetyculture/sc-web-ui/react";
+import type { UrlObject } from "node:url";
+import type { TextProps } from "@safetyculture/sc-web-ui/react";
+import { Text } from "@safetyculture/sc-web-ui/react";
+import type { LinkProps as NextLinkProps } from "next/link";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { SupportedLocale } from "../consts/i18n";
-import { UrlObject } from "url";
+import type { SupportedLocale } from "../constants/i18n";
 
-type Params = {
+interface Params {
   locale: SupportedLocale;
   [key: string]: string | string[];
-};
+}
 
 type LinkProps = {
   variant?: TextProps["variant"];

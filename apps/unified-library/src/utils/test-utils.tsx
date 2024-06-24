@@ -1,11 +1,12 @@
-import { ReactNode } from "react";
-import { RenderOptions, render as _render } from "@testing-library/react";
-import { ConfigProvider, defaultConfig } from "@safetyculture/sc-web-ui/react";
-import { maggie } from "@safetyculture/sc-web-ui";
-import { ThemeProvider } from "styled-components";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { defaultLocale } from "#/consts/i18n";
+import { maggie } from "@safetyculture/sc-web-ui";
+import { ConfigProvider, defaultConfig } from "@safetyculture/sc-web-ui/react";
+import type { RenderOptions } from "@testing-library/react";
+import { render as _render } from "@testing-library/react";
+import type { ReactNode } from "react";
+import { ThemeProvider } from "styled-components";
+import { defaultLocale } from "#/constants/i18n";
 
 i18n.load({
   // Force default messages to be used
@@ -18,7 +19,6 @@ export function DefaultWrapper({ children }: { children: ReactNode }) {
 
   return (
     <I18nProvider i18n={i18n}>
-      hello
       <ConfigProvider config={defaultConfig}>
         <ThemeProvider theme={maggie}>{children}</ThemeProvider>
       </ConfigProvider>
@@ -27,9 +27,8 @@ export function DefaultWrapper({ children }: { children: ReactNode }) {
 }
 
 /**
- * A custom render to setup providers. Extends regular
- * render options with `providerProps` to allow injecting
- * different scenarios to test with.
+ * A custom render to setup providers. Extends regular render options with
+ * `providerProps` to allow injecting different scenarios to test with.
  *
  * @see https://testing-library.com/docs/react-testing-library/setup#custom-render
  */

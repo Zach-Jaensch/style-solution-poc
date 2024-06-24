@@ -1,21 +1,21 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { S12_API_URL } from "#/utils/s12/consts";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { S12_API_URL } from "#/utils/s12/constants";
 
 const proxy = createProxyMiddleware({
   target: S12_API_URL,
   changeOrigin: true,
 });
 
-type ResponseData = {
+interface ResponseData {
   message: string;
-};
+}
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>,
 ) {
-  proxy(req, res, (result: unknown) => {
+  await proxy(req, res, (result: unknown) => {
     if (result instanceof Error) {
       throw result;
     }

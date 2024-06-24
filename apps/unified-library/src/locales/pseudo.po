@@ -13,81 +13,81 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/[locale]/index.page.tsx:88
-#: src/pages/[locale]/other/index.page.tsx:89
-#: src/pages/[locale]/test/index.page.tsx:88
+#: src/pages/[locale]/index.page.tsx:90
+#: src/pages/[locale]/other/index.page.tsx:90
+#: src/pages/[locale]/test/index.page.tsx:90
 msgid "{value, plural, =0 {Hi {name}, You have no unread messages.} one {Hi {name}, You have # unread message.} other {Hi {name}, You have # unread messages.}}"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:64
-#: src/pages/[locale]/other/index.page.tsx:65
-#: src/pages/[locale]/test/index.page.tsx:64
+#: src/pages/[locale]/index.page.tsx:66
+#: src/pages/[locale]/other/index.page.tsx:66
+#: src/pages/[locale]/test/index.page.tsx:66
 msgid "{value, plural, =0 {You have no unread messages.} one {You have # unread message.} other {You have # unread messages.}}"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:45
-#: src/pages/[locale]/other/index.page.tsx:46
-#: src/pages/[locale]/test/index.page.tsx:45
+#: src/pages/[locale]/index.page.tsx:47
+#: src/pages/[locale]/other/index.page.tsx:47
+#: src/pages/[locale]/test/index.page.tsx:47
 msgid "Example body text in Noto Sans."
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:42
-#: src/pages/[locale]/other/index.page.tsx:43
-#: src/pages/[locale]/test/index.page.tsx:42
+#: src/pages/[locale]/index.page.tsx:44
+#: src/pages/[locale]/other/index.page.tsx:44
+#: src/pages/[locale]/test/index.page.tsx:44
 msgid "Example title text in Noto Sans"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:39
-#: src/pages/[locale]/other/index.page.tsx:40
-#: src/pages/[locale]/test/index.page.tsx:39
+#: src/pages/[locale]/index.page.tsx:41
+#: src/pages/[locale]/other/index.page.tsx:41
+#: src/pages/[locale]/test/index.page.tsx:41
 msgid "Hello World"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:29
-#: src/pages/[locale]/other/index.page.tsx:30
-#: src/pages/[locale]/test/index.page.tsx:29
+#: src/pages/[locale]/index.page.tsx:31
+#: src/pages/[locale]/other/index.page.tsx:31
+#: src/pages/[locale]/test/index.page.tsx:31
 msgctxt "main nav"
 msgid "Home"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:53
-#: src/pages/[locale]/other/index.page.tsx:54
-#: src/pages/[locale]/test/index.page.tsx:53
+#: src/pages/[locale]/index.page.tsx:55
+#: src/pages/[locale]/other/index.page.tsx:55
+#: src/pages/[locale]/test/index.page.tsx:55
 msgid "Number of messages"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:35
-#: src/pages/[locale]/other/index.page.tsx:36
-#: src/pages/[locale]/test/index.page.tsx:35
+#: src/pages/[locale]/index.page.tsx:37
+#: src/pages/[locale]/other/index.page.tsx:37
+#: src/pages/[locale]/test/index.page.tsx:37
 msgctxt "main nav"
 msgid "Other"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:50
-#: src/pages/[locale]/other/index.page.tsx:51
-#: src/pages/[locale]/test/index.page.tsx:50
+#: src/pages/[locale]/index.page.tsx:52
+#: src/pages/[locale]/other/index.page.tsx:52
+#: src/pages/[locale]/test/index.page.tsx:52
 msgid "Plural translation example"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:73
-#: src/pages/[locale]/other/index.page.tsx:74
-#: src/pages/[locale]/test/index.page.tsx:73
+#: src/pages/[locale]/index.page.tsx:75
+#: src/pages/[locale]/other/index.page.tsx:75
+#: src/pages/[locale]/test/index.page.tsx:75
 msgid "Plural translation example with variables"
 msgstr ""
 
-#: src/pages/[locale]/report/[shareId]/index.page.tsx:33
+#: src/pages/[locale]/report/[shareId]/index.page.tsx:31
 msgid "report name {0}"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:32
-#: src/pages/[locale]/other/index.page.tsx:33
-#: src/pages/[locale]/test/index.page.tsx:32
+#: src/pages/[locale]/index.page.tsx:34
+#: src/pages/[locale]/other/index.page.tsx:34
+#: src/pages/[locale]/test/index.page.tsx:34
 msgctxt "main nav"
 msgid "Test"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:77
-#: src/pages/[locale]/other/index.page.tsx:78
-#: src/pages/[locale]/test/index.page.tsx:77
+#: src/pages/[locale]/index.page.tsx:79
+#: src/pages/[locale]/other/index.page.tsx:79
+#: src/pages/[locale]/test/index.page.tsx:79
 msgid "Your name"
 msgstr ""

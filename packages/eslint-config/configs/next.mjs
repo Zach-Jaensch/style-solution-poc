@@ -1,26 +1,23 @@
 import { fixupPluginRules } from "@eslint/compat";
 import next from "@next/eslint-plugin-next";
-import tseslint from "typescript-eslint";
+import * as tanstackQuery from "@tanstack/eslint-plugin-query";
 import jsxA11y from "eslint-plugin-jsx-a11y";
+import lingui from "eslint-plugin-lingui";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import testingLibrary from "eslint-plugin-testing-library";
-import tanstackQuery from "@tanstack/eslint-plugin-query";
-import lingui from "eslint-plugin-lingui";
-import { baseConfig } from "./base.js";
-import { TEST_GLOB } from "./utils/constants.js";
+import tseslint from "typescript-eslint";
+import { TEST_GLOB } from "../utils/constants.js";
+import { baseConfig } from "./base.mjs";
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
+/** @type {import("eslint").Linter.FlatConfig[]} */
 const nextConfig = [
   ...baseConfig,
-  {
-    ignores: [".next/*", "next.config.mjs"],
-  },
   // React rules
   {
     plugins: {
       react: react,
-      "react-hooks": reactHooks,
+      "react-hooks": fixupPluginRules(reactHooks),
     },
     rules: {
       ...react.configs.recommended.rules,
@@ -56,6 +53,7 @@ const nextConfig = [
   {
     files: [TEST_GLOB],
     plugins: {
+      // Doesn't support ESLint 9.x.
       "testing-library": fixupPluginRules({
         rules: testingLibrary.rules,
       }),
@@ -65,7 +63,7 @@ const nextConfig = [
   // Tanstack Query
   {
     plugins: {
-      "tanstack-query": tanstackQuery,
+      "@tanstack/query": tanstackQuery,
     },
     rules: tanstackQuery.configs.recommended.rules,
   },
@@ -75,13 +73,14 @@ const nextConfig = [
     plugins: {
       lingui: fixupPluginRules(lingui),
     },
+    ignores: [TEST_GLOB],
     rules: {
-      "lingui/no-unlocalized-strings": "error",
-      "lingui/t-call-in-function": "error",
-      "lingui/no-single-variables-to-translate": "error",
       "lingui/no-expression-in-message": "error",
       "lingui/no-single-tag-to-translate": "error",
+      "lingui/no-single-variables-to-translate": "error",
       "lingui/no-trans-inside-trans": "error",
+      "lingui/no-unlocalized-strings": "error",
+      "lingui/t-call-in-function": "error",
     },
   },
 ];

@@ -1,12 +1,13 @@
-import { Trans, Plural, t } from "@lingui/macro";
+import type { ParsedUrlQuery } from "node:querystring";
+import { Plural, Trans, t } from "@lingui/macro";
 import { Avatar, Stack, Text } from "@safetyculture/sc-web-ui/react";
-import styled from "styled-components";
-import { loadCatalog } from "#/pagesRouterI18n";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { SupportedLocale, supportedLocales } from "#/consts/i18n";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { useState } from "react";
+import styled from "styled-components";
 import { Link } from "#/components/link";
-import type { ParsedUrlQuery } from "querystring";
+import type { SupportedLocale } from "#/constants/i18n";
+import { supportedLocales } from "#/constants/i18n";
+import { loadCatalog } from "#/pages-router-i18n";
 
 const PaddedStack = styled(Stack)`
   padding: ${(props) => props.theme.space.s3};
@@ -16,6 +17,7 @@ interface Params extends ParsedUrlQuery {
   locale: SupportedLocale;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface -- Placeholder
 interface PageProps {}
 
 export default function Home() {

@@ -19,8 +19,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "jest.*.js",
-    "lingui.config.mjs"
+    "*.*js"
   ],
   "exclude": ["node_modules"]
 }

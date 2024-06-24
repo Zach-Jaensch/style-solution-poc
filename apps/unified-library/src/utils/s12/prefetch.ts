@@ -1,8 +1,7 @@
-import { QueryClient } from "@tanstack/react-query";
-
-import { publicServerSideTransport } from "#/utils/s12/transport";
+import type { UnaryHooks } from "@bufbuild/connect-query";
 import type { Message, PartialMessage } from "@bufbuild/protobuf";
-import { UnaryHooks } from "@bufbuild/connect-query";
+import type { QueryClient } from "@tanstack/react-query";
+import { publicServerSideTransport } from "#/utils/s12/transport";
 
 export async function prefetch<I extends Message<I>, O extends Message<O>>(
   queryClient: QueryClient,

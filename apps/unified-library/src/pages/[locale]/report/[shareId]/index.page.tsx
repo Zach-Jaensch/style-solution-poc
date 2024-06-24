@@ -1,22 +1,20 @@
 // TODO: REMOVE AFTER FIRST PAGE IS IMPLEMENTED
-
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import type { ParsedUrlQuery } from "node:querystring";
 import { Trans } from "@lingui/macro";
-
-import { publicReportQueryService } from "#/utils/s12/public_reports";
+import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
+import type { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
+import type { SupportedLocale } from "#/constants/i18n";
+import { loadCatalog } from "#/pages-router-i18n";
 import { prefetch } from "#/utils/s12/prefetch";
-import { supportedLocales } from "#/consts/i18n";
-import type { SupportedLocale } from "#/consts/i18n";
-import type { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import type { ParsedUrlQuery } from "querystring";
-import { loadCatalog } from "#/pagesRouterI18n";
+import { publicReportQueryService } from "#/utils/s12/public-reports";
 
 interface Params extends ParsedUrlQuery {
   locale: SupportedLocale;
   shareId: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface -- Placeholder
 interface PageProps {}
 
 export default function Page() {
@@ -47,7 +45,7 @@ export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
     };
   }
 
-  const shareId = ctx.params?.shareId as string;
+  const shareId = ctx.params?.shareId;
   const queryClient = new QueryClient();
 
   await prefetch(queryClient, publicReportQueryService.getPublicReport, {
