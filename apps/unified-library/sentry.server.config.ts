@@ -4,6 +4,7 @@
 import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
+  enabled: Boolean(process.env.VERCEL),
   dsn: "https://8287169b80688472d986be6167481f8d@o176876.ingest.us.sentry.io/4507451649949696",
   environment: process.env.NEXT_PUBLIC_VERCEL_ENV,
 
