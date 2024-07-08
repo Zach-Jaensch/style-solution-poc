@@ -24,6 +24,7 @@
   "pnpm": {
     "patchedDependencies": {
       "@bufbuild/protobuf@1.10.0": "patches/@bufbuild__protobuf@1.10.0.patch",
+      "@safetyculture/s12-apis-connect-web@1.242.38": "patches/@safetyculture__s12-apis-connect-web@1.242.38.patch",
       "@safetyculture/sc-web-ui@0.5.5": "patches/@safetyculture__sc-web-ui@0.5.5.patch"
     }
   }

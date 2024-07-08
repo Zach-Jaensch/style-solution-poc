@@ -25,6 +25,12 @@
 | [`@internal/eslint-config`](packages/eslint-config/README.md)         | A set of ESLint configurations.     |
 | [`@internal/typescript-config`](packages/typescript-config/README.md) | A set of TypeScript configurations. |
 
+## Playwright tests
+
+| Name                                                            | Description                                |
+| --------------------------------------------------------------- | ------------------------------------------ |
+| [`unified-library-tests`](playwright/unified-library/README.md) | The Unified Library Playwright test suite. |
+
 ## Getting set up
 
 This guide is designed to get you up and running in this repo quickly.

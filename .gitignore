@@ -34,3 +34,9 @@ dist/
 
 # Required for Buildkite cache only
 .pnpm-store/
+
+# Playwright files
+blob-report/
+playwright-report/
+playwright/.cache/
+test-results/

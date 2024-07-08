@@ -10,7 +10,6 @@ const nextConfig = {
     optimizePackageImports: ["@safetyculture/sc-web-ui"],
     swcPlugins: [["@lingui/swc-plugin", {}]],
   },
-
   webpack: (/** @type {import("webpack").Configuration} */ config) => {
     config.module.rules.push({
       test: /\.po$/,

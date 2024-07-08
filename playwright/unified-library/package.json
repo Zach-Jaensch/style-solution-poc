@@ -1,0 +1,25 @@
+{
+  "name": "unified-library-tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "e2e": "playwright test --ui",
+    "e2e:codegen": "playwright codegen",
+    "e2e:headless": "playwright test",
+    "e2e:report": "playwright show-report",
+    "eslint": "eslint",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@bufbuild/protobuf": "^1.10.0",
+    "@internal/eslint-config": "workspace:*",
+    "@internal/typescript-config": "workspace:*",
+    "@playwright/test": "^1.45.1",
+    "@safetyculture/s12-apis-connect-web": "^1.242.38",
+    "@types/node": "^20.14.9",
+    "next": "15.0.0-rc.0",
+    "playwright-core": "^1.45.1",
+    "typescript": "^5.5.3"
+  }
+}

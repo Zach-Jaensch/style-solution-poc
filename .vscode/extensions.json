@@ -3,6 +3,7 @@
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
     "esbenp.prettier-vscode",
+    "ms-playwright.playwright",
     // Adds support for advanced GitHub markdown blockquotes:
     // https://github.com/orgs/community/discussions/16925
     "yahyabatulu.vscode-markdown-alert"

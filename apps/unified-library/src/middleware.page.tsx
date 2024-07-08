@@ -68,7 +68,7 @@ export function middleware(request: NextRequest) {
 
 function getCSPHeader(): [string, string] {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
-  const cspHeader = `
+  let cspHeader = `
     default-src 'self';
     connect-src 'self' *.sentry.io/;
     script-src 'self' 'unsafe-inline' 'unsafe-eval';
@@ -82,6 +82,12 @@ function getCSPHeader(): [string, string] {
     frame-ancestors 'none';
     upgrade-insecure-requests;
 `;
+
+  if (process.env.NODE_ENV === "development") {
+    // This causes Safari to redirect to HTTPS for localhost.
+    cspHeader = cspHeader.replace("upgrade-insecure-requests;", "");
+  }
+
   // Replace newline characters and spaces
   return [cspHeader.replace(/\s{2,}/g, " ").trim(), nonce];
 }
