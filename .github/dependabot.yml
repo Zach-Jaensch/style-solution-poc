@@ -7,6 +7,8 @@ registries:
 updates:
   - package-ecosystem: "npm"
     directory: "/"
+    commit-message:
+      prefix: "[UL-142] "
     registries:
       - npm-github
     groups:
@@ -21,5 +23,7 @@ updates:
       - dependency-name: "styled-components"
   - package-ecosystem: "github-actions"
     directory: "/"
+    commit-message:
+      prefix: "[UL-142] "
     schedule:
       interval: "weekly"
