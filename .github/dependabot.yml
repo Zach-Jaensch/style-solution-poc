@@ -5,12 +5,13 @@ registries:
     url: https://npm.pkg.github.com
     token: ${{secrets.PACKAGES_TOKEN}}
 updates:
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/"
     groups:
-      update-types:
-        - "minor"
-        - "patch"
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
     schedule:
       interval: "weekly"
     ignore:
