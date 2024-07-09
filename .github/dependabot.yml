@@ -7,6 +7,8 @@ registries:
 updates:
   - package-ecosystem: "npm"
     directory: "/"
+    registries:
+      - npm-github
     groups:
       minor-patch:
         update-types:
