@@ -12,10 +12,16 @@ updates:
     registries:
       - npm-github
     groups:
+      # Groups minor and patch updates for less noise.
       minor-patch:
         update-types:
           - "minor"
           - "patch"
+      # These need to be updated in the same PR.
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
     schedule:
       interval: "weekly"
     ignore:
