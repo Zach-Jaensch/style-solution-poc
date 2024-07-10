@@ -36,6 +36,9 @@ export default function Home() {
         <Link href="/other">
           <Trans context="main nav">Other</Trans>
         </Link>
+        <Link href="/layout-test">
+          <Trans context="main nav">Layout Test</Trans>
+        </Link>
       </Stack>
       <PaddedStack spacing="s3" align="center">
         <Avatar name={t`Hello World`} size="medium" />

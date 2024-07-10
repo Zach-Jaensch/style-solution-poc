@@ -14,9 +14,18 @@ import type { AppProps } from "next/app";
 import { Noto_Sans } from "next/font/google";
 import Head from "next/head";
 import { useState } from "react";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import type { PageWithLayout } from "#/components/layout";
 import { publicTransport } from "#/utils/s12/transport";
 import { useLinguiInit } from "../pages-router-i18n";
+
+const NextGlobalStyles = createGlobalStyle`
+  body > div:first-child,
+  div#__next,
+  div#__next > div:first-child {
+    height: 100%;
+  }
+`;
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -29,12 +38,15 @@ interface ExtendedAppProps {
   translation: Messages;
 }
 
-export default function App({
-  Component,
-  pageProps,
-}: AppProps<ExtendedAppProps>) {
+interface AppPropsWithLayout extends AppProps<ExtendedAppProps> {
+  Component: PageWithLayout;
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(() => new QueryClient());
   useLinguiInit(pageProps.translation);
+
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
     <>
@@ -47,6 +59,7 @@ export default function App({
       </Head>
 
       <GlobalStyle />
+      <NextGlobalStyles />
 
       <I18nProvider i18n={i18n}>
         <ConfigProvider config={defaultConfig}>
@@ -55,7 +68,7 @@ export default function App({
               <QueryClientProvider client={queryClient}>
                 <HydrationBoundary state={pageProps.dehydratedState}>
                   <main className={notoSans.className}>
-                    <Component {...pageProps} />
+                    {getLayout(<Component {...pageProps} />)}
                   </main>
                 </HydrationBoundary>
                 <ReactQueryDevtools />
