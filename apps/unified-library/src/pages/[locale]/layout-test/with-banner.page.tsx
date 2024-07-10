@@ -1,8 +1,8 @@
 import type { ParsedUrlQuery } from "node:querystring";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import styled from "styled-components";
-import { Layout } from "#/components/layout";
-import type { PageWithLayout } from "#/components/layout";
+import type { PageWithLayout } from "#/components/layouts";
+import { BaseLayout, SidenavLayout } from "#/components/layouts";
 import type { SupportedLocale } from "#/constants/i18n";
 import { supportedLocales } from "#/constants/i18n";
 import { loadCatalog } from "#/pages-router-i18n";
@@ -40,7 +40,11 @@ const LayoutTestPage: PageWithLayout = () => {
 };
 
 LayoutTestPage.getLayout = (page) => {
-  return <Layout showBanner={true}>{page}</Layout>;
+  return (
+    <BaseLayout showBanner={true}>
+      <SidenavLayout>{page}</SidenavLayout>
+    </BaseLayout>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = () => {

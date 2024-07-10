@@ -13,31 +13,48 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/[locale]/index.page.tsx:90
+#: src/components/category-panel/category-panel.tsx:77
+msgid "{0, plural, one {{1} # item} other {{2} # items}}"
+msgstr "{0, plural, one {{1} # item} other {{2} # items}}"
+
+#: src/components/category-panel/category-panel.tsx:55
+msgid "{totalCount, plural, one {All categories # item} other {All categories # items}}"
+msgstr "{totalCount, plural, one {All categories # item} other {All categories # items}}"
+
+#: src/pages/[locale]/index.page.tsx:93
 #: src/pages/[locale]/other/index.page.tsx:90
 #: src/pages/[locale]/test/index.page.tsx:90
 msgid "{value, plural, =0 {Hi {name}, You have no unread messages.} one {Hi {name}, You have # unread message.} other {Hi {name}, You have # unread messages.}}"
 msgstr "{value, plural, =0 {Hi {name}, You have no unread messages.} one {Hi {name}, You have # unread message.} other {Hi {name}, You have # unread messages.}}"
 
-#: src/pages/[locale]/index.page.tsx:66
+#: src/pages/[locale]/index.page.tsx:69
 #: src/pages/[locale]/other/index.page.tsx:66
 #: src/pages/[locale]/test/index.page.tsx:66
 msgid "{value, plural, =0 {You have no unread messages.} one {You have # unread message.} other {You have # unread messages.}}"
 msgstr "{value, plural, =0 {You have no unread messages.} one {You have # unread message.} other {You have # unread messages.}}"
 
-#: src/pages/[locale]/index.page.tsx:47
+#. shows all available listings in library
+#: src/components/category-panel/category-panel.tsx:61
+msgid "All Categories"
+msgstr "All Categories"
+
+#: src/components/category-panel/category-panel.tsx:48
+msgid "Categories"
+msgstr "Categories"
+
+#: src/pages/[locale]/index.page.tsx:50
 #: src/pages/[locale]/other/index.page.tsx:47
 #: src/pages/[locale]/test/index.page.tsx:47
 msgid "Example body text in Noto Sans."
 msgstr "Example body text in Noto Sans."
 
-#: src/pages/[locale]/index.page.tsx:44
+#: src/pages/[locale]/index.page.tsx:47
 #: src/pages/[locale]/other/index.page.tsx:44
 #: src/pages/[locale]/test/index.page.tsx:44
 msgid "Example title text in Noto Sans"
 msgstr "Example title text in Noto Sans"
 
-#: src/pages/[locale]/index.page.tsx:41
+#: src/pages/[locale]/index.page.tsx:44
 #: src/pages/[locale]/other/index.page.tsx:41
 #: src/pages/[locale]/test/index.page.tsx:41
 msgid "Hello World"
@@ -50,7 +67,12 @@ msgctxt "main nav"
 msgid "Home"
 msgstr "Home"
 
-#: src/pages/[locale]/index.page.tsx:55
+#: src/pages/[locale]/index.page.tsx:40
+msgctxt "main nav"
+msgid "Layout Test"
+msgstr "Layout Test"
+
+#: src/pages/[locale]/index.page.tsx:58
 #: src/pages/[locale]/other/index.page.tsx:55
 #: src/pages/[locale]/test/index.page.tsx:55
 msgid "Number of messages"
@@ -63,13 +85,13 @@ msgctxt "main nav"
 msgid "Other"
 msgstr "Other"
 
-#: src/pages/[locale]/index.page.tsx:52
+#: src/pages/[locale]/index.page.tsx:55
 #: src/pages/[locale]/other/index.page.tsx:52
 #: src/pages/[locale]/test/index.page.tsx:52
 msgid "Plural translation example"
 msgstr "Plural translation example"
 
-#: src/pages/[locale]/index.page.tsx:75
+#: src/pages/[locale]/index.page.tsx:78
 #: src/pages/[locale]/other/index.page.tsx:75
 #: src/pages/[locale]/test/index.page.tsx:75
 msgid "Plural translation example with variables"
@@ -86,7 +108,7 @@ msgctxt "main nav"
 msgid "Test"
 msgstr "Test"
 
-#: src/pages/[locale]/index.page.tsx:79
+#: src/pages/[locale]/index.page.tsx:82
 #: src/pages/[locale]/other/index.page.tsx:79
 #: src/pages/[locale]/test/index.page.tsx:79
 msgid "Your name"

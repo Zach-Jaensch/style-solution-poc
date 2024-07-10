@@ -45,33 +45,11 @@ function prefixHref(href: UrlObject | string, prefix: string) {
   return prefixedHref;
 }
 
-export function Link({
-  href,
-  replace,
-  scroll,
-  shallow,
-  passHref,
-  prefetch,
-  onMouseEnter,
-  onTouchStart,
-  onClick,
-  ...props
-}: LinkProps) {
+function BaseLink({ href, ...props }: LinkProps) {
   const { locale } = useRouter().query as Params;
-
-  return (
-    <NextLink
-      href={prefixHref(href, locale)}
-      replace={replace}
-      scroll={scroll}
-      shallow={shallow}
-      passHref={passHref}
-      prefetch={prefetch}
-      onMouseEnter={onMouseEnter}
-      onTouchStart={onTouchStart}
-      onClick={onClick}
-    >
-      <Text component="span" variant="inherit" {...props} />
-    </NextLink>
-  );
+  return <NextLink href={prefixHref(href, locale)} {...props} />;
 }
+
+export const Link = ({ ...props }: LinkProps) => (
+  <Text component={BaseLink} variant="inherit" {...props} />
+);

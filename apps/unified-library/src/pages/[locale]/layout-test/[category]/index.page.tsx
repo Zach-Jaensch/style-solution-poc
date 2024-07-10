@@ -1,47 +1,29 @@
 import type { ParsedUrlQuery } from "node:querystring";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
-import type { GetStaticPaths, GetStaticProps } from "next";
-import styled from "styled-components";
+import type { GetServerSideProps, GetStaticPaths } from "next";
 import { categoryStub } from "#/components/category-panel/category.stub";
 import { BaseLayout, SidenavLayout } from "#/components/layouts";
 import type { PageWithLayout } from "#/components/layouts";
 import type { SupportedLocale } from "#/constants/i18n";
 import { supportedLocales } from "#/constants/i18n";
 import { loadCatalog } from "#/pages-router-i18n";
+import { formatForUrl } from "#/utils/url-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface -- Placeholder
 interface PageProps {}
 
 interface Params extends ParsedUrlQuery {
   locale: SupportedLocale;
+  category: string;
 }
 
-const CardList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const Card = styled.div`
-  width: 300px;
-  aspect-ratio: 1.6;
-  border: 1px solid blue;
-`;
-
 /** TODO Delete when first page is implemented */
-const LayoutTestPage: PageWithLayout = () => {
-  return (
-    <CardList>
-      {Array(20)
-        .fill(0)
-        .map((_, idx) => (
-          <Card key={idx}>{idx}</Card>
-        ))}
-    </CardList>
-  );
+const CategoryTestPage: PageWithLayout = () => {
+  // eslint-disable-next-line lingui/no-unlocalized-strings -- mock
+  return <span>Pretend there is stuff here</span>;
 };
 
-LayoutTestPage.getLayout = (page) => {
+CategoryTestPage.getLayout = (page) => {
   return (
     <BaseLayout>
       <SidenavLayout>{page}</SidenavLayout>
@@ -50,7 +32,17 @@ LayoutTestPage.getLayout = (page) => {
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = () => {
-  const paths = supportedLocales.map((locale) => ({ params: { locale } }));
+  const paths = categoryStub
+    .map((c) => c.name)
+    .map((category) =>
+      supportedLocales.map((locale) => ({
+        params: {
+          locale,
+          category: formatForUrl(category),
+        },
+      })),
+    )
+    .flat();
 
   return {
     paths,
@@ -58,7 +50,7 @@ export const getStaticPaths: GetStaticPaths<Params> = () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<PageProps, Params> = async (
+export const getStaticProps: GetServerSideProps<PageProps, Params> = async (
   ctx,
 ) => {
   const locale = ctx.params?.locale;
@@ -85,4 +77,4 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   };
 };
 
-export default LayoutTestPage;
+export default CategoryTestPage;

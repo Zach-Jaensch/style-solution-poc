@@ -7,7 +7,7 @@ import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import testingLibrary from "eslint-plugin-testing-library";
 import tseslint from "typescript-eslint";
-import { TEST_GLOB } from "../utils/constants.js";
+import { STUB_GLOB, TEST_GLOB } from "../utils/constants.js";
 import { baseConfig } from "./base.mjs";
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
@@ -73,7 +73,7 @@ const nextConfig = [
     plugins: {
       lingui: fixupPluginRules(lingui),
     },
-    ignores: [TEST_GLOB],
+    ignores: [STUB_GLOB, TEST_GLOB],
     rules: {
       "lingui/no-expression-in-message": "error",
       "lingui/no-single-tag-to-translate": "error",

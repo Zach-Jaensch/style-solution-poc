@@ -15,15 +15,19 @@ import { Noto_Sans } from "next/font/google";
 import Head from "next/head";
 import { useState } from "react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import type { PageWithLayout } from "#/components/layout";
+import type { PageWithLayout } from "#/components/layouts";
 import { publicTransport } from "#/utils/s12/transport";
 import { useLinguiInit } from "../pages-router-i18n";
 
 const NextGlobalStyles = createGlobalStyle`
   body > div:first-child,
   div#__next,
-  div#__next > div:first-child {
+  div#__next > main:first-child {
     height: 100%;
+  }
+
+  body {
+    color: ${(p) => p.theme.colors.surface.text.default};
   }
 `;
 
@@ -59,11 +63,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
 
       <GlobalStyle />
-      <NextGlobalStyles />
 
       <I18nProvider i18n={i18n}>
         <ConfigProvider config={defaultConfig}>
           <ThemeProvider theme={maggie}>
+            <NextGlobalStyles />
             <TransportProvider transport={publicTransport}>
               <QueryClientProvider client={queryClient}>
                 <HydrationBoundary state={pageProps.dehydratedState}>
