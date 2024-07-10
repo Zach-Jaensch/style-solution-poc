@@ -8,6 +8,9 @@ patchedDependencies:
   '@bufbuild/protobuf@1.10.0':
     hash: 4x4hls7tdvm5ut5rbm4e33r4lm
     path: patches/@bufbuild__protobuf@1.10.0.patch
+  '@safetyculture/icons-react@1.12.0':
+    hash: duamy7y6wli2xdfguou2hquwhi
+    path: patches/@safetyculture__icons-react@1.12.0.patch
   '@safetyculture/s12-apis-connect-web@1.242.38':
     hash: 46xi754zrlixnnfko5gkh56pga
     path: patches/@safetyculture__s12-apis-connect-web@1.242.38.patch
@@ -55,6 +58,9 @@ importers:
       '@lingui/react':
         specifier: ^4.11.2
         version: 4.11.2(react@19.0.0-rc.0)
+      '@safetyculture/icons-react':
+        specifier: ^1.12.0
+        version: 1.12.0(patch_hash=duamy7y6wli2xdfguou2hquwhi)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       '@safetyculture/s12-apis-connect-web':
         specifier: ^1.242.38
         version: 1.242.38(patch_hash=46xi754zrlixnnfko5gkh56pga)
@@ -82,6 +88,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc.0
         version: 19.0.0-rc.0(react@19.0.0-rc.0)
+      slugify:
+        specifier: ^1.6.6
+        version: 1.6.6
       styled-components:
         specifier: ^5.3.11
         version: 5.3.11(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react-is@18.3.1)(react@19.0.0-rc.0)
@@ -1368,6 +1377,12 @@ packages:
 
   '@safetyculture/design-tokens@3.1.1':
     resolution: {integrity: sha512-d4seWxdbUx3cAx5KeTSUifcZ48ldGLU00p7KSD2JuR0kGmqOzWtNR6nshY3AV/Uac7m9QyNt2U2p/A2gLY0vdQ==, tarball: https://npm.pkg.github.com/download/@SafetyCulture/design-tokens/3.1.1/982967229b8729f93c74b7c47fc71678626d6461}
+
+  '@safetyculture/icons-react@1.12.0':
+    resolution: {integrity: sha512-Z/xk1cUadzksIpir0rZF8FWmFdDZvorQOYg+9IB2WYQu1/RoHzkSKF0V9c1mY/XIrObttfro7liDS83jebaS9A==, tarball: https://npm.pkg.github.com/download/@safetyculture/icons-react/1.12.0/08364ae57b61eeac6a1d35c5e71ac492e233c62b}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
 
   '@safetyculture/icons-react@1.9.0':
     resolution: {integrity: sha512-AiS+FB+hvNFCXRrioxqL/wIFypuF6AzpjD1euIyHOmTqkbpps5KgVRlgZPEk6MkiEhElF7iwP77njJQnpgDWIg==, tarball: https://npm.pkg.github.com/download/@safetyculture/icons-react/1.9.0/7d3d3d8f03f5027f207abe6446b422ef50b57826}
@@ -4456,6 +4471,10 @@ packages:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
     engines: {node: '>=12'}
 
+  slugify@1.6.6:
+    resolution: {integrity: sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==}
+    engines: {node: '>=8.0.0'}
+
   sort-object-keys@1.1.3:
     resolution: {integrity: sha512-855pvK+VkU7PaKYPc+Jjnmt4EzejQHyhhF33q31qG8x7maDzkeFhAAThdCYay11CISO+qAMwjOBP+fPZe0IPyg==}
 
@@ -6273,6 +6292,11 @@ snapshots:
       rollup: 3.29.4
 
   '@safetyculture/design-tokens@3.1.1': {}
+
+  '@safetyculture/icons-react@1.12.0(patch_hash=duamy7y6wli2xdfguou2hquwhi)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
+    dependencies:
+      react: 19.0.0-rc.0
+      react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
 
   '@safetyculture/icons-react@1.9.0(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)':
     dependencies:
@@ -10268,6 +10292,8 @@ snapshots:
   slash@3.0.0: {}
 
   slash@4.0.0: {}
+
+  slugify@1.6.6: {}
 
   sort-object-keys@1.1.3: {}
 

@@ -19,6 +19,7 @@
     "@emotion/is-prop-valid": "^1.2.2",
     "@lingui/core": "^4.11.2",
     "@lingui/react": "^4.11.2",
+    "@safetyculture/icons-react": "^1.12.0",
     "@safetyculture/s12-apis-connect-web": "^1.242.38",
     "@safetyculture/sc-web-ui": "^0.5.5",
     "@sentry/nextjs": "^8.16.0",
@@ -28,6 +29,7 @@
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc.0",
     "react-dom": "19.0.0-rc.0",
+    "slugify": "^1.6.6",
     "styled-components": "^5.3.11"
   },
   "devDependencies": {

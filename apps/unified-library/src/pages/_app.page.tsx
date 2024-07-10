@@ -27,6 +27,7 @@ const NextGlobalStyles = createGlobalStyle`
   }
 
   body {
+    min-width: 20rem;
     color: ${(p) => p.theme.colors.surface.text.default};
   }
 `;

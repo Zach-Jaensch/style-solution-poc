@@ -1,3 +1,5 @@
+import slugify from "slugify";
+
 export const formatForUrl = (text: string) => {
-  return text.toLocaleLowerCase().replaceAll(/\s+/g, "-");
+  return slugify(text, { lower: true });
 };

@@ -38,9 +38,21 @@ msgstr "{value, plural, =0 {You have no unread messages.} one {You have # unread
 msgid "All Categories"
 msgstr "All Categories"
 
+#: src/pages/_error.page.tsx:14
+msgid "An error or misconfiguration was encountered and we are unable to complete your request."
+msgstr "An error or misconfiguration was encountered and we are unable to complete your request."
+
+#: src/components/error/error.tsx:30
+msgid "Back to home"
+msgstr "Back to home"
+
 #: src/components/category-panel/category-panel.tsx:48
 msgid "Categories"
 msgstr "Categories"
+
+#: src/pages/_error.page.tsx:12
+msgid "Error"
+msgstr "Error"
 
 #: src/pages/[locale]/index.page.tsx:50
 #: src/pages/[locale]/other/index.page.tsx:47
@@ -67,6 +79,10 @@ msgctxt "main nav"
 msgid "Home"
 msgstr "Home"
 
+#: src/pages/500.page.tsx:13
+msgid "Internal server error"
+msgstr "Internal server error"
+
 #: src/pages/[locale]/index.page.tsx:40
 msgctxt "main nav"
 msgid "Layout Test"
@@ -85,6 +101,10 @@ msgctxt "main nav"
 msgid "Other"
 msgstr "Other"
 
+#: src/pages/404.page.tsx:13
+msgid "Page not found"
+msgstr "Page not found"
+
 #: src/pages/[locale]/index.page.tsx:55
 #: src/pages/[locale]/other/index.page.tsx:52
 #: src/pages/[locale]/test/index.page.tsx:52
@@ -101,12 +121,24 @@ msgstr "Plural translation example with variables"
 msgid "report name {0}"
 msgstr "report name {0}"
 
+#: src/pages/_error.page.tsx:13
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
 #: src/pages/[locale]/index.page.tsx:34
 #: src/pages/[locale]/other/index.page.tsx:34
 #: src/pages/[locale]/test/index.page.tsx:34
 msgctxt "main nav"
 msgid "Test"
 msgstr "Test"
+
+#: src/pages/404.page.tsx:14
+msgid "The page you were looking for could not be found. It might have been removed, renamed, or did not exist in the first place."
+msgstr "The page you were looking for could not be found. It might have been removed, renamed, or did not exist in the first place."
+
+#: src/pages/500.page.tsx:14
+msgid "The server encountered an internal error or misconfiguration and was unable to complete your request."
+msgstr "The server encountered an internal error or misconfiguration and was unable to complete your request."
 
 #: src/pages/[locale]/index.page.tsx:82
 #: src/pages/[locale]/other/index.page.tsx:79

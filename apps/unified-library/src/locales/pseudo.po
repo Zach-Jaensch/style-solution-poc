@@ -38,8 +38,20 @@ msgstr ""
 msgid "All Categories"
 msgstr ""
 
+#: src/pages/_error.page.tsx:14
+msgid "An error or misconfiguration was encountered and we are unable to complete your request."
+msgstr ""
+
+#: src/components/error/error.tsx:30
+msgid "Back to home"
+msgstr ""
+
 #: src/components/category-panel/category-panel.tsx:48
 msgid "Categories"
+msgstr ""
+
+#: src/pages/_error.page.tsx:12
+msgid "Error"
 msgstr ""
 
 #: src/pages/[locale]/index.page.tsx:50
@@ -67,6 +79,10 @@ msgctxt "main nav"
 msgid "Home"
 msgstr ""
 
+#: src/pages/500.page.tsx:13
+msgid "Internal server error"
+msgstr ""
+
 #: src/pages/[locale]/index.page.tsx:40
 msgctxt "main nav"
 msgid "Layout Test"
@@ -85,6 +101,10 @@ msgctxt "main nav"
 msgid "Other"
 msgstr ""
 
+#: src/pages/404.page.tsx:13
+msgid "Page not found"
+msgstr ""
+
 #: src/pages/[locale]/index.page.tsx:55
 #: src/pages/[locale]/other/index.page.tsx:52
 #: src/pages/[locale]/test/index.page.tsx:52
@@ -101,11 +121,23 @@ msgstr ""
 msgid "report name {0}"
 msgstr ""
 
+#: src/pages/_error.page.tsx:13
+msgid "Something went wrong"
+msgstr ""
+
 #: src/pages/[locale]/index.page.tsx:34
 #: src/pages/[locale]/other/index.page.tsx:34
 #: src/pages/[locale]/test/index.page.tsx:34
 msgctxt "main nav"
 msgid "Test"
+msgstr ""
+
+#: src/pages/404.page.tsx:14
+msgid "The page you were looking for could not be found. It might have been removed, renamed, or did not exist in the first place."
+msgstr ""
+
+#: src/pages/500.page.tsx:14
+msgid "The server encountered an internal error or misconfiguration and was unable to complete your request."
 msgstr ""
 
 #: src/pages/[locale]/index.page.tsx:82
