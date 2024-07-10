@@ -17,7 +17,7 @@
     "@internal/typescript-config": "workspace:*",
     "@playwright/test": "^1.45.1",
     "@safetyculture/s12-apis-connect-web": "^1.242.38",
-    "@types/node": "^20.14.9",
+    "@types/node": "^20.14.10",
     "next": "15.0.0-rc.0",
     "playwright-core": "^1.45.1",
     "typescript": "^5.5.3"

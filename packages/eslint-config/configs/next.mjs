@@ -1,6 +1,6 @@
 import { fixupPluginRules } from "@eslint/compat";
 import next from "@next/eslint-plugin-next";
-import * as tanstackQuery from "@tanstack/eslint-plugin-query";
+import tanstackQuery from "@tanstack/eslint-plugin-query";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import lingui from "eslint-plugin-lingui";
 import react from "eslint-plugin-react";
