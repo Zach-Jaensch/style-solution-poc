@@ -7,13 +7,14 @@ import { render } from "#/utils/test-utils";
 mockRouter.useParser(
   createDynamicRouteParser([
     // These paths should match those found in the `/pages` folder:
-    "/[locale]/layout-test/[category]",
+    "/[locale]/library",
+    "/[locale]/library/[category]",
   ]),
 );
 
 describe("category panel tests", () => {
   it("can render", async () => {
-    await mockRouter.push("/en-US/layout-test");
+    await mockRouter.push("/en-US/library");
     render(<CategoryPanel />);
 
     const nav = await screen.findByRole("navigation", { name: "Categories" });
@@ -24,7 +25,7 @@ describe("category panel tests", () => {
   });
 
   it("links are correctly accessible and visible", async () => {
-    await mockRouter.push("/en-US/layout-test");
+    await mockRouter.push("/en-US/library");
     render(<CategoryPanel />);
 
     const nav = await screen.findByRole("navigation", { name: "Categories" });
@@ -41,7 +42,7 @@ describe("category panel tests", () => {
   });
 
   it("clicking link navigates user to target page", async () => {
-    await mockRouter.push("/en-US/layout-test");
+    await mockRouter.push("/en-US/library");
     render(<CategoryPanel />);
 
     const hospitalityLink = await screen.findByRole("link", {
@@ -49,11 +50,11 @@ describe("category panel tests", () => {
     });
 
     fireEvent.click(hospitalityLink);
-    expect(mockRouter.asPath).toContain("layout-test/hospitality");
+    expect(mockRouter.asPath).toContain("library/hospitality");
   });
 
   it("can highlight 'All Categories' if no search params are provided", async () => {
-    await mockRouter.push("/en-US/layout-test");
+    await mockRouter.push("/en-US/library");
     render(<CategoryPanel />);
 
     const allCategoriesItem = await screen.findByText("All Categories");
@@ -67,7 +68,7 @@ describe("category panel tests", () => {
   });
 
   it("can highlight a specific category", async () => {
-    await mockRouter.push("/en-US/layout-test/hospitality");
+    await mockRouter.push("/en-US/library/hospitality");
     render(<CategoryPanel />);
 
     const hospitalityItem = await screen.findByText("Hospitality");

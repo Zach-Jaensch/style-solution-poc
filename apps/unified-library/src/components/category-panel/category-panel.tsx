@@ -2,7 +2,8 @@ import { Trans, plural } from "@lingui/macro";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useId } from "react";
-import { formatForUrl } from "#/utils/url-utils";
+import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
+import { mockStubRetrieval } from "#/components/category-panel/category.stub";
 import {
   Categories,
   CategoryCount,
@@ -11,13 +12,6 @@ import {
   Panel,
   PanelTitle,
 } from "./category-panel-styled";
-import { categoryStub } from "./category.stub";
-
-interface CategoryEntry {
-  name: string;
-  count: number;
-  encodedName?: string;
-}
 
 export const CategoryPanel = () => {
   const titleId = useId();
@@ -33,9 +27,9 @@ export const CategoryPanel = () => {
   }
 
   // TODO: use correct API when built
-  const { data: categories } = useQuery<CategoryEntry[]>({
+  const { data: categories } = useQuery<MockEnhancedStub[]>({
     queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: () => categoryStub,
+    queryFn: mockStubRetrieval,
   });
 
   const totalCount = String(
@@ -50,7 +44,7 @@ export const CategoryPanel = () => {
       <Categories>
         <li>
           <CategoryLink
-            href={"/layout-test"}
+            href={"/library"}
             aria-current={categorySlug === null ? "page" : undefined}
             aria-label={plural(totalCount, {
               one: `All categories # item`,
@@ -65,12 +59,12 @@ export const CategoryPanel = () => {
             <CategoryCount>{totalCount}</CategoryCount>
           </CategoryLink>
         </li>
-        {categories?.map((category: CategoryEntry) => {
-          const formattedName = formatForUrl(category.name);
+        {categories?.map((category) => {
+          const formattedName = category.slug;
           return (
             <li key={category.name}>
               <CategoryLink
-                href={`/layout-test/${formattedName}`}
+                href={`/library/${formattedName}`}
                 aria-current={
                   categorySlug === formattedName ? "page" : undefined
                 }
