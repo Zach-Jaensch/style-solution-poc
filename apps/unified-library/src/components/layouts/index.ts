@@ -5,5 +5,5 @@ export { default as BaseLayout } from "./base-layout";
 export { default as SidenavLayout } from "./sidenav-layout";
 
 export type PageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
+  getLayout?: (page: ReactElement<P>) => ReactNode;
 };

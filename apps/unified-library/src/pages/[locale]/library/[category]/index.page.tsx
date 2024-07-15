@@ -1,8 +1,10 @@
 import type { ParsedUrlQuery } from "node:querystring";
 import type { Messages } from "@lingui/core";
+import { t } from "@lingui/macro";
 import type { DehydratedState } from "@tanstack/react-query";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
+import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
 import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
 import { mockStubRetrieval } from "#/components/category-panel/category.stub";
 import type { PageWithLayout } from "#/components/layouts";
@@ -12,13 +14,23 @@ import type { SupportedLocale } from "#/constants/i18n";
 import { supportedLocales } from "#/constants/i18n";
 import { loadCatalog } from "#/pages-router-i18n";
 
-const CategoryPage: PageWithLayout = () => {
+const CategoryPage: PageWithLayout<PageProps> = () => {
   return <MockCardList />;
 };
 
 CategoryPage.getLayout = (page) => {
+  const breadcrumbs = createBreadCrumbs([
+    {
+      title: t`Library`,
+      href: "/library",
+    },
+    {
+      title: page.props.pageTitle,
+      href: `/library/${page.props.pageSlug}`,
+    },
+  ]);
   return (
-    <BaseLayout>
+    <BaseLayout breadcrumbs={breadcrumbs}>
       <SidenavLayout>{page}</SidenavLayout>
     </BaseLayout>
   );
@@ -55,8 +67,8 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 interface PageProps {
   translation: Messages;
   dehydratedState: DehydratedState;
-  pageTitle: string | undefined;
-  pageSlug: string | undefined;
+  pageTitle: string;
+  pageSlug: string;
 }
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   ctx,
@@ -78,6 +90,12 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   });
 
   const pageTitle = data.find((d) => d.slug === categorySlug)?.name;
+
+  if (!pageTitle || !categorySlug) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

@@ -1,5 +1,18 @@
+diff --git a/cjs/packages/react/input/search-input/search-input.js b/cjs/packages/react/input/search-input/search-input.js
+index e8da55eff14840a843f0a446def4b5269c69913d..adbf54b3ea3bc92f7f5fffd0db2082b0b2f611d0 100644
+--- a/cjs/packages/react/input/search-input/search-input.js
++++ b/cjs/packages/react/input/search-input/search-input.js
+@@ -66,7 +66,7 @@ var StyledSearchIcon = (0, styled_1.default)(icons_react_1.MagnifyingGlass)(temp
+ exports.SearchInput = (0, react_1.forwardRef)(function (_a, ref) {
+     var _b = _a.debounceWaitTime, debounceWaitTime = _b === void 0 ? 500 : _b, controlledValue = _a.value, onChange = _a.onChange, disabled = _a.disabled, _c = _a.defaultValue, defaultValue = _c === void 0 ? "" : _c, placeholder = _a.placeholder, props = __rest(_a, ["debounceWaitTime", "value", "onChange", "disabled", "defaultValue", "placeholder"]);
+     var uiLocalization = (0, config_1.useLocalization)();
+-    var inputRef = (0, react_1.useRef)(document.createElement("input"));
++    var inputRef = (0, react_1.useRef)(null);
+     var _d = (0, react_1.useState)(controlledValue !== null && controlledValue !== void 0 ? controlledValue : defaultValue), value = _d[0], setValue = _d[1];
+     var _e = (0, react_1.useState)(false), isModified = _e[0], setIsModified = _e[1];
+     var debouncedOnChange = (0, react_1.useMemo)(function () {
 diff --git a/package.json b/package.json
-index d77913dc61cf887d13991e6dbd9a89c6feffcea2..6098111b5a64a2dc1477fc8ab505b6eaacb08604 100644
+index d77913dc61cf887d13991e6dbd9a89c6feffcea2..2f2529cd33d65328358ffa9139b9f1ef53289632 100644
 --- a/package.json
 +++ b/package.json
 @@ -4,6 +4,18 @@
@@ -21,3 +34,16 @@ index d77913dc61cf887d13991e6dbd9a89c6feffcea2..6098111b5a64a2dc1477fc8ab505b6ea
    "sideEffects": false,
    "files": [
      "*",
+diff --git a/packages/react/input/search-input/search-input.js b/packages/react/input/search-input/search-input.js
+index 4b7ed2f8c92b8bc54565fd8f6121b91569b3a574..ae9dcad3a49853d8becd1b6fdb366c973e667b2b 100644
+--- a/packages/react/input/search-input/search-input.js
++++ b/packages/react/input/search-input/search-input.js
+@@ -30,7 +30,7 @@ const StyledSearchIcon = styled(MagnifyingGlass) `
+ export const SearchInput = forwardRef((_a, ref) => {
+     var { debounceWaitTime = 500, value: controlledValue, onChange, disabled, defaultValue = "", placeholder } = _a, props = __rest(_a, ["debounceWaitTime", "value", "onChange", "disabled", "defaultValue", "placeholder"]);
+     const uiLocalization = useLocalization();
+-    const inputRef = useRef(document.createElement("input"));
++    const inputRef = useRef(null);
+     const [value, setValue] = useState(controlledValue !== null && controlledValue !== void 0 ? controlledValue : defaultValue);
+     const [isModified, setIsModified] = useState(false);
+     const debouncedOnChange = useMemo(() => debounce((e) => {

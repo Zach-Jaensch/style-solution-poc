@@ -1,8 +1,10 @@
 import type { ParsedUrlQuery } from "node:querystring";
 import type { Messages } from "@lingui/core";
+import { t } from "@lingui/macro";
 import type { DehydratedState } from "@tanstack/react-query";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
+import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
 import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
 import { mockStubRetrieval } from "#/components/category-panel/category.stub";
 import type { PageWithLayout } from "#/components/layouts";
@@ -17,8 +19,15 @@ const LibraryPage: PageWithLayout = () => {
 };
 
 LibraryPage.getLayout = (page) => {
+  const breadcrumbs = createBreadCrumbs([
+    {
+      title: t`Library`,
+      href: "/library",
+    },
+  ]);
+
   return (
-    <BaseLayout>
+    <BaseLayout breadcrumbs={breadcrumbs}>
       <SidenavLayout>{page}</SidenavLayout>
     </BaseLayout>
   );

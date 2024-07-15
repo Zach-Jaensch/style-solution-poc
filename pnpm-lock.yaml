@@ -15,7 +15,7 @@ patchedDependencies:
     hash: 46xi754zrlixnnfko5gkh56pga
     path: patches/@safetyculture__s12-apis-connect-web@1.242.38.patch
   '@safetyculture/sc-web-ui@0.5.5':
-    hash: a6clo3norxihxyzrtpzgt2aeye
+    hash: vff3d5zgchas7uwfmlxopi3kwu
     path: patches/@safetyculture__sc-web-ui@0.5.5.patch
 
 importers:
@@ -66,7 +66,7 @@ importers:
         version: 1.242.38(patch_hash=46xi754zrlixnnfko5gkh56pga)
       '@safetyculture/sc-web-ui':
         specifier: ^0.5.5
-        version: 0.5.5(patch_hash=a6clo3norxihxyzrtpzgt2aeye)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)(styled-components@5.3.11(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react-is@18.3.1)(react@19.0.0-rc.0))
+        version: 0.5.5(patch_hash=vff3d5zgchas7uwfmlxopi3kwu)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)(styled-components@5.3.11(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react-is@18.3.1)(react@19.0.0-rc.0))
       '@sentry/nextjs':
         specifier: ^8.17.0
         version: 8.17.0(@opentelemetry/api@1.9.0)(@opentelemetry/core@1.25.1(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.25.1(@opentelemetry/api@1.9.0))(next@15.0.0-rc.0(@babel/core@7.24.7)(@opentelemetry/api@1.9.0)(@playwright/test@1.45.1)(babel-plugin-macros@3.1.0)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0))(react@19.0.0-rc.0)(webpack@5.92.1)
@@ -6251,7 +6251,7 @@ snapshots:
       '@bufbuild/connect-web': 0.9.1(@bufbuild/protobuf@1.10.0(patch_hash=4x4hls7tdvm5ut5rbm4e33r4lm))
       '@bufbuild/protobuf': 1.10.0(patch_hash=4x4hls7tdvm5ut5rbm4e33r4lm)
 
-  '@safetyculture/sc-web-ui@0.5.5(patch_hash=a6clo3norxihxyzrtpzgt2aeye)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)(styled-components@5.3.11(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react-is@18.3.1)(react@19.0.0-rc.0))':
+  '@safetyculture/sc-web-ui@0.5.5(patch_hash=vff3d5zgchas7uwfmlxopi3kwu)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)(styled-components@5.3.11(@babel/core@7.24.7)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react-is@18.3.1)(react@19.0.0-rc.0))':
     dependencies:
       '@floating-ui/react': 0.26.12(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)

@@ -13,11 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/category-panel/category-panel.tsx:77
+#: src/components/category-panel/category-panel.tsx:71
 msgid "{0, plural, one {{1} # item} other {{2} # items}}"
 msgstr "{0, plural, one {{1} # item} other {{2} # items}}"
 
-#: src/components/category-panel/category-panel.tsx:55
+#: src/components/category-panel/category-panel.tsx:49
 msgid "{totalCount, plural, one {All categories # item} other {All categories # items}}"
 msgstr "{totalCount, plural, one {All categories # item} other {All categories # items}}"
 
@@ -34,7 +34,7 @@ msgid "{value, plural, =0 {You have no unread messages.} one {You have # unread 
 msgstr "{value, plural, =0 {You have no unread messages.} one {You have # unread message.} other {You have # unread messages.}}"
 
 #. shows all available listings in library
-#: src/components/category-panel/category-panel.tsx:61
+#: src/components/category-panel/category-panel.tsx:55
 msgid "All Categories"
 msgstr "All Categories"
 
@@ -42,11 +42,11 @@ msgstr "All Categories"
 msgid "An error or misconfiguration was encountered and we are unable to complete your request."
 msgstr "An error or misconfiguration was encountered and we are unable to complete your request."
 
-#: src/components/error/error.tsx:30
+#: src/components/error/error.tsx:31
 msgid "Back to home"
 msgstr "Back to home"
 
-#: src/components/category-panel/category-panel.tsx:48
+#: src/components/category-panel/category-panel.tsx:42
 msgid "Categories"
 msgstr "Categories"
 
@@ -72,6 +72,11 @@ msgstr "Example title text in Noto Sans"
 msgid "Hello World"
 msgstr "Hello World"
 
+#: src/components/breadcrumbs/utils.tsx:19
+msgctxt "link for breadcrumb navigation'"
+msgid "Home"
+msgstr "Home"
+
 #: src/pages/[locale]/index.page.tsx:31
 #: src/pages/[locale]/other/index.page.tsx:31
 #: src/pages/[locale]/test/index.page.tsx:31
@@ -87,6 +92,11 @@ msgstr "Internal server error"
 msgctxt "main nav"
 msgid "Layout Test"
 msgstr "Layout Test"
+
+#: src/pages/[locale]/library/[category]/index.page.tsx:24
+#: src/pages/[locale]/library/index.page.tsx:24
+msgid "Library"
+msgstr "Library"
 
 #: src/pages/[locale]/index.page.tsx:58
 #: src/pages/[locale]/other/index.page.tsx:55
@@ -120,6 +130,10 @@ msgstr "Plural translation example with variables"
 #: src/pages/[locale]/report/[shareId]/index.page.tsx:31
 msgid "report name {0}"
 msgstr "report name {0}"
+
+#: src/components/search-bar/index.tsx:5
+msgid "Search industry, activity or categories."
+msgstr "Search industry, activity or categories."
 
 #: src/pages/_error.page.tsx:13
 msgid "Something went wrong"
