@@ -117,7 +117,8 @@ function getRequestLocale(request: NextRequest): SupportedLocale {
 export const config = {
   matcher: [
     {
-      source: "/((?!api|_next/static|_next/image|favicon.ico|shared).*)",
+      source:
+        "/((?!api|_next/static|_next/image|favicon.ico|shared|sitemap).*)",
       missing: [
         { type: "header", key: "next-router-prefetch" },
         { type: "header", key: "purpose", value: "prefetch" },
