@@ -1,7 +1,12 @@
 import { TransportProvider } from "@bufbuild/connect-query";
 import type { Messages } from "@lingui/core";
 import { i18n } from "@lingui/core";
+import { t } from "@lingui/macro";
 import { I18nProvider } from "@lingui/react";
+import { CssReset } from "@safetyculture/safetyculture-next-shared/cssreset";
+import { Footer } from "@safetyculture/safetyculture-next-shared/footer";
+import { Header } from "@safetyculture/safetyculture-next-shared/header";
+import "@safetyculture/safetyculture-next-shared/style";
 import { GlobalStyle, maggie } from "@safetyculture/sc-web-ui";
 import { ConfigProvider, defaultConfig } from "@safetyculture/sc-web-ui/react";
 import {
@@ -18,6 +23,9 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import type { PageWithLayout } from "#/components/layouts";
 import { publicTransport } from "#/utils/s12/transport";
 import { useLinguiInit } from "../pages-router-i18n";
+import footer from "./menus/footer.json";
+import header from "./menus/header.json";
+import legal from "./menus/legal.json";
 
 const NextGlobalStyles = createGlobalStyle`
   body > div:first-child,
@@ -43,6 +51,12 @@ interface ExtendedAppProps {
   translation: Messages;
 }
 
+const menus = {
+  header: header,
+  footer: footer,
+  legal: legal,
+};
+
 interface AppPropsWithLayout extends AppProps<ExtendedAppProps> {
   Component: PageWithLayout;
 }
@@ -54,7 +68,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <>
+    <div className={notoSans.className}>
       <Head>
         {/* eslint-disable-next-line lingui/no-unlocalized-strings -- Placeholder */}
         <title>SafetyCulture</title>
@@ -72,9 +86,34 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             <TransportProvider transport={publicTransport}>
               <QueryClientProvider client={queryClient}>
                 <HydrationBoundary state={pageProps.dehydratedState}>
-                  <main className={notoSans.className}>
-                    {getLayout(<Component {...pageProps} />)}
-                  </main>
+                  <CssReset>
+                    <Header
+                      // @ts-expect-error -- typed incorrectly
+                      menus={menus}
+                      customise={{
+                        navigationStatus: true,
+                        notification: false,
+                        languageToggle: false,
+                        loginAndSignUpButtonsStatus: false,
+                      }}
+                      locale="en"
+                      website="safetyculture"
+                    />
+                  </CssReset>
+                  <main>{getLayout(<Component {...pageProps} />)}</main>
+                  <CssReset>
+                    <Footer
+                      // @ts-expect-error -- typed incorrectly
+                      menus={menus}
+                      customise={{
+                        mainMenu: true,
+                        legalMenu: true,
+                        products: true,
+                        title: t`SafetyCulture`,
+                      }}
+                      website="safetyculture"
+                    />
+                  </CssReset>
                 </HydrationBoundary>
                 <ReactQueryDevtools />
               </QueryClientProvider>
@@ -82,6 +121,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           </ThemeProvider>
         </ConfigProvider>
       </I18nProvider>
-    </>
+    </div>
   );
 }

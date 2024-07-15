@@ -1,0 +1,72 @@
+[
+  {
+    "__typename": "MenuItem",
+    "childItems": {
+      "__typename": "MenuItemToMenuItemConnection",
+      "nodes": []
+    },
+    "id": "cG9zdDoxOTc1",
+    "label": "Status",
+
+    "target": false,
+    "url": "https://status.safetyculture.com/",
+    "description": null,
+    "cssClasses": []
+  },
+  {
+    "__typename": "MenuItem",
+    "childItems": {
+      "__typename": "MenuItemToMenuItemConnection",
+      "nodes": []
+    },
+    "id": "cG9zdDoxOTcx",
+    "label": "Legal",
+
+    "target": false,
+    "url": "https://safetyculture.com/legal/",
+    "description": null,
+    "cssClasses": []
+  },
+  {
+    "__typename": "MenuItem",
+    "childItems": {
+      "__typename": "MenuItemToMenuItemConnection",
+      "nodes": []
+    },
+    "id": "cG9zdDo0ODMwNw==",
+    "label": "Terms and Conditions",
+
+    "target": false,
+    "url": "https://safetyculture.com/legal/terms-and-conditions/",
+    "description": null,
+    "cssClasses": []
+  },
+  {
+    "__typename": "MenuItem",
+    "childItems": {
+      "__typename": "MenuItemToMenuItemConnection",
+      "nodes": []
+    },
+    "id": "cG9zdDoxOTcy",
+    "label": "Privacy Portal",
+
+    "target": false,
+    "url": "https://safetyculture.com/legal/privacy-portal/",
+    "description": null,
+    "cssClasses": []
+  },
+  {
+    "__typename": "MenuItem",
+    "childItems": {
+      "__typename": "MenuItemToMenuItemConnection",
+      "nodes": []
+    },
+    "id": "cG9zdDoxOTc0",
+    "label": "Security",
+
+    "target": false,
+    "url": "https://safetyculture.com/security/",
+    "description": null,
+    "cssClasses": []
+  }
+]
