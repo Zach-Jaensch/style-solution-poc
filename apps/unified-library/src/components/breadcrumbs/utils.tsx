@@ -16,7 +16,7 @@ export const createBreadCrumbs = (
             <House size={12}></House>
           </HStack>
           <ScreenReaderOnly>
-            <Trans context="link for breadcrumb navigation'">Home</Trans>
+            <Trans context="link for breadcrumb navigation">Home</Trans>
           </ScreenReaderOnly>
         </>
       ),

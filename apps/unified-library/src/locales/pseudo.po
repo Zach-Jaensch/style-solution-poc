@@ -73,7 +73,7 @@ msgid "Hello World"
 msgstr ""
 
 #: src/components/breadcrumbs/utils.tsx:19
-msgctxt "link for breadcrumb navigation'"
+msgctxt "link for breadcrumb navigation"
 msgid "Home"
 msgstr ""
 
