@@ -21,7 +21,7 @@ export const CategoryPanel = () => {
   const { category: categorySlugs } = router.query;
   let categorySlug: string | null;
   if (Array.isArray(categorySlugs)) {
-    categorySlug = categorySlugs.length > 0 ? categorySlugs[0] ?? null : null;
+    categorySlug = categorySlugs.length > 0 ? (categorySlugs[0] ?? null) : null;
   } else {
     categorySlug = categorySlugs ?? null;
   }
