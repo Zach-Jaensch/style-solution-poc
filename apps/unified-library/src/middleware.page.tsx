@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import type { SupportedLocale } from "#/constants/i18n";
 import { defaultLocale, supportedLocales } from "#/constants/i18n";
+import { IS_PREVIEW } from "./constants/app";
 
 const LOCALE_COOKIE = "S12_LOCALE";
 
@@ -71,17 +72,18 @@ function getCSPHeader(): [string, string] {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   let cspHeader = `
     default-src 'self';
-    connect-src 'self' *.sentry.io/;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval';
-    style-src 'self' 'unsafe-inline';
+    connect-src 'self' *.sentry.io/ ${IS_PREVIEW ? "https://vercel.live wss://ws-us3.pusher.com" : ""};
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' ${IS_PREVIEW ? "https://vercel.live" : ""};
+    style-src 'self' 'unsafe-inline' ${IS_PREVIEW ? "https://vercel.live" : ""};
     worker-src 'self' blob:;
-    img-src 'self' blob: data:;
-    font-src 'self';
+    img-src 'self' ${IS_PREVIEW ? "https://vercel.live https://vercel.com" : ""} blob: data:;
+    font-src 'self' ${IS_PREVIEW ? "https://vercel.live https://assets.vercel.com" : ""};
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
+    frame-src ${IS_PREVIEW ? "https://vercel.live" : ""};
 `;
 
   if (process.env.NODE_ENV === "development") {
