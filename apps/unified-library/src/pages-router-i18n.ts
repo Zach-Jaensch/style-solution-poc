@@ -2,14 +2,21 @@ import type { Messages } from "@lingui/core";
 import { i18n } from "@lingui/core";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { defaultLocale, supportedLocales } from "./constants/i18n";
+import { z } from "zod";
+import { defaultLocale, localeSchema } from "./constants/i18n";
+
+export const paramsWithLocaleSchema = z.object({
+  locale: localeSchema,
+});
+
+export const ctxWithLocaleSchema = z.object({
+  params: paramsWithLocaleSchema.optional().default({}),
+});
 
 export async function loadCatalog(
-  locale: (typeof supportedLocales)[number] = defaultLocale,
+  ctx: z.input<typeof ctxWithLocaleSchema>,
 ): Promise<Messages | null> {
-  if (!supportedLocales.includes(locale)) {
-    return null;
-  }
+  const locale = ctxWithLocaleSchema.parse(ctx).params.locale;
 
   try {
     const catalog = (await import(`#/locales/${locale}.po`)) as {

@@ -1,4 +1,3 @@
-import type { ParsedUrlQuery } from "node:querystring";
 import type { Messages } from "@lingui/core";
 import { t } from "@lingui/macro";
 import type { DehydratedState } from "@tanstack/react-query";
@@ -10,7 +9,6 @@ import { mockStubRetrieval } from "#/components/category-panel/category.stub";
 import type { PageWithLayout } from "#/components/layouts";
 import { BaseLayout, SidenavLayout } from "#/components/layouts";
 import { MockCardList } from "#/components/mock-card-list";
-import type { SupportedLocale } from "#/constants/i18n";
 import { supportedLocales } from "#/constants/i18n";
 import { loadCatalog } from "#/pages-router-i18n";
 
@@ -33,10 +31,7 @@ LibraryPage.getLayout = (page) => {
   );
 };
 
-interface Params extends ParsedUrlQuery {
-  locale: SupportedLocale;
-}
-export const getStaticPaths: GetStaticPaths<Params> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const queryClient = new QueryClient();
   const data = await queryClient.fetchQuery<MockEnhancedStub[]>({
     queryKey: ["fake-query-key-for-stubbing-categories"],
@@ -64,11 +59,8 @@ interface PageProps {
   translation: Messages;
   dehydratedState: DehydratedState;
 }
-export const getStaticProps: GetStaticProps<PageProps, Params> = async (
-  ctx,
-) => {
-  const locale = ctx.params?.locale;
-  const translation = await loadCatalog(locale);
+export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
+  const translation = await loadCatalog(ctx);
 
   if (!translation) {
     return {

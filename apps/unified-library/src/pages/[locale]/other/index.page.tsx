@@ -1,4 +1,3 @@
-import type { ParsedUrlQuery } from "node:querystring";
 import { Plural, Trans, t } from "@lingui/macro";
 import { Avatar, Stack, Text } from "@safetyculture/sc-web-ui/react";
 import type { GetStaticPaths, GetStaticProps } from "next";
@@ -6,16 +5,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "#/components/link";
 import { supportedLocales } from "#/constants/i18n";
-import type { SupportedLocale } from "#/constants/i18n";
 import { loadCatalog } from "#/pages-router-i18n";
 
 const PaddedStack = styled(Stack)`
   padding: ${(props) => props.theme.space.s3};
 `;
-
-interface Params extends ParsedUrlQuery {
-  locale: SupportedLocale;
-}
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface -- Placeholder
 interface PageProps {}
@@ -98,7 +92,7 @@ export default function Home() {
   );
 }
 
-export const getStaticPaths: GetStaticPaths<Params> = () => {
+export const getStaticPaths: GetStaticPaths = () => {
   const paths = supportedLocales.map((locale) => ({ params: { locale } }));
 
   return {
@@ -107,11 +101,8 @@ export const getStaticPaths: GetStaticPaths<Params> = () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<PageProps, Params> = async (
-  ctx,
-) => {
-  const locale = ctx.params?.locale;
-  const translation = await loadCatalog(locale);
+export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
+  const translation = await loadCatalog(ctx);
 
   if (!translation) {
     return {

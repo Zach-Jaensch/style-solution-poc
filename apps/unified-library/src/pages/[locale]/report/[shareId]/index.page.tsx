@@ -1,18 +1,23 @@
 // TODO: REMOVE AFTER FIRST PAGE IS IMPLEMENTED
-import type { ParsedUrlQuery } from "node:querystring";
 import { Trans } from "@lingui/macro";
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import type { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import type { SupportedLocale } from "#/constants/i18n";
-import { loadCatalog } from "#/pages-router-i18n";
+import { z } from "zod";
+import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
 import { prefetch } from "#/utils/s12/prefetch";
 import { publicReportQueryService } from "#/utils/s12/public-reports";
 
-interface Params extends ParsedUrlQuery {
-  locale: SupportedLocale;
-  shareId: string;
-}
+const ctxSchema = z.intersection(
+  ctxWithLocaleSchema,
+  z.object({
+    params: z.object({
+      shareId: z.string(),
+    }),
+  }),
+);
+
+type Params = z.infer<typeof ctxSchema>["params"];
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface -- Placeholder
 interface PageProps {}
@@ -34,10 +39,11 @@ export default function Page() {
 }
 
 export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
-  ctx,
+  _ctx,
 ) => {
-  const locale = ctx.params?.locale;
-  const translation = await loadCatalog(locale);
+  const ctx = ctxSchema.parse(_ctx);
+
+  const translation = await loadCatalog(ctx);
 
   if (!translation) {
     return {
@@ -45,11 +51,10 @@ export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
     };
   }
 
-  const shareId = ctx.params?.shareId;
   const queryClient = new QueryClient();
 
   await prefetch(queryClient, publicReportQueryService.getPublicReport, {
-    shareCode: shareId,
+    shareCode: ctx.params.shareId,
   });
 
   return {

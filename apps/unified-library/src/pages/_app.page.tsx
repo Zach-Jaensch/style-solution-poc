@@ -22,6 +22,7 @@ import { useRef, useState } from "react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import type { PageWithLayout } from "#/components/layouts";
 import { SkipToContent } from "#/components/skip-to-content";
+import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
 import { publicTransport } from "#/utils/s12/transport";
 import { useLinguiInit } from "../pages-router-i18n";
 import footer from "./menus/footer.json";
@@ -63,6 +64,9 @@ interface AppPropsWithLayout extends AppProps<ExtendedAppProps> {
 }
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  // Check that the pageProps are valid to the minimum schema, will throw an error if not
+  pagePropsMinimumSchema.parse(pageProps);
+
   const mainRef = useRef<HTMLElement>(null);
   const [queryClient] = useState(() => new QueryClient());
   useLinguiInit(pageProps.translation);

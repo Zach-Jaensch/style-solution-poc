@@ -28,6 +28,12 @@ export const baseConfig = [
     },
     rules: {
       "@typescript-eslint/consistent-type-imports": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          ignoreRestSiblings: true,
+        },
+      ],
     },
   },
   // Import rules

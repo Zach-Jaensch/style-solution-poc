@@ -4,7 +4,10 @@ import { maggie } from "@safetyculture/sc-web-ui";
 import { ConfigProvider, defaultConfig } from "@safetyculture/sc-web-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { RenderOptions } from "@testing-library/react";
-import { render as _render } from "@testing-library/react";
+import {
+  render as _render,
+  renderHook as _renderHook,
+} from "@testing-library/react";
 import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
 import type { ReactNode } from "react";
 import { useState } from "react";
@@ -42,6 +45,13 @@ export function DefaultWrapper({ children }: { children: ReactNode }) {
  */
 export const render = (ui: ReactNode, renderOptions?: RenderOptions) => {
   return _render(ui, {
+    wrapper: DefaultWrapper,
+    ...renderOptions,
+  });
+};
+
+export const renderHook: typeof _renderHook = (hook, renderOptions) => {
+  return _renderHook(hook, {
     wrapper: DefaultWrapper,
     ...renderOptions,
   });

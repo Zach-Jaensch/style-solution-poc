@@ -3,13 +3,8 @@ import type { TextProps } from "@safetyculture/sc-web-ui/react";
 import { Text } from "@safetyculture/sc-web-ui/react";
 import type { LinkProps as NextLinkProps } from "next/link";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
-import type { SupportedLocale } from "../constants/i18n";
-
-interface Params {
-  locale: SupportedLocale;
-  [key: string]: string | string[];
-}
+import { useTypedRouter } from "#/hooks/use-typed-router";
+import { paramsWithLocaleSchema } from "#/pages-router-i18n";
 
 type LinkProps = {
   variant?: TextProps["variant"];
@@ -46,7 +41,7 @@ function prefixHref(href: UrlObject | string, prefix: string) {
 }
 
 function BaseLink({ href, ...props }: LinkProps) {
-  const { locale } = useRouter().query as Params;
+  const { locale } = useTypedRouter(paramsWithLocaleSchema).query;
   return <NextLink href={prefixHref(href, locale)} {...props} />;
 }
 

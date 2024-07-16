@@ -1,9 +1,7 @@
-import type { ParsedUrlQuery } from "node:querystring";
 import type { Messages } from "@lingui/core";
 import { t } from "@lingui/macro";
 import type { GetStaticProps } from "next";
 import Error from "#/components/error/error";
-import type { SupportedLocale } from "#/constants/i18n";
 import { loadCatalog } from "#/pages-router-i18n";
 
 export default function Custom404() {
@@ -16,18 +14,12 @@ export default function Custom404() {
   );
 }
 
-interface Params extends ParsedUrlQuery {
-  locale: SupportedLocale;
-}
-
 interface PageProps {
   translation?: Messages;
 }
 
-export const getStaticProps: GetStaticProps<PageProps, Params> = async ({
-  params,
-}) => {
-  const translation = await loadCatalog(params?.locale);
+export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
+  const translation = await loadCatalog(ctx);
 
   return translation
     ? {

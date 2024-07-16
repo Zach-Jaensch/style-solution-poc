@@ -1,32 +1,51 @@
-import type { ParsedUrlQuery } from "node:querystring";
-import type { Messages } from "@lingui/core";
 import { t } from "@lingui/macro";
-import type { DehydratedState } from "@tanstack/react-query";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
+import { z } from "zod";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
 import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
 import { mockStubRetrieval } from "#/components/category-panel/category.stub";
 import type { PageWithLayout } from "#/components/layouts";
 import { BaseLayout, SidenavLayout } from "#/components/layouts";
 import { MockCardList } from "#/components/mock-card-list";
-import type { SupportedLocale } from "#/constants/i18n";
 import { supportedLocales } from "#/constants/i18n";
-import { loadCatalog } from "#/pages-router-i18n";
+import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
+import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
+
+const ctxSchema = z.intersection(
+  ctxWithLocaleSchema,
+  z.object({
+    params: z.object({
+      category: z.string(),
+    }),
+  }),
+);
+
+const pagePropsSchema = z
+  .object({
+    pageTitle: z.string(),
+    pageSlug: z.string(),
+  })
+  .merge(pagePropsMinimumSchema);
+
+type Params = z.infer<typeof ctxSchema>["params"];
+type PageProps = z.infer<typeof pagePropsSchema>;
 
 const CategoryPage: PageWithLayout<PageProps> = () => {
   return <MockCardList />;
 };
 
 CategoryPage.getLayout = (page) => {
+  const props = pagePropsSchema.parse(page.props);
+
   const breadcrumbs = createBreadCrumbs([
     {
       title: t`Library`,
       href: "/library",
     },
     {
-      title: page.props.pageTitle,
-      href: `/library/${page.props.pageSlug}`,
+      title: props.pageTitle,
+      href: `/library/${props.pageSlug}`,
     },
   ]);
   return (
@@ -36,10 +55,6 @@ CategoryPage.getLayout = (page) => {
   );
 };
 
-interface Params extends ParsedUrlQuery {
-  locale: SupportedLocale;
-  category: string;
-}
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const queryClient = new QueryClient();
   const data = await queryClient.fetchQuery<MockEnhancedStub[]>({
@@ -64,18 +79,13 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   };
 };
 
-interface PageProps {
-  translation: Messages;
-  dehydratedState: DehydratedState;
-  pageTitle: string;
-  pageSlug: string;
-}
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
-  ctx,
+  _ctx,
 ) => {
-  const locale = ctx.params?.locale;
-  const categorySlug = ctx.params?.category;
-  const translation = await loadCatalog(locale);
+  const ctx = ctxSchema.parse(_ctx);
+
+  const categorySlug = ctx.params.category;
+  const translation = await loadCatalog(ctx);
 
   if (!translation) {
     return {
