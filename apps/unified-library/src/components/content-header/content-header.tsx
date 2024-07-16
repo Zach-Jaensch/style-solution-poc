@@ -7,9 +7,13 @@ import { SearchBar } from "#/components/search-bar";
 
 interface ContentHeaderProps {
   breadcrumbs?: BreadcrumbItem[];
+  showSearch?: boolean;
 }
 
-export const ContentHeader = ({ breadcrumbs }: ContentHeaderProps) => {
+export const ContentHeader = ({
+  breadcrumbs,
+  showSearch,
+}: ContentHeaderProps) => {
   return (
     <Container>
       <div>
@@ -20,7 +24,7 @@ export const ContentHeader = ({ breadcrumbs }: ContentHeaderProps) => {
           />
         )}
       </div>
-      <SearchBar />
+      {showSearch && <SearchBar />}
     </Container>
   );
 };
@@ -28,6 +32,8 @@ export const ContentHeader = ({ breadcrumbs }: ContentHeaderProps) => {
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto minmax(3rem, 30rem);
+  grid-template-rows: ${(p) => p.theme.space.s10};
+
   align-items: center;
   gap: ${(p) => p.theme.space.s8};
 

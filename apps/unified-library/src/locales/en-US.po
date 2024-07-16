@@ -46,13 +46,25 @@ msgstr "An error or misconfiguration was encountered and we are unable to comple
 msgid "Back to home"
 msgstr "Back to home"
 
+#: src/components/landing-banner/index.tsx:28
+msgid "Browse thousands of ready-made resources designed to help your teams reach higher standards, work safely, and improve every day"
+msgstr "Browse thousands of ready-made resources designed to help your teams reach higher standards, work safely, and improve every day"
+
 #: src/components/category-panel/category-panel.tsx:42
 msgid "Categories"
 msgstr "Categories"
 
+#: src/components/landing-banner/index.tsx:19
+msgid "color gradient"
+msgstr "color gradient"
+
 #: src/pages/_error.page.tsx:12
 msgid "Error"
 msgstr "Error"
+
+#: src/components/landing-banner/index.tsx:25
+msgid "Everything you need to get started with SafetyCulture"
+msgstr "Everything you need to get started with SafetyCulture"
 
 #: src/pages/[locale]/index.page.tsx:50
 #: src/pages/[locale]/other/index.page.tsx:47
@@ -111,6 +123,10 @@ msgctxt "main nav"
 msgid "Other"
 msgstr "Other"
 
+#: src/components/landing-banner/index.tsx:15
+msgid "page banner"
+msgstr "page banner"
+
 #: src/pages/404.page.tsx:13
 msgid "Page not found"
 msgstr "Page not found"
@@ -131,7 +147,15 @@ msgstr "Plural translation example with variables"
 msgid "report name {0}"
 msgstr "report name {0}"
 
-#: src/components/search-bar/index.tsx:5
+#: src/pages/_app.page.tsx:112
+msgid "SafetyCulture"
+msgstr "SafetyCulture"
+
+#: src/components/search-bar/index.tsx:8
+msgid "search categories"
+msgstr "search categories"
+
+#: src/components/search-bar/index.tsx:9
 msgid "Search industry, activity or categories."
 msgstr "Search industry, activity or categories."
 

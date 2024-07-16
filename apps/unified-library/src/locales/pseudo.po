@@ -46,12 +46,24 @@ msgstr ""
 msgid "Back to home"
 msgstr ""
 
+#: src/components/landing-banner/index.tsx:28
+msgid "Browse thousands of ready-made resources designed to help your teams reach higher standards, work safely, and improve every day"
+msgstr ""
+
 #: src/components/category-panel/category-panel.tsx:42
 msgid "Categories"
 msgstr ""
 
+#: src/components/landing-banner/index.tsx:19
+msgid "color gradient"
+msgstr ""
+
 #: src/pages/_error.page.tsx:12
 msgid "Error"
+msgstr ""
+
+#: src/components/landing-banner/index.tsx:25
+msgid "Everything you need to get started with SafetyCulture"
 msgstr ""
 
 #: src/pages/[locale]/index.page.tsx:50
@@ -111,6 +123,10 @@ msgctxt "main nav"
 msgid "Other"
 msgstr ""
 
+#: src/components/landing-banner/index.tsx:15
+msgid "page banner"
+msgstr ""
+
 #: src/pages/404.page.tsx:13
 msgid "Page not found"
 msgstr ""
@@ -131,7 +147,15 @@ msgstr ""
 msgid "report name {0}"
 msgstr ""
 
-#: src/components/search-bar/index.tsx:5
+#: src/pages/_app.page.tsx:112
+msgid "SafetyCulture"
+msgstr ""
+
+#: src/components/search-bar/index.tsx:8
+msgid "search categories"
+msgstr ""
+
+#: src/components/search-bar/index.tsx:9
 msgid "Search industry, activity or categories."
 msgstr ""
 

@@ -25,7 +25,7 @@ LibraryPage.getLayout = (page) => {
   ]);
 
   return (
-    <BaseLayout breadcrumbs={breadcrumbs}>
+    <BaseLayout breadcrumbs={breadcrumbs} showBanner showTopSearch={false}>
       <SidenavLayout>{page}</SidenavLayout>
     </BaseLayout>
   );
