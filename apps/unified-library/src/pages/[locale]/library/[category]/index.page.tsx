@@ -1,6 +1,7 @@
 import { t } from "@lingui/macro";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import { z } from "zod";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
 import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
@@ -31,8 +32,20 @@ const pagePropsSchema = z
 type Params = z.infer<typeof ctxSchema>["params"];
 type PageProps = z.infer<typeof pagePropsSchema>;
 
-const CategoryPage: PageWithLayout<PageProps> = () => {
-  return <MockCardList />;
+const CategoryPage: PageWithLayout<PageProps> = ({ pageTitle }: PageProps) => {
+  return (
+    <>
+      <Head>
+        <title key="title">{t`${pageTitle} | SafetyCulture Library`}</title>
+        <meta
+          key="description"
+          name="description"
+          content={t`Discover free customizable templates and training courses for ${pageTitle} from the SafetyCulture library.`}
+        />
+      </Head>
+      <MockCardList />
+    </>
+  );
 };
 
 CategoryPage.getLayout = (page) => {

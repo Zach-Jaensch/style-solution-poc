@@ -17,6 +17,10 @@ msgstr ""
 msgid "{0, plural, one {{1} # item} other {{2} # items}}"
 msgstr "{0, plural, one {{1} # item} other {{2} # items}}"
 
+#: src/pages/[locale]/library/[category]/index.page.tsx:22
+msgid "{pageTitle} | SafetyCulture Library"
+msgstr "{pageTitle} | SafetyCulture Library"
+
 #: src/components/category-panel/category-panel.tsx:49
 msgid "{totalCount, plural, one {All categories # item} other {All categories # items}}"
 msgstr "{totalCount, plural, one {All categories # item} other {All categories # items}}"
@@ -46,7 +50,7 @@ msgstr "An error or misconfiguration was encountered and we are unable to comple
 msgid "Back to home"
 msgstr "Back to home"
 
-#: src/components/landing-banner/index.tsx:28
+#: src/components/landing-banner/index.tsx:26
 msgid "Browse thousands of ready-made resources designed to help your teams reach higher standards, work safely, and improve every day"
 msgstr "Browse thousands of ready-made resources designed to help your teams reach higher standards, work safely, and improve every day"
 
@@ -54,15 +58,23 @@ msgstr "Browse thousands of ready-made resources designed to help your teams rea
 msgid "Categories"
 msgstr "Categories"
 
-#: src/components/landing-banner/index.tsx:19
+#: src/components/landing-banner/index.tsx:17
 msgid "color gradient"
 msgstr "color gradient"
+
+#: src/pages/_app.page.tsx:73
+msgid "Content Library - Templates & Courses | SafetyCulture"
+msgstr "Content Library - Templates & Courses | SafetyCulture"
+
+#: src/pages/[locale]/library/[category]/index.page.tsx:26
+msgid "Discover free customizable templates and training courses for {pageTitle} from the SafetyCulture library."
+msgstr "Discover free customizable templates and training courses for {pageTitle} from the SafetyCulture library."
 
 #: src/pages/_error.page.tsx:12
 msgid "Error"
 msgstr "Error"
 
-#: src/components/landing-banner/index.tsx:25
+#: src/components/landing-banner/index.tsx:23
 msgid "Everything you need to get started with SafetyCulture"
 msgstr "Everything you need to get started with SafetyCulture"
 
@@ -77,6 +89,10 @@ msgstr "Example body text in Noto Sans."
 #: src/pages/[locale]/test/index.page.tsx:44
 msgid "Example title text in Noto Sans"
 msgstr "Example title text in Noto Sans"
+
+#: src/pages/_app.page.tsx:77
+msgid "Explore our library of templates, training courses, and content collections you can customize and easily share from SafetyCulture."
+msgstr "Explore our library of templates, training courses, and content collections you can customize and easily share from SafetyCulture."
 
 #: src/pages/[locale]/index.page.tsx:44
 #: src/pages/[locale]/other/index.page.tsx:41
@@ -105,7 +121,7 @@ msgctxt "main nav"
 msgid "Layout Test"
 msgstr "Layout Test"
 
-#: src/pages/[locale]/library/[category]/index.page.tsx:24
+#: src/pages/[locale]/library/[category]/index.page.tsx:37
 #: src/pages/[locale]/library/index.page.tsx:24
 msgid "Library"
 msgstr "Library"
@@ -123,7 +139,7 @@ msgctxt "main nav"
 msgid "Other"
 msgstr "Other"
 
-#: src/components/landing-banner/index.tsx:15
+#: src/components/landing-banner/index.tsx:13
 msgid "page banner"
 msgstr "page banner"
 
@@ -147,7 +163,7 @@ msgstr "Plural translation example with variables"
 msgid "report name {0}"
 msgstr "report name {0}"
 
-#: src/pages/_app.page.tsx:112
+#: src/pages/_app.page.tsx:115
 msgid "SafetyCulture"
 msgstr "SafetyCulture"
 
