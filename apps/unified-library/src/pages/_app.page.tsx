@@ -18,9 +18,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
 import { Noto_Sans } from "next/font/google";
 import Head from "next/head";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import type { PageWithLayout } from "#/components/layouts";
+import { SkipToContent } from "#/components/skip-to-content";
 import { publicTransport } from "#/utils/s12/transport";
 import { useLinguiInit } from "../pages-router-i18n";
 import footer from "./menus/footer.json";
@@ -62,6 +63,7 @@ interface AppPropsWithLayout extends AppProps<ExtendedAppProps> {
 }
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const mainRef = useRef<HTMLElement>(null);
   const [queryClient] = useState(() => new QueryClient());
   useLinguiInit(pageProps.translation);
 
@@ -86,6 +88,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             <TransportProvider transport={publicTransport}>
               <QueryClientProvider client={queryClient}>
                 <HydrationBoundary state={pageProps.dehydratedState}>
+                  <SkipToContent targetRef={mainRef} />
                   <CssReset>
                     <Header
                       // @ts-expect-error -- typed incorrectly
@@ -100,7 +103,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                       website="safetyculture"
                     />
                   </CssReset>
-                  <main>{getLayout(<Component {...pageProps} />)}</main>
+                  <main id="main" ref={mainRef}>
+                    {getLayout(<Component {...pageProps} />)}
+                  </main>
                   <CssReset>
                     <Footer
                       // @ts-expect-error -- typed incorrectly

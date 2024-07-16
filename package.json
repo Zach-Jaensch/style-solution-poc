@@ -22,6 +22,10 @@
     "node": "20.x"
   },
   "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@rc",
+      "@types/react-dom": "npm:types-react-dom@rc"
+    },
     "patchedDependencies": {
       "@bufbuild/protobuf@1.10.0": "patches/@bufbuild__protobuf@1.10.0.patch",
       "@safetyculture/icons-react@1.12.0": "patches/@safetyculture__icons-react@1.12.0.patch",
