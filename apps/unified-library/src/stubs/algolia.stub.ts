@@ -1,7 +1,7 @@
 import { formatForUrl } from "#/utils/url-utils";
 
 /** TODO delete when no longer needed */
-const categoryStub = [
+const categoriesStub = [
   { name: "Manufacturing", count: 1025 },
   { name: "Health & Safety", count: 785 },
   { name: "Mining", count: 631 },
@@ -21,8 +21,8 @@ export interface MockEnhancedStub {
   slug: string;
 }
 
-export const mockStubRetrieval = (): MockEnhancedStub[] => {
-  return categoryStub.map((c) => ({
+export const mockRetrieveCategories = (): MockEnhancedStub[] => {
+  return categoriesStub.map((c) => ({
     ...c,
     slug: formatForUrl(c.name),
   }));

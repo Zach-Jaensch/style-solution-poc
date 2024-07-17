@@ -22,7 +22,7 @@
     "@safetyculture/icons-react": "^1.12.0",
     "@safetyculture/s12-apis-connect-web": "^1.242.38",
     "@safetyculture/safetyculture-next-shared": "^1.0.25",
-    "@safetyculture/sc-web-ui": "^0.5.5",
+    "@safetyculture/sc-web-ui": "^0.5.8",
     "@sentry/nextjs": "^8.17.0",
     "@tanstack/react-query": "^5.51.1",
     "http-proxy-middleware": "^3.0.0",

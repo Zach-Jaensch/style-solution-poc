@@ -1,7 +1,7 @@
 import { Trans } from "@lingui/macro";
 // eslint-disable-next-line import/namespace -- issue with eslint-plugin-import
 import { ArrowLongLeft } from "@safetyculture/icons-react";
-import { Button, Text as Typography } from "@safetyculture/sc-web-ui/react";
+import { Button, Typography } from "@safetyculture/sc-web-ui/react";
 import { Poppins } from "next/font/google";
 import styled from "styled-components";
 

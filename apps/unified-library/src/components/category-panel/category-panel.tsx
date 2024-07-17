@@ -2,8 +2,8 @@ import { Trans, plural } from "@lingui/macro";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useId } from "react";
-import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
-import { mockStubRetrieval } from "#/components/category-panel/category.stub";
+import type { MockEnhancedStub } from "#/stubs/algolia.stub";
+import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 import {
   Categories,
   CategoryCount,
@@ -29,7 +29,7 @@ export const CategoryPanel = () => {
   // TODO: use correct API when built
   const { data: categories } = useQuery<MockEnhancedStub[]>({
     queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockStubRetrieval,
+    queryFn: mockRetrieveCategories,
   });
 
   const totalCount = String(

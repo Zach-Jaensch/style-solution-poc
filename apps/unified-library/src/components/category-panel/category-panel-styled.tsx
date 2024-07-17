@@ -1,4 +1,4 @@
-import { Card, Text as Typography } from "@safetyculture/sc-web-ui/react";
+import { Card, Typography } from "@safetyculture/sc-web-ui/react";
 import styled from "styled-components";
 import { Link } from "#/components/link";
 

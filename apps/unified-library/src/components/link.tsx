@@ -1,14 +1,14 @@
 import type { UrlObject } from "node:url";
-import type { TextProps } from "@safetyculture/sc-web-ui/react";
-import { Text } from "@safetyculture/sc-web-ui/react";
+import type { TypographyProps } from "@safetyculture/sc-web-ui/react";
+import { Typography } from "@safetyculture/sc-web-ui/react";
 import type { LinkProps as NextLinkProps } from "next/link";
 import NextLink from "next/link";
 import { useTypedRouter } from "#/hooks/use-typed-router";
 import { paramsWithLocaleSchema } from "#/pages-router-i18n";
 
 type LinkProps = {
-  variant?: TextProps["variant"];
-} & Omit<TextProps, "variant"> &
+  variant?: TypographyProps["variant"];
+} & Omit<TypographyProps, "variant"> &
   Omit<NextLinkProps, "locale" | "as" | "legacyBehavior">;
 
 function prefixPathname(prefix: string, pathname: string) {
@@ -46,5 +46,5 @@ function BaseLink({ href, ...props }: LinkProps) {
 }
 
 export const Link = ({ ...props }: LinkProps) => (
-  <Text component={BaseLink} variant="inherit" {...props} />
+  <Typography component={BaseLink} variant="inherit" {...props} />
 );

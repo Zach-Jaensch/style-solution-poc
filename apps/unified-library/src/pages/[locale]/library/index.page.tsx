@@ -4,13 +4,13 @@ import type { DehydratedState } from "@tanstack/react-query";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
-import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
-import { mockStubRetrieval } from "#/components/category-panel/category.stub";
 import type { PageWithLayout } from "#/components/layouts";
 import { BaseLayout, SidenavLayout } from "#/components/layouts";
 import { MockCardList } from "#/components/mock-card-list";
 import { supportedLocales } from "#/constants/i18n";
 import { loadCatalog } from "#/pages-router-i18n";
+import type { MockEnhancedStub } from "#/stubs/algolia.stub";
+import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 
 const LibraryPage: PageWithLayout = () => {
   return <MockCardList />;
@@ -35,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const queryClient = new QueryClient();
   const data = await queryClient.fetchQuery<MockEnhancedStub[]>({
     queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockStubRetrieval,
+    queryFn: mockRetrieveCategories,
   });
 
   const paths = data
@@ -71,7 +71,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockStubRetrieval,
+    queryFn: mockRetrieveCategories,
   });
 
   return {

@@ -4,13 +4,18 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { z } from "zod";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
-import type { MockEnhancedStub } from "#/components/category-panel/category.stub";
-import { mockStubRetrieval } from "#/components/category-panel/category.stub";
 import type { PageWithLayout } from "#/components/layouts";
 import { BaseLayout, SidenavLayout } from "#/components/layouts";
 import { MockCardList } from "#/components/mock-card-list";
 import { supportedLocales } from "#/constants/i18n";
 import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
+import {
+  PageDescription,
+  PageTitle,
+} from "#/pages/[locale]/library/[category]/index.styled";
+import type { MockEnhancedStub } from "#/stubs/algolia.stub";
+import { mockRetrieveCategories } from "#/stubs/algolia.stub";
+import { mockRetrieveCategoryDescriptions } from "#/stubs/contentful.stub";
 import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
 
 const ctxSchema = z.intersection(
@@ -26,13 +31,17 @@ const pagePropsSchema = z
   .object({
     pageTitle: z.string(),
     pageSlug: z.string(),
+    pageDescription: z.string(),
   })
   .merge(pagePropsMinimumSchema);
 
 type Params = z.infer<typeof ctxSchema>["params"];
 type PageProps = z.infer<typeof pagePropsSchema>;
 
-const CategoryPage: PageWithLayout<PageProps> = ({ pageTitle }: PageProps) => {
+const CategoryPage: PageWithLayout<PageProps> = ({
+  pageTitle,
+  pageDescription,
+}: PageProps) => {
   return (
     <>
       <Head>
@@ -43,6 +52,12 @@ const CategoryPage: PageWithLayout<PageProps> = ({ pageTitle }: PageProps) => {
           content={t`Discover free customizable templates and training courses for ${pageTitle} from the SafetyCulture library.`}
         />
       </Head>
+      <PageTitle variant="headlineLarge" component="h1">
+        {pageTitle}
+      </PageTitle>
+      <PageDescription variant="bodyMedium" component="p">
+        {pageDescription}
+      </PageDescription>
       <MockCardList />
     </>
   );
@@ -72,7 +87,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const queryClient = new QueryClient();
   const data = await queryClient.fetchQuery<MockEnhancedStub[]>({
     queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockStubRetrieval,
+    queryFn: mockRetrieveCategories,
   });
 
   const paths = data
@@ -107,14 +122,21 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   }
 
   const queryClient = new QueryClient();
-  const data = await queryClient.fetchQuery({
+  const categories = await queryClient.fetchQuery({
     queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockStubRetrieval,
+    queryFn: mockRetrieveCategories,
   });
+  const pageTitle = categories.find((c) => c.slug === categorySlug)?.name;
 
-  const pageTitle = data.find((d) => d.slug === categorySlug)?.name;
+  const descriptions = await queryClient.fetchQuery({
+    queryKey: ["fake-query-key-for-stubbing-category-descriptions"],
+    queryFn: mockRetrieveCategoryDescriptions,
+  });
+  const pageDescription = descriptions.find(
+    (d) => d.name === pageTitle,
+  )?.description;
 
-  if (!pageTitle || !categorySlug) {
+  if (!pageTitle || !pageDescription || !categorySlug) {
     return {
       notFound: true,
     };
@@ -125,6 +147,7 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
       translation,
       dehydratedState: dehydrate(queryClient),
       pageTitle,
+      pageDescription,
       pageSlug: categorySlug,
     },
   };
