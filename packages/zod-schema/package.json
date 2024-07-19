@@ -1,0 +1,25 @@
+{
+  "name": "@internal/zod-schema",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./algolia-search": {
+      "import": "./dist/algolia/search.js",
+      "types": "./dist/algolia/search.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@algolia/client-search": "^4.24.0",
+    "@internal/eslint-config": "workspace:*",
+    "@internal/typescript-config": "workspace:*",
+    "typescript": "^5.5.3",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "zod": "^3.23.8"
+  }
+}

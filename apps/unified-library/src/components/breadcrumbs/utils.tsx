@@ -1,5 +1,4 @@
 import { Trans } from "@lingui/macro";
-// eslint-disable-next-line import/namespace -- issue with eslint-plugin-import
 import { House } from "@safetyculture/icons-react";
 import { HStack } from "@safetyculture/sc-web-ui/react";
 import { ScreenReaderOnly } from "#/components/accessibility/helpers";

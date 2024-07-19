@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import type { SupportedLocale } from "#/constants/i18n";
 import { defaultLocale, supportedLocales } from "#/constants/i18n";
-import { IS_PREVIEW } from "./constants/app";
+import { ALGOLIA_APP_ID, IS_PREVIEW } from "./constants/app";
 
 const LOCALE_COOKIE = "S12_LOCALE";
 
@@ -57,6 +57,27 @@ export function middleware(request: NextRequest) {
 
   // End CSP
 
+  //
+  // Handle searching
+  //
+
+  if (request.nextUrl.searchParams.has("q") && !pathname.endsWith("/search")) {
+    // Redirect to new URL
+    request.nextUrl.pathname = `${request.nextUrl.pathname}/search`;
+    return NextResponse.rewrite(request.nextUrl);
+  }
+
+  if (pathname.endsWith("/search") && !request.nextUrl.searchParams.has("q")) {
+    // Redirect to new URL
+    request.nextUrl.pathname = request.nextUrl.pathname.replace(
+      /\/search$/,
+      "",
+    );
+    return NextResponse.redirect(request.nextUrl);
+  }
+
+  // End searching
+
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
@@ -68,11 +89,21 @@ export function middleware(request: NextRequest) {
   return response;
 }
 
+// https://www.algolia.com/doc/rest-api/search/#hosts
+const algoliaHosts = ALGOLIA_APP_ID
+  ? [
+      `${ALGOLIA_APP_ID}-1.algolianet.com`,
+      `${ALGOLIA_APP_ID}-2.algolianet.com`,
+      `${ALGOLIA_APP_ID}-3.algolianet.com`,
+      `${ALGOLIA_APP_ID}-dsn.algolia.net`,
+    ]
+  : [];
+
 function getCSPHeader(): [string, string] {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   let cspHeader = `
     default-src 'self';
-    connect-src 'self' *.sentry.io/ ${IS_PREVIEW ? "https://vercel.live wss://ws-us3.pusher.com" : ""};
+    connect-src 'self' *.sentry.io/ ${algoliaHosts.join(" ")} ${IS_PREVIEW ? "https://vercel.live wss://ws-us3.pusher.com" : ""};
     script-src 'self' 'unsafe-inline' 'unsafe-eval' ${IS_PREVIEW ? "https://vercel.live" : ""};
     style-src 'self' 'unsafe-inline' ${IS_PREVIEW ? "https://vercel.live" : ""};
     worker-src 'self' blob:;

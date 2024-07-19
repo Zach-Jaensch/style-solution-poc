@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "eslint": "pnpm -r --no-bail eslint --max-warnings=0",
-    "prepare": "husky",
+    "prepare": "husky && pnpm --filter @internal/zod-schema build",
     "prettier": "prettier -c .",
     "test": "pnpm -r --no-bail test",
     "typecheck": "pnpm -r --no-bail typecheck"

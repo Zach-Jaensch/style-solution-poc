@@ -1,31 +1,22 @@
 import { t } from "@lingui/macro";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 import { z } from "zod";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
 import type { PageWithLayout } from "#/components/layouts";
 import { BaseLayout, SidenavLayout } from "#/components/layouts";
-import { MockCardList } from "#/components/mock-card-list";
-import { supportedLocales } from "#/constants/i18n";
-import { useTypedRouter } from "#/hooks/use-typed-router";
 import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
 import { mockRetrieveCategories } from "#/stubs/algolia.stub";
-import {
-  prefetchAlgoliaSearch,
-  useAlgoliaSearch,
-} from "#/utils/algolia/search";
+import { prefetchAlgoliaSearch } from "#/utils/algolia/search";
 import type { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
+import type { PageProps as LibraryPageProps } from "./index.page";
+import LibraryPage from "./index.page";
 
-const LibraryPage: PageWithLayout = () => {
-  const query = useTypedRouter(paramsSchema).query.q;
-  const { data } = useAlgoliaSearch({
-    query,
-  });
-
-  return <MockCardList data={data?.hits} />;
+const LibrarySearchPage: PageWithLayout<LibraryPageProps> = (props) => {
+  return <LibraryPage {...props} />;
 };
 
-LibraryPage.getLayout = (page) => {
+LibrarySearchPage.getLayout = (page) => {
   const breadcrumbs = createBreadCrumbs([
     {
       title: t`Library`,
@@ -34,7 +25,7 @@ LibraryPage.getLayout = (page) => {
   ]);
 
   return (
-    <BaseLayout breadcrumbs={breadcrumbs} showBanner showTopSearch={false}>
+    <BaseLayout breadcrumbs={breadcrumbs}>
       <SidenavLayout>{page}</SidenavLayout>
     </BaseLayout>
   );
@@ -52,22 +43,9 @@ const ctxSchema = z.intersection(
 );
 
 type Params = z.input<typeof ctxSchema>["params"];
-export type PageProps = z.infer<typeof pagePropsMinimumSchema>;
+type PageProps = z.infer<typeof pagePropsMinimumSchema>;
 
-export const getStaticPaths: GetStaticPaths = () => {
-  const paths = supportedLocales.map((locale) => ({
-    params: {
-      locale,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<PageProps, Params> = async (
+export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
   _ctx,
 ) => {
   const ctx = ctxSchema.parse(_ctx);
@@ -86,7 +64,9 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
     queryFn: mockRetrieveCategories,
   });
 
-  await prefetchAlgoliaSearch(queryClient);
+  await prefetchAlgoliaSearch(queryClient, {
+    query: ctx.params.q,
+  });
 
   return {
     props: {
@@ -95,4 +75,5 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
     },
   };
 };
-export default LibraryPage;
+
+export default LibrarySearchPage;

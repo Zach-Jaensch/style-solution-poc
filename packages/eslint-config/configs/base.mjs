@@ -48,6 +48,9 @@ export const baseConfig = [
     ...importPlugin.configs.typescript,
     rules: {
       "import/consistent-type-specifier-style": "error",
+      // Currently has unknown issues with flat config
+      // https://github.com/import-js/eslint-plugin-import/issues/2556
+      "import/namespace": "off",
     },
     settings: {
       "import/resolver": {

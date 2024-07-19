@@ -14,12 +14,8 @@ const Card = styled.div`
   border: 1px solid blue;
 `;
 
-export const MockCardList = () => (
+export const MockCardList = ({ data }: { data?: { title: string }[] }) => (
   <CardList>
-    {Array(20)
-      .fill(0)
-      .map((_, idx) => (
-        <Card key={idx}>{idx}</Card>
-      ))}
+    {data?.map(({ title }, idx) => <Card key={idx}>{title}</Card>)}
   </CardList>
 );

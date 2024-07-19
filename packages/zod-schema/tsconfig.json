@@ -1,0 +1,10 @@
+{
+  "extends": ["@internal/typescript-config"],
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2017"
+  },
+  "include": ["**/*.ts", "*.*js"],
+  "exclude": ["node_modules"]
+}

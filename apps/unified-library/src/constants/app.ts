@@ -6,3 +6,6 @@ export const BASE_URL =
 export const VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV;
 
 export const IS_PREVIEW = VERCEL_ENV === "preview";
+
+export const ALGOLIA_APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+export const ALGOLIA_API_KEY = process.env.NEXT_PUBLIC_ALGOLIA_API_KEY;
