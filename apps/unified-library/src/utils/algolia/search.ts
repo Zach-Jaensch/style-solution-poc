@@ -19,10 +19,12 @@ async function searchAlgolia({
   query,
   page,
   hitsPerPage,
+  facets,
 }: z.infer<typeof searchOptionsSchema>) {
   const result = await getAlgoliaClient().initIndex(indexName).search(query, {
     page,
     hitsPerPage,
+    facets,
   });
 
   const parsedResponse = searchResponseSchema.safeParse(result);
@@ -50,6 +52,15 @@ export function prefetchAlgoliaSearch(
   opts: z.input<typeof searchOptionsSchema> = {},
 ) {
   return client.prefetchQuery(
+    searchAlgoliaQueryOptions(searchOptionsSchema.parse(opts)),
+  );
+}
+
+export function fetchAlgoliaSearch(
+  client: QueryClient,
+  opts: z.input<typeof searchOptionsSchema> = {},
+) {
+  return client.fetchQuery(
     searchAlgoliaQueryOptions(searchOptionsSchema.parse(opts)),
   );
 }

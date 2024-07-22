@@ -4,15 +4,20 @@ import type { GetServerSideProps } from "next";
 import { z } from "zod";
 import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
+import { CategoryPanel } from "#/components/category-panel/category-panel";
 import { ContentHeader } from "#/components/content-header";
 import { SearchBar } from "#/components/search-bar/connected";
 import { ContentContainer } from "#/layouts/content-container";
-import { SidenavLayout } from "#/layouts/sidenav-layout";
+import { SidenavLayout, SidenavLayoutContent } from "#/layouts/sidenav-layout";
 import type { PageWithLayout } from "#/layouts/types";
 import { loadCatalog, paramsWithLocaleSchema } from "#/pages-router-i18n";
-import { mockRetrieveCategories } from "#/stubs/algolia.stub";
-import { prefetchAlgoliaSearch } from "#/utils/algolia/search";
-import type { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
+import { fetchAlgoliaSearch } from "#/utils/algolia/search";
+import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
+import {
+  enrichCategories,
+  enrichedCategoriesSchema,
+  getCategories,
+} from "#/utils/categories/get-categories";
 import type { PageProps as LibraryPageProps } from "./index.page";
 import LibraryPage from "./index.page";
 
@@ -35,7 +40,10 @@ LibrarySearchPage.getLayout = (page) => {
         <SearchBar paramsSchema={paramsSchema} />
       </ContentHeader>
 
-      <SidenavLayout>{page}</SidenavLayout>
+      <SidenavLayout>
+        <CategoryPanel categories={page.props.categories} />
+        <SidenavLayoutContent>{page}</SidenavLayoutContent>
+      </SidenavLayout>
     </ContentContainer>
   );
 };
@@ -49,10 +57,14 @@ const paramsSchema = z.intersection(
 
 const ctxSchema = z.object({
   params: paramsSchema,
+  query: paramsSchema,
 });
 
 type Params = z.input<typeof ctxSchema>["params"];
-type PageProps = z.infer<typeof pagePropsMinimumSchema>;
+const pagePropsSchema = z
+  .object({ categories: enrichedCategoriesSchema })
+  .merge(pagePropsMinimumSchema);
+export type PageProps = z.infer<typeof pagePropsSchema>;
 
 export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
   _ctx,
@@ -68,19 +80,25 @@ export const getServerSideProps: GetServerSideProps<PageProps, Params> = async (
   }
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockRetrieveCategories,
+  const categories = await getCategories(queryClient);
+  const searchResults = await fetchAlgoliaSearch(queryClient, {
+    query: ctx.query.q,
   });
-
-  await prefetchAlgoliaSearch(queryClient, {
-    query: ctx.params.q,
-  });
+  const enrichedCategories = enrichCategories(
+    searchResults.facets["industries.name"],
+    categories,
+  );
+  if (!enrichedCategories) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       translation,
       dehydratedState: dehydrate(queryClient),
+      categories: enrichedCategories,
     },
   };
 };

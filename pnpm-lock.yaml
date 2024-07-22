@@ -15,9 +15,6 @@ patchedDependencies:
   '@safetyculture/icons-react@1.12.0':
     hash: duamy7y6wli2xdfguou2hquwhi
     path: patches/@safetyculture__icons-react@1.12.0.patch
-  '@safetyculture/s12-apis-connect-web@1.242.38':
-    hash: 46xi754zrlixnnfko5gkh56pga
-    path: patches/@safetyculture__s12-apis-connect-web@1.242.38.patch
 
 importers:
 
@@ -78,8 +75,8 @@ importers:
         specifier: ^1.12.0
         version: 1.12.0(patch_hash=duamy7y6wli2xdfguou2hquwhi)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)
       '@safetyculture/s12-apis-connect-web':
-        specifier: ^1.242.38
-        version: 1.242.38(patch_hash=46xi754zrlixnnfko5gkh56pga)
+        specifier: ^1.247.38
+        version: 1.247.38
       '@safetyculture/safetyculture-next-shared':
         specifier: ^1.0.25
         version: 1.0.25(next@15.0.0-rc.0(@babel/core@7.24.7)(@opentelemetry/api@1.9.0)(@playwright/test@1.45.3)(babel-plugin-macros@3.1.0)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)(sass@1.77.7))(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)(sass@1.77.7)
@@ -331,8 +328,8 @@ importers:
         specifier: ^1.45.3
         version: 1.45.3
       '@safetyculture/s12-apis-connect-web':
-        specifier: ^1.242.38
-        version: 1.242.38(patch_hash=46xi754zrlixnnfko5gkh56pga)
+        specifier: ^1.247.38
+        version: 1.247.38
       '@types/node':
         specifier: ^20.14.13
         version: 20.14.13
@@ -1617,8 +1614,8 @@ packages:
       react: '*'
       react-dom: '*'
 
-  '@safetyculture/s12-apis-connect-web@1.242.38':
-    resolution: {integrity: sha512-VweSBENtcFAoHENfW7lRO2ZjgljlzU5zr6p8ASU5L1npWOob6SfcvZrrDm6Usop9OB9daAaOqSVs3JPjC9167A==, tarball: https://npm.pkg.github.com/download/@SafetyCulture/s12-apis-connect-web/1.242.38/7e7148ff93e6c9db327cdce67cab98ccb7bd1ffe}
+  '@safetyculture/s12-apis-connect-web@1.247.38':
+    resolution: {integrity: sha512-gfhc0NejEq/GNUQ11NDwKzAPMyBwzHkA09uaOKIShtGFZI/7mT0ZNtPwhbJ07R6gqoX4qSt++3S6+JwYu2cj4A==, tarball: https://npm.pkg.github.com/download/@SafetyCulture/s12-apis-connect-web/1.247.38/e9c3c47102c21773ef563368ea2f9e191d8e7cdb}
 
   '@safetyculture/safetyculture-next-shared@1.0.25':
     resolution: {integrity: sha512-iUJvGOvRV0yAKz2TDcgkG0sAFpkDvQc1D2WQUR95x5rPCpfdPPWsfXoDW72dyeeI81fV9ouTT/O4UclgV1Ynsg==, tarball: https://npm.pkg.github.com/download/@safetyculture/safetyculture-next-shared/1.0.25/e18c0ed403139145f61c018e89bbf6dcf99d2c7b}
@@ -1628,6 +1625,9 @@ packages:
       react: ^18.0.0 || 19.0.0-rc-f994737d14-20240522
       react-dom: ^18.0.0 || 19.0.0-rc-f994737d14-20240522
       sass: ^1.77.6
+    peerDependenciesMeta:
+      sass:
+        optional: true
 
   '@safetyculture/sc-web-ui@0.5.10':
     resolution: {integrity: sha512-uyN3txL9iSKkaGGt/YtOpnR2aqYmlOVaZ2UXyPvYQICRMsr9h8+NM1ysQOiExCjqUMeXdsA2DqcGs51smXW9kA==, tarball: https://npm.pkg.github.com/download/@safetyculture/sc-web-ui/0.5.10/dbdc1af8d071055a76de74666518a4399a1c7670}
@@ -7571,7 +7571,7 @@ snapshots:
       react: 19.0.0-rc.0
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
 
-  '@safetyculture/s12-apis-connect-web@1.242.38(patch_hash=46xi754zrlixnnfko5gkh56pga)':
+  '@safetyculture/s12-apis-connect-web@1.247.38':
     dependencies:
       '@bufbuild/connect': 0.9.1(@bufbuild/protobuf@1.10.0(patch_hash=4x4hls7tdvm5ut5rbm4e33r4lm))
       '@bufbuild/connect-web': 0.9.1(@bufbuild/protobuf@1.10.0(patch_hash=4x4hls7tdvm5ut5rbm4e33r4lm))
@@ -7584,6 +7584,7 @@ snapshots:
       next: 15.0.0-rc.0(@babel/core@7.24.7)(@opentelemetry/api@1.9.0)(@playwright/test@1.45.3)(babel-plugin-macros@3.1.0)(react-dom@19.0.0-rc.0(react@19.0.0-rc.0))(react@19.0.0-rc.0)(sass@1.77.7)
       react: 19.0.0-rc.0
       react-dom: 19.0.0-rc.0(react@19.0.0-rc.0)
+    optionalDependencies:
       sass: 1.77.7
     transitivePeerDependencies:
       - bufferutil
@@ -10341,7 +10342,8 @@ snapshots:
 
   ignore@5.3.1: {}
 
-  immutable@4.3.7: {}
+  immutable@4.3.7:
+    optional: true
 
   import-fresh@3.3.0:
     dependencies:
@@ -12163,6 +12165,7 @@ snapshots:
       chokidar: 3.6.0
       immutable: 4.3.7
       source-map-js: 1.2.0
+    optional: true
 
   sax@1.4.1: {}
 

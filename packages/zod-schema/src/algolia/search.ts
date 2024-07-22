@@ -1,6 +1,9 @@
 import type { SearchOptions, SearchResponse } from "@algolia/client-search";
 import { z } from "zod";
 
+// TODO retrieve this from s12 api
+export const IndustryFacet = "industries.name";
+
 //  https://safetyculture.atlassian.net/wiki/x/MYHx1Q
 export const searchResponseHitSchema = z.object({
   title: z.string(),
@@ -44,6 +47,12 @@ export const searchResponseSchema = z.object({
   exhaustiveNbHits: z.boolean(),
   query: z.string(),
   params: z.string(),
+  facets: z.intersection(
+    z.object({
+      [IndustryFacet]: z.record(z.string(), z.number()),
+    }),
+    z.record(z.string(), z.record(z.string(), z.number())),
+  ),
 }) satisfies z.ZodType<SearchResponse>;
 
 export const searchOptionsSchema = z.object({
@@ -52,4 +61,5 @@ export const searchOptionsSchema = z.object({
   query: z.string().optional().default(""),
   page: z.number().optional().default(0),
   hitsPerPage: z.number().optional().default(10),
+  facets: z.array(z.string()).optional().default([IndustryFacet]),
 }) satisfies z.ZodType<SearchOptions>;

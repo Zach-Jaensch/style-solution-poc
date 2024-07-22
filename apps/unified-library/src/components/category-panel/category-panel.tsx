@@ -1,9 +1,9 @@
 import { Trans, plural } from "@lingui/macro";
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import { useId } from "react";
-import type { MockEnhancedStub } from "#/stubs/algolia.stub";
-import { mockRetrieveCategories } from "#/stubs/algolia.stub";
+import { z } from "zod";
+import { useTypedRouter } from "#/hooks/use-typed-router";
+import { useAlgoliaSearch } from "#/utils/algolia/search";
+import type { CategoryEnriched } from "#/utils/categories/get-categories";
 import {
   Categories,
   CategoryCount,
@@ -13,28 +13,25 @@ import {
   PanelTitle,
 } from "./category-panel-styled";
 
-export const CategoryPanel = () => {
+const categoryQuerySchema = z.object({
+  category: z.string().optional(),
+  q: z.string().optional().default(""),
+});
+
+interface CategoryPanelProps {
+  categories: CategoryEnriched[];
+}
+
+export const CategoryPanel = ({ categories }: CategoryPanelProps) => {
   const titleId = useId();
-  const router = useRouter();
+  const { category: categorySlug, q: query } =
+    useTypedRouter(categoryQuerySchema).query;
 
-  // TODO: these might not match what the eventual routes will be
-  const { category: categorySlugs } = router.query;
-  let categorySlug: string | null;
-  if (Array.isArray(categorySlugs)) {
-    categorySlug = categorySlugs.length > 0 ? (categorySlugs[0] ?? null) : null;
-  } else {
-    categorySlug = categorySlugs ?? null;
-  }
-
-  // TODO: use correct API when built
-  const { data: categories } = useQuery<MockEnhancedStub[]>({
-    queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockRetrieveCategories,
+  const { data } = useAlgoliaSearch({
+    query,
   });
 
-  const totalCount = String(
-    categories?.reduce((acc, c) => c.count + acc, 0) ?? 0,
-  );
+  const totalCount = data?.nbHits ?? 0;
 
   return (
     <Panel aria-labelledby={titleId} component="nav">
@@ -45,13 +42,13 @@ export const CategoryPanel = () => {
         <li>
           <CategoryLink
             href={"/library"}
-            aria-current={categorySlug === null ? "page" : undefined}
+            aria-current={categorySlug ? undefined : "page"}
             aria-label={plural(totalCount, {
               one: `All categories # item`,
               other: `All categories # items`,
             })}
           >
-            <CategoryLabel active={categorySlug === null}>
+            <CategoryLabel active={!categorySlug}>
               <Trans comment={"shows all available listings in library"}>
                 All Categories
               </Trans>
@@ -59,28 +56,24 @@ export const CategoryPanel = () => {
             <CategoryCount>{totalCount}</CategoryCount>
           </CategoryLink>
         </li>
-        {categories?.map((category) => {
-          const formattedName = category.slug;
-          return (
-            <li key={category.name}>
-              <CategoryLink
-                href={`/library/${formattedName}`}
-                aria-current={
-                  categorySlug === formattedName ? "page" : undefined
-                }
-                aria-label={plural(category.count, {
-                  one: `${category.name} # item`,
-                  other: `${category.name} # items`,
-                })}
-              >
-                <CategoryLabel active={categorySlug === formattedName}>
-                  {category.name}
-                </CategoryLabel>
-                <CategoryCount>{category.count}</CategoryCount>
-              </CategoryLink>
-            </li>
-          );
-        })}
+
+        {categories.map((category) => (
+          <li key={category.name}>
+            <CategoryLink
+              href={`/library/${category.slug}`}
+              aria-current={categorySlug === category.slug ? "page" : undefined}
+              aria-label={plural(category.count, {
+                one: `${category.name} # item`,
+                other: `${category.name} # items`,
+              })}
+            >
+              <CategoryLabel active={categorySlug === category.slug}>
+                {category.name}
+              </CategoryLabel>
+              <CategoryCount>{category.count}</CategoryCount>
+            </CategoryLink>
+          </li>
+        ))}
       </Categories>
     </Panel>
   );

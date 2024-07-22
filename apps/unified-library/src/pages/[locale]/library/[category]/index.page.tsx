@@ -5,22 +5,26 @@ import Head from "next/head";
 import { z } from "zod";
 import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
+import { CategoryPanel } from "#/components/category-panel/category-panel";
 import { ContentHeader } from "#/components/content-header";
 import { MockCardList } from "#/components/mock-card-list";
 import { SearchBar } from "#/components/search-bar/connected";
 import { supportedLocales } from "#/constants/i18n";
 import { ContentContainer } from "#/layouts/content-container";
-import { SidenavLayout } from "#/layouts/sidenav-layout";
+import { SidenavLayout, SidenavLayoutContent } from "#/layouts/sidenav-layout";
 import type { PageWithLayout } from "#/layouts/types";
 import { loadCatalog, paramsWithLocaleSchema } from "#/pages-router-i18n";
 import {
   PageDescription,
   PageTitle,
 } from "#/pages/[locale]/library/[category]/index.styled";
-import type { MockEnhancedStub } from "#/stubs/algolia.stub";
-import { mockRetrieveCategories } from "#/stubs/algolia.stub";
-import { mockRetrieveCategoryDescriptions } from "#/stubs/contentful.stub";
+import { fetchAlgoliaSearch } from "#/utils/algolia/search";
 import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
+import {
+  enrichCategories,
+  enrichedCategoriesSchema,
+  getCategories,
+} from "#/utils/categories/get-categories";
 
 const paramsSchema = z.intersection(
   z.object({
@@ -38,12 +42,12 @@ const pagePropsSchema = z
   .object({
     pageTitle: z.string(),
     pageSlug: z.string(),
-    pageDescription: z.string(),
+    pageDescription: z.string().nullable(),
+    categories: enrichedCategoriesSchema,
   })
   .merge(pagePropsMinimumSchema);
-
-type Params = z.input<typeof ctxSchema>["params"];
 type PageProps = z.infer<typeof pagePropsSchema>;
+type Params = z.input<typeof ctxSchema>["params"];
 
 const CategoryPage: PageWithLayout<PageProps> = ({
   pageTitle,
@@ -62,9 +66,11 @@ const CategoryPage: PageWithLayout<PageProps> = ({
       <PageTitle variant="headlineLarge" component="h1">
         {pageTitle}
       </PageTitle>
-      <PageDescription variant="bodyMedium" component="p">
-        {pageDescription}
-      </PageDescription>
+      {pageDescription && (
+        <PageDescription variant="bodyMedium" component="p">
+          {pageDescription}
+        </PageDescription>
+      )}
       <MockCardList />
     </>
   );
@@ -90,19 +96,19 @@ CategoryPage.getLayout = (page) => {
         <SearchBar paramsSchema={paramsSchema} />
       </ContentHeader>
 
-      <SidenavLayout>{page}</SidenavLayout>
+      <SidenavLayout>
+        <CategoryPanel categories={page.props.categories} />
+        <SidenavLayoutContent>{page}</SidenavLayoutContent>
+      </SidenavLayout>
     </ContentContainer>
   );
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const queryClient = new QueryClient();
-  const data = await queryClient.fetchQuery<MockEnhancedStub[]>({
-    queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockRetrieveCategories,
-  });
 
-  const paths = data
+  const categories = await getCategories(queryClient);
+  const paths = categories
     .map((category) =>
       supportedLocales.map((locale) => ({
         params: {
@@ -115,7 +121,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -124,7 +130,7 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
 ) => {
   const ctx = ctxSchema.parse(_ctx);
 
-  const categorySlug = ctx.params.category;
+  const pageSlug = ctx.params.category;
   const translation = await loadCatalog(ctx);
 
   if (!translation) {
@@ -134,21 +140,22 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   }
 
   const queryClient = new QueryClient();
-  const categories = await queryClient.fetchQuery({
-    queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockRetrieveCategories,
-  });
-  const pageTitle = categories.find((c) => c.slug === categorySlug)?.name;
+  const categories = await getCategories(queryClient);
+  const matchedCategory = categories.find((c) => c.slug === pageSlug);
+  if (!matchedCategory) {
+    return {
+      notFound: true,
+    };
+  }
+  const pageTitle = matchedCategory.name;
+  const pageDescription = matchedCategory.description ?? null;
 
-  const descriptions = await queryClient.fetchQuery({
-    queryKey: ["fake-query-key-for-stubbing-category-descriptions"],
-    queryFn: mockRetrieveCategoryDescriptions,
-  });
-  const pageDescription = descriptions.find(
-    (d) => d.name === pageTitle,
-  )?.description;
-
-  if (!pageTitle || !pageDescription || !categorySlug) {
+  const searchResults = await fetchAlgoliaSearch(queryClient);
+  const enrichedCategories = enrichCategories(
+    searchResults.facets["industries.name"],
+    categories,
+  );
+  if (!enrichedCategories) {
     return {
       notFound: true,
     };
@@ -160,7 +167,8 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
       dehydratedState: dehydrate(queryClient),
       pageTitle,
       pageDescription,
-      pageSlug: categorySlug,
+      pageSlug,
+      categories: enrichedCategories,
     },
   };
 };

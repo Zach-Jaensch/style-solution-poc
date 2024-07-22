@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { z } from "zod";
 import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
+import { CategoryPanel } from "#/components/category-panel/category-panel";
 import { ContentHeader } from "#/components/content-header";
 import { FeaturedContent } from "#/components/featured-content";
 import { MockCardList } from "#/components/mock-card-list";
@@ -13,18 +14,19 @@ import { SearchBar } from "#/components/search-bar/connected";
 import { supportedLocales } from "#/constants/i18n";
 import { useTypedRouter } from "#/hooks/use-typed-router";
 import { ContentContainer } from "#/layouts/content-container";
-import { SidenavLayout } from "#/layouts/sidenav-layout";
+import { SidenavLayout, SidenavLayoutContent } from "#/layouts/sidenav-layout";
 import type { PageWithLayout } from "#/layouts/types";
 import { loadCatalog, paramsWithLocaleSchema } from "#/pages-router-i18n";
-import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 import { mockRetrieveFeaturedTemplates } from "#/stubs/commercetools.stub";
+import { fetchAlgoliaSearch, useAlgoliaSearch } from "#/utils/algolia/search";
+import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
 import {
-  prefetchAlgoliaSearch,
-  useAlgoliaSearch,
-} from "#/utils/algolia/search";
-import type { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
+  enrichCategories,
+  enrichedCategoriesSchema,
+  getCategories,
+} from "#/utils/categories/get-categories";
 
-const LibraryPage: PageWithLayout = () => {
+const LibraryPage: PageWithLayout<PageProps> = () => {
   const query = useTypedRouter(paramsSchema).query.q;
   const { data } = useAlgoliaSearch({
     query,
@@ -67,7 +69,6 @@ LibraryPage.getLayout = (page) => {
       <ContentHeader>
         <Breadcrumbs items={breadcrumbs} />
       </ContentHeader>
-
       <LandingBannerContainer component="section" aria-label={t`page banner`}>
         <Typography variant="headlineLarge" textAlign="center" component="h1">
           <Trans>Everything you need to get started with SafetyCulture</Trans>
@@ -81,8 +82,10 @@ LibraryPage.getLayout = (page) => {
 
         <SearchBar paramsSchema={paramsSchema} />
       </LandingBannerContainer>
-
-      <SidenavLayout>{page}</SidenavLayout>
+      <SidenavLayout>
+        <CategoryPanel categories={page.props.categories} />
+        <SidenavLayoutContent>{page}</SidenavLayoutContent>
+      </SidenavLayout>
     </ContentContainer>
   );
 };
@@ -99,7 +102,11 @@ const ctxSchema = z.object({
 });
 
 type Params = z.input<typeof ctxSchema>["params"];
-export type PageProps = z.infer<typeof pagePropsMinimumSchema>;
+
+const pagePropsSchema = z
+  .object({ categories: enrichedCategoriesSchema })
+  .merge(pagePropsMinimumSchema);
+export type PageProps = z.infer<typeof pagePropsSchema>;
 
 export const getStaticPaths: GetStaticPaths = () => {
   const paths = supportedLocales.map((locale) => ({
@@ -120,7 +127,6 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   const ctx = ctxSchema.parse(_ctx);
 
   const translation = await loadCatalog(ctx);
-
   if (!translation) {
     return {
       notFound: true,
@@ -128,12 +134,17 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   }
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["fake-query-key-for-stubbing-categories"],
-    queryFn: mockRetrieveCategories,
-  });
-
-  await prefetchAlgoliaSearch(queryClient);
+  const categories = await getCategories(queryClient);
+  const searchResults = await fetchAlgoliaSearch(queryClient);
+  const enrichedCategories = enrichCategories(
+    searchResults.facets["industries.name"],
+    categories,
+  );
+  if (!enrichedCategories) {
+    return {
+      notFound: true,
+    };
+  }
 
   await queryClient.prefetchQuery({
     queryKey: ["fake-query-key-for-featured-templates"],
@@ -144,6 +155,7 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
     props: {
       translation,
       dehydratedState: dehydrate(queryClient),
+      categories: enrichedCategories,
     },
   };
 };

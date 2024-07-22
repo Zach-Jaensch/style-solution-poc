@@ -21,7 +21,7 @@
     "@lingui/core": "^4.11.2",
     "@lingui/react": "^4.11.2",
     "@safetyculture/icons-react": "^1.12.0",
-    "@safetyculture/s12-apis-connect-web": "^1.242.38",
+    "@safetyculture/s12-apis-connect-web": "^1.247.38",
     "@safetyculture/safetyculture-next-shared": "^1.0.25",
     "@safetyculture/sc-web-ui": "^0.5.10",
     "@sentry/nextjs": "^8.20.0",
