@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import type { BreadcrumbItem } from "#/components/breadcrumbs";
 import { ContentHeader } from "#/components/content-header/content-header";

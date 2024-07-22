@@ -18,6 +18,11 @@ const gitignorePath = path.resolve(workspaceDir, ".gitignore");
 export const baseConfig = [
   includeIgnoreFile(gitignorePath),
   eslint.configs.recommended,
+  {
+    rules: {
+      eqeqeq: ["error", "smart"],
+    },
+  },
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {

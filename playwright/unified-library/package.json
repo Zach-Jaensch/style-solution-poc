@@ -18,11 +18,11 @@
     "@internal/eslint-config": "workspace:*",
     "@internal/typescript-config": "workspace:*",
     "@internal/zod-schema": "workspace:*",
-    "@playwright/test": "^1.45.1",
+    "@playwright/test": "^1.45.2",
     "@safetyculture/s12-apis-connect-web": "^1.242.38",
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.14.11",
     "next": "15.0.0-rc.0",
-    "playwright-core": "^1.45.1",
+    "playwright-core": "^1.45.2",
     "typescript": "^5.5.3",
     "zod": "^3.23.8"
   }

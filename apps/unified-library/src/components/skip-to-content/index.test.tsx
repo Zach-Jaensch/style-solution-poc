@@ -1,5 +1,4 @@
 import { screen } from "@testing-library/react";
-import type React from "react";
 import type { RefObject } from "react";
 import { render } from "#/utils/test-utils";
 import { ERROR_NO_ID_ON_TARGET, SkipToContent } from ".";

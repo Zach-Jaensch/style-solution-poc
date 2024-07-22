@@ -14,21 +14,20 @@ import { baseConfig } from "./base.mjs";
 const nextConfig = [
   ...baseConfig,
   // React rules
+  react.configs.flat.recommended,
+  react.configs.flat["jsx-runtime"],
   {
-    plugins: {
-      react: react,
-      "react-hooks": fixupPluginRules(reactHooks),
-    },
-    rules: {
-      ...react.configs.recommended.rules,
-      ...react.configs["jsx-runtime"].rules,
-      ...reactHooks.configs.recommended.rules,
-    },
     settings: {
       react: {
         version: "detect",
       },
     },
+  },
+  {
+    plugins: {
+      "react-hooks": fixupPluginRules(reactHooks),
+    },
+    rules: reactHooks.configs.recommended.rules,
   },
   // Next.js rules
   {
