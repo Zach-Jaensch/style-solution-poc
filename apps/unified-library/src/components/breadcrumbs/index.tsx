@@ -1,3 +1,4 @@
+import { ChevronRight } from "@safetyculture/icons-react";
 import { HStack } from "@safetyculture/sc-web-ui/react";
 import type { ReactNode } from "react";
 import styled from "styled-components";
@@ -10,17 +11,16 @@ export interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
-  separator: ReactNode;
 }
 
-export const Breadcrumbs = ({ items, separator }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   return (
     <nav aria-label="breadcrumbs">
       <HStack align="center" spacing="s1" component="ol">
         {items.map((item, index) => (
           <ListItem key={item.href}>
             <span hidden={index === 0} aria-hidden>
-              {separator}
+              <ChevronRight size={12} />
             </span>
             <LinkStyled
               href={item.href}

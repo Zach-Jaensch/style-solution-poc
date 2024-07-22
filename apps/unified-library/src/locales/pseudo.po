@@ -17,7 +17,7 @@ msgstr ""
 msgid "{0, plural, one {{1} # item} other {{2} # items}}"
 msgstr ""
 
-#: src/pages/[locale]/library/[category]/index.page.tsx:22
+#: src/pages/[locale]/library/[category]/index.page.tsx:55
 msgid "{pageTitle} | SafetyCulture Library"
 msgstr ""
 
@@ -25,15 +25,15 @@ msgstr ""
 msgid "{totalCount, plural, one {All categories # item} other {All categories # items}}"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:93
-#: src/pages/[locale]/other/index.page.tsx:90
-#: src/pages/[locale]/test/index.page.tsx:90
+#: src/pages/[locale]/index.page.tsx:87
+#: src/pages/[locale]/other/index.page.tsx:84
+#: src/pages/[locale]/test/index.page.tsx:84
 msgid "{value, plural, =0 {Hi {name}, You have no unread messages.} one {Hi {name}, You have # unread message.} other {Hi {name}, You have # unread messages.}}"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:69
-#: src/pages/[locale]/other/index.page.tsx:66
-#: src/pages/[locale]/test/index.page.tsx:66
+#: src/pages/[locale]/index.page.tsx:63
+#: src/pages/[locale]/other/index.page.tsx:60
+#: src/pages/[locale]/test/index.page.tsx:60
 msgid "{value, plural, =0 {You have no unread messages.} one {You have # unread message.} other {You have # unread messages.}}"
 msgstr ""
 
@@ -42,15 +42,15 @@ msgstr ""
 msgid "All Categories"
 msgstr ""
 
-#: src/pages/_error.page.tsx:14
+#: src/pages/_error.page.tsx:12
 msgid "An error or misconfiguration was encountered and we are unable to complete your request."
 msgstr ""
 
-#: src/components/error/error.tsx:31
+#: src/components/error/error.tsx:30
 msgid "Back to home"
 msgstr ""
 
-#: src/components/landing-banner/index.tsx:26
+#: src/pages/[locale]/library/index.page.tsx:79
 msgid "Browse thousands of ready-made resources designed to help your teams reach higher standards, work safely, and improve every day"
 msgstr ""
 
@@ -58,144 +58,146 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: src/components/landing-banner/index.tsx:17
+#: src/pages/[locale]/library/index.page.tsx:69
 msgid "color gradient"
 msgstr ""
 
-#: src/pages/_app.page.tsx:73
+#: src/pages/_app.page.tsx:79
 msgid "Content Library - Templates & Courses | SafetyCulture"
 msgstr ""
 
-#: src/pages/[locale]/library/[category]/index.page.tsx:26
+#: src/pages/[locale]/library/[category]/index.page.tsx:59
 msgid "Discover free customizable templates and training courses for {pageTitle} from the SafetyCulture library."
 msgstr ""
 
-#: src/pages/_error.page.tsx:12
+#: src/pages/_error.page.tsx:10
 msgid "Error"
 msgstr ""
 
-#: src/components/landing-banner/index.tsx:23
+#: src/pages/[locale]/library/index.page.tsx:76
 msgid "Everything you need to get started with SafetyCulture"
-msgstr ""
-
-#: src/pages/[locale]/index.page.tsx:50
-#: src/pages/[locale]/other/index.page.tsx:47
-#: src/pages/[locale]/test/index.page.tsx:47
-msgid "Example body text in Noto Sans."
-msgstr ""
-
-#: src/pages/[locale]/index.page.tsx:47
-#: src/pages/[locale]/other/index.page.tsx:44
-#: src/pages/[locale]/test/index.page.tsx:44
-msgid "Example title text in Noto Sans"
-msgstr ""
-
-#: src/pages/_app.page.tsx:77
-msgid "Explore our library of templates, training courses, and content collections you can customize and easily share from SafetyCulture."
 msgstr ""
 
 #: src/pages/[locale]/index.page.tsx:44
 #: src/pages/[locale]/other/index.page.tsx:41
 #: src/pages/[locale]/test/index.page.tsx:41
+msgid "Example body text in Noto Sans."
+msgstr ""
+
+#: src/pages/[locale]/index.page.tsx:41
+#: src/pages/[locale]/other/index.page.tsx:38
+#: src/pages/[locale]/test/index.page.tsx:38
+msgid "Example title text in Noto Sans"
+msgstr ""
+
+#: src/pages/_app.page.tsx:83
+msgid "Explore our library of templates, training courses, and content collections you can customize and easily share from SafetyCulture."
+msgstr ""
+
+#: src/pages/[locale]/index.page.tsx:38
+#: src/pages/[locale]/other/index.page.tsx:35
+#: src/pages/[locale]/test/index.page.tsx:35
 msgid "Hello World"
 msgstr ""
 
-#: src/components/breadcrumbs/utils.tsx:19
+#: src/components/breadcrumbs/utils.tsx:18
 msgctxt "link for breadcrumb navigation"
 msgid "Home"
+msgstr ""
+
+#: src/pages/[locale]/index.page.tsx:25
+#: src/pages/[locale]/other/index.page.tsx:25
+#: src/pages/[locale]/test/index.page.tsx:25
+msgctxt "main nav"
+msgid "Home"
+msgstr ""
+
+#: src/pages/500.page.tsx:11
+msgid "Internal server error"
+msgstr ""
+
+#: src/pages/[locale]/index.page.tsx:34
+msgctxt "main nav"
+msgid "Layout Test"
+msgstr ""
+
+#: src/pages/[locale]/library/[category]/index.page.tsx:78
+#: src/pages/[locale]/library/index.page.tsx:55
+#: src/pages/[locale]/library/search.page.tsx:26
+msgid "Library"
+msgstr ""
+
+#: src/pages/[locale]/index.page.tsx:52
+#: src/pages/[locale]/other/index.page.tsx:49
+#: src/pages/[locale]/test/index.page.tsx:49
+msgid "Number of messages"
 msgstr ""
 
 #: src/pages/[locale]/index.page.tsx:31
 #: src/pages/[locale]/other/index.page.tsx:31
 #: src/pages/[locale]/test/index.page.tsx:31
 msgctxt "main nav"
-msgid "Home"
-msgstr ""
-
-#: src/pages/500.page.tsx:13
-msgid "Internal server error"
-msgstr ""
-
-#: src/pages/[locale]/index.page.tsx:40
-msgctxt "main nav"
-msgid "Layout Test"
-msgstr ""
-
-#: src/pages/[locale]/library/[category]/index.page.tsx:37
-#: src/pages/[locale]/library/index.page.tsx:24
-msgid "Library"
-msgstr ""
-
-#: src/pages/[locale]/index.page.tsx:58
-#: src/pages/[locale]/other/index.page.tsx:55
-#: src/pages/[locale]/test/index.page.tsx:55
-msgid "Number of messages"
-msgstr ""
-
-#: src/pages/[locale]/index.page.tsx:37
-#: src/pages/[locale]/other/index.page.tsx:37
-#: src/pages/[locale]/test/index.page.tsx:37
-msgctxt "main nav"
 msgid "Other"
 msgstr ""
 
-#: src/components/landing-banner/index.tsx:13
+#: src/pages/[locale]/library/index.page.tsx:66
 msgid "page banner"
 msgstr ""
 
-#: src/pages/404.page.tsx:13
+#: src/pages/404.page.tsx:11
 msgid "Page not found"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:55
-#: src/pages/[locale]/other/index.page.tsx:52
-#: src/pages/[locale]/test/index.page.tsx:52
+#: src/pages/[locale]/index.page.tsx:49
+#: src/pages/[locale]/other/index.page.tsx:46
+#: src/pages/[locale]/test/index.page.tsx:46
 msgid "Plural translation example"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:78
-#: src/pages/[locale]/other/index.page.tsx:75
-#: src/pages/[locale]/test/index.page.tsx:75
+#: src/pages/[locale]/index.page.tsx:72
+#: src/pages/[locale]/other/index.page.tsx:69
+#: src/pages/[locale]/test/index.page.tsx:69
 msgid "Plural translation example with variables"
 msgstr ""
 
-#: src/pages/[locale]/report/[shareId]/index.page.tsx:31
+#: src/pages/[locale]/report/[shareId]/index.page.tsx:36
 msgid "report name {0}"
 msgstr ""
 
-#: src/pages/_app.page.tsx:115
+#: src/pages/_app.page.tsx:124
 msgid "SafetyCulture"
 msgstr ""
 
-#: src/components/search-bar/index.tsx:8
-msgid "search categories"
+#: src/components/search-bar/index.tsx:33
+msgid "Search industry, activity or categories"
 msgstr ""
 
-#: src/components/search-bar/index.tsx:9
-msgid "Search industry, activity or categories."
+#: src/components/skip-to-content/index.tsx:35
+msgctxt "skip"
+msgid "Skip to content"
 msgstr ""
 
-#: src/pages/_error.page.tsx:13
+#: src/pages/_error.page.tsx:11
 msgid "Something went wrong"
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:34
-#: src/pages/[locale]/other/index.page.tsx:34
-#: src/pages/[locale]/test/index.page.tsx:34
+#: src/pages/[locale]/index.page.tsx:28
+#: src/pages/[locale]/other/index.page.tsx:28
+#: src/pages/[locale]/test/index.page.tsx:28
 msgctxt "main nav"
 msgid "Test"
 msgstr ""
 
-#: src/pages/404.page.tsx:14
+#: src/pages/404.page.tsx:12
 msgid "The page you were looking for could not be found. It might have been removed, renamed, or did not exist in the first place."
 msgstr ""
 
-#: src/pages/500.page.tsx:14
+#: src/pages/500.page.tsx:12
 msgid "The server encountered an internal error or misconfiguration and was unable to complete your request."
 msgstr ""
 
-#: src/pages/[locale]/index.page.tsx:82
-#: src/pages/[locale]/other/index.page.tsx:79
-#: src/pages/[locale]/test/index.page.tsx:79
+#: src/pages/[locale]/index.page.tsx:76
+#: src/pages/[locale]/other/index.page.tsx:73
+#: src/pages/[locale]/test/index.page.tsx:73
 msgid "Your name"
 msgstr ""

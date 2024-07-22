@@ -6,7 +6,7 @@ interface SideNavLayout {
   children?: React.ReactNode;
 }
 
-export default function SidenavLayout({ children }: SideNavLayout) {
+export function SidenavLayout({ children }: SideNavLayout) {
   return (
     <LayoutContainer>
       <CategoryPanel />

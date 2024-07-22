@@ -2,9 +2,13 @@ import { t } from "@lingui/macro";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetServerSideProps } from "next";
 import { z } from "zod";
+import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
-import type { PageWithLayout } from "#/components/layouts";
-import { BaseLayout, SidenavLayout } from "#/components/layouts";
+import { ContentHeader } from "#/components/content-header";
+import { SearchBar } from "#/components/search-bar/connected";
+import { ContentContainer } from "#/layouts/content-container";
+import { SidenavLayout } from "#/layouts/sidenav-layout";
+import type { PageWithLayout } from "#/layouts/types";
 import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
 import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 import { prefetchAlgoliaSearch } from "#/utils/algolia/search";
@@ -25,9 +29,14 @@ LibrarySearchPage.getLayout = (page) => {
   ]);
 
   return (
-    <BaseLayout breadcrumbs={breadcrumbs}>
+    <ContentContainer>
+      <ContentHeader>
+        <Breadcrumbs items={breadcrumbs} />
+        <SearchBar paramsSchema={paramsSchema} />
+      </ContentHeader>
+
       <SidenavLayout>{page}</SidenavLayout>
-    </BaseLayout>
+    </ContentContainer>
   );
 };
 

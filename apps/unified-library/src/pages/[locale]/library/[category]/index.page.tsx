@@ -3,11 +3,15 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { z } from "zod";
+import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
-import type { PageWithLayout } from "#/components/layouts";
-import { BaseLayout, SidenavLayout } from "#/components/layouts";
+import { ContentHeader } from "#/components/content-header";
 import { MockCardList } from "#/components/mock-card-list";
+import { SearchBar } from "#/components/search-bar/connected";
 import { supportedLocales } from "#/constants/i18n";
+import { ContentContainer } from "#/layouts/content-container";
+import { SidenavLayout } from "#/layouts/sidenav-layout";
+import type { PageWithLayout } from "#/layouts/types";
 import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
 import {
   PageDescription,
@@ -18,12 +22,15 @@ import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 import { mockRetrieveCategoryDescriptions } from "#/stubs/contentful.stub";
 import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
 
+const paramsSchema = z.object({
+  q: z.string().optional().default(""),
+  category: z.string(),
+});
+
 const ctxSchema = z.intersection(
   ctxWithLocaleSchema,
   z.object({
-    params: z.object({
-      category: z.string(),
-    }),
+    params: paramsSchema,
   }),
 );
 
@@ -35,7 +42,7 @@ const pagePropsSchema = z
   })
   .merge(pagePropsMinimumSchema);
 
-type Params = z.infer<typeof ctxSchema>["params"];
+type Params = z.input<typeof ctxSchema>["params"];
 type PageProps = z.infer<typeof pagePropsSchema>;
 
 const CategoryPage: PageWithLayout<PageProps> = ({
@@ -77,9 +84,14 @@ CategoryPage.getLayout = (page) => {
     },
   ]);
   return (
-    <BaseLayout breadcrumbs={breadcrumbs}>
+    <ContentContainer>
+      <ContentHeader>
+        <Breadcrumbs items={breadcrumbs} />
+        <SearchBar paramsSchema={paramsSchema} />
+      </ContentHeader>
+
       <SidenavLayout>{page}</SidenavLayout>
-    </BaseLayout>
+    </ContentContainer>
   );
 };
 

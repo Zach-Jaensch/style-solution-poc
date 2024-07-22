@@ -20,7 +20,7 @@ describe("breadcrumb tests", () => {
       },
       { title: "apple", href: "/fruits/apple" },
     ]);
-    render(<Breadcrumbs separator={"/"} items={breadcrumbs} />);
+    render(<Breadcrumbs items={breadcrumbs} />);
 
     const nav = await screen.findByRole("navigation", { name: "breadcrumbs" });
     expect(nav).toBeVisible();
@@ -48,7 +48,7 @@ describe("breadcrumb tests", () => {
         href: "/fruits",
       },
     ]);
-    render(<Breadcrumbs separator={"/"} items={breadcrumbs} />);
+    render(<Breadcrumbs items={breadcrumbs} />);
 
     const links = screen
       .getAllByRole("listitem")
