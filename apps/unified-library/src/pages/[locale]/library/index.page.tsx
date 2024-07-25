@@ -1,5 +1,5 @@
 import { Trans, t } from "@lingui/macro";
-import { Text as Typography, VStack } from "@safetyculture/sc-web-ui/react";
+import { Typography, VStack } from "@safetyculture/sc-web-ui/react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { z } from "zod";
 import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
 import { ContentHeader } from "#/components/content-header";
+import { FeaturedContent } from "#/components/featured-content";
 import { MockCardList } from "#/components/mock-card-list";
 import { SearchBar } from "#/components/search-bar/connected";
 import { supportedLocales } from "#/constants/i18n";
@@ -17,6 +18,7 @@ import { SidenavLayout } from "#/layouts/sidenav-layout";
 import type { PageWithLayout } from "#/layouts/types";
 import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
 import { mockRetrieveCategories } from "#/stubs/algolia.stub";
+import { mockRetrieveFeaturedTemplates } from "#/stubs/commercetools.stub";
 import {
   prefetchAlgoliaSearch,
   useAlgoliaSearch,
@@ -29,7 +31,12 @@ const LibraryPage: PageWithLayout = () => {
     query,
   });
 
-  return <MockCardList data={data?.hits} />;
+  return (
+    <>
+      <FeaturedContent />
+      <MockCardList data={data?.hits} />
+    </>
+  );
 };
 
 const Description = styled(Typography)`
@@ -137,6 +144,11 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   });
 
   await prefetchAlgoliaSearch(queryClient);
+
+  await queryClient.prefetchQuery({
+    queryKey: ["fake-query-key-for-featured-templates"],
+    queryFn: mockRetrieveFeaturedTemplates,
+  });
 
   return {
     props: {

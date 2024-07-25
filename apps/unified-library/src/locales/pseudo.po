@@ -17,6 +17,10 @@ msgstr ""
 msgid "{0, plural, one {{1} # item} other {{2} # items}}"
 msgstr ""
 
+#: src/components/featured-content/index.tsx:61
+msgid "{0, plural, one {# Download} other {# Downloads}}"
+msgstr ""
+
 #: src/pages/[locale]/library/[category]/index.page.tsx:55
 msgid "{pageTitle} | SafetyCulture Library"
 msgstr ""
@@ -50,15 +54,20 @@ msgstr ""
 msgid "Back to home"
 msgstr ""
 
-#: src/pages/[locale]/library/index.page.tsx:79
+#: src/pages/[locale]/library/index.page.tsx:86
 msgid "Browse thousands of ready-made resources designed to help your teams reach higher standards, work safely, and improve every day"
+msgstr ""
+
+#: src/components/featured-content/index.tsx:42
+msgctxt "denotes the publisher of a piece of content"
+msgid "by<0>{0}</0>"
 msgstr ""
 
 #: src/components/category-panel/category-panel.tsx:42
 msgid "Categories"
 msgstr ""
 
-#: src/pages/[locale]/library/index.page.tsx:69
+#: src/pages/[locale]/library/index.page.tsx:76
 msgid "color gradient"
 msgstr ""
 
@@ -74,7 +83,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: src/pages/[locale]/library/index.page.tsx:76
+#: src/pages/[locale]/library/index.page.tsx:83
 msgid "Everything you need to get started with SafetyCulture"
 msgstr ""
 
@@ -92,6 +101,14 @@ msgstr ""
 
 #: src/pages/_app.page.tsx:83
 msgid "Explore our library of templates, training courses, and content collections you can customize and easily share from SafetyCulture."
+msgstr ""
+
+#: src/components/featured-content/index.tsx:31
+msgid "featured content"
+msgstr ""
+
+#: src/components/featured-content/index.tsx:53
+msgid "Get template"
 msgstr ""
 
 #: src/pages/[locale]/index.page.tsx:38
@@ -122,7 +139,7 @@ msgid "Layout Test"
 msgstr ""
 
 #: src/pages/[locale]/library/[category]/index.page.tsx:78
-#: src/pages/[locale]/library/index.page.tsx:55
+#: src/pages/[locale]/library/index.page.tsx:62
 #: src/pages/[locale]/library/search.page.tsx:26
 msgid "Library"
 msgstr ""
@@ -140,7 +157,7 @@ msgctxt "main nav"
 msgid "Other"
 msgstr ""
 
-#: src/pages/[locale]/library/index.page.tsx:66
+#: src/pages/[locale]/library/index.page.tsx:73
 msgid "page banner"
 msgstr ""
 
