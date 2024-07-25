@@ -19,7 +19,7 @@ import type { AppProps } from "next/app";
 import { Noto_Sans } from "next/font/google";
 import Head from "next/head";
 import { useRef, useState } from "react";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { SkipToContent } from "#/components/skip-to-content";
 import type { PageWithLayout } from "#/layouts/types";
 import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
@@ -30,16 +30,14 @@ import header from "./menus/header.json";
 import legal from "./menus/legal.json";
 
 const NextGlobalStyles = createGlobalStyle`
-  body > div:first-child,
-  div#__next,
-  div#__next > main:first-child {
-    height: 100%;
-  }
-
   body {
     min-width: 20rem;
     color: ${(p) => p.theme.colors.surface.text.default};
   }
+`;
+
+const Main = styled.main`
+  background-color: ${(p) => p.theme.colors.bg.default};
 `;
 
 const notoSans = Noto_Sans({
@@ -110,9 +108,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                       website="safetyculture"
                     />
                   </CssReset>
-                  <main id="main" ref={mainRef}>
+                  <Main id="main" ref={mainRef}>
                     {getLayout(<Component {...pageProps} />)}
-                  </main>
+                  </Main>
                   <CssReset>
                     <Footer
                       // @ts-expect-error -- typed incorrectly

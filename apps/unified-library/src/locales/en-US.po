@@ -71,7 +71,7 @@ msgstr "Categories"
 msgid "color gradient"
 msgstr "color gradient"
 
-#: src/pages/_app.page.tsx:79
+#: src/pages/_app.page.tsx:77
 msgid "Content Library - Templates & Courses | SafetyCulture"
 msgstr "Content Library - Templates & Courses | SafetyCulture"
 
@@ -99,7 +99,7 @@ msgstr "Example body text in Noto Sans."
 msgid "Example title text in Noto Sans"
 msgstr "Example title text in Noto Sans"
 
-#: src/pages/_app.page.tsx:83
+#: src/pages/_app.page.tsx:81
 msgid "Explore our library of templates, training courses, and content collections you can customize and easily share from SafetyCulture."
 msgstr "Explore our library of templates, training courses, and content collections you can customize and easily share from SafetyCulture."
 
@@ -181,7 +181,7 @@ msgstr "Plural translation example with variables"
 msgid "report name {0}"
 msgstr "report name {0}"
 
-#: src/pages/_app.page.tsx:124
+#: src/pages/_app.page.tsx:122
 msgid "SafetyCulture"
 msgstr "SafetyCulture"
 

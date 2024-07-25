@@ -9,4 +9,5 @@ export const ContentHeader = styled.div`
   gap: ${(p) => p.theme.space.s8};
 
   padding: 0 ${(p) => p.theme.space.s1};
+  margin: -${(p) => p.theme.space.s4} 0;
 `;
