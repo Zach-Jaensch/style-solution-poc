@@ -10,7 +10,7 @@ export function SidenavLayout({ children }: SideNavLayout) {
   return (
     <LayoutContainer>
       <CategoryPanel />
-      <div>{children}</div>
+      <Content>{children}</Content>
     </LayoutContainer>
   );
 }
@@ -18,4 +18,9 @@ export function SidenavLayout({ children }: SideNavLayout) {
 const LayoutContainer = styled.div`
   display: flex;
   column-gap: ${(p) => p.theme.space.s8};
+`;
+
+const Content = styled.div`
+  flex: 1;
+  min-width: 0;
 `;
