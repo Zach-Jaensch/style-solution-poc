@@ -1,4 +1,4 @@
 {
   "extends": ["@internal/typescript-config"],
-  "include": ["*.*js", "**/*.ts"]
+  "include": ["**/*.*js"]
 }

@@ -2,9 +2,9 @@
   "extends": ["@internal/typescript-config"],
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "noEmit": true,
     "paths": {
       "#/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "playwright-report"]
 }

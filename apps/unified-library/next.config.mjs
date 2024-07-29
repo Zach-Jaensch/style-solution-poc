@@ -6,12 +6,18 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     optimizePackageImports: ["@safetyculture/sc-web-ui"],
     swcPlugins: [["@lingui/swc-plugin", {}]],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   webpack: (/** @type {import("webpack").Configuration} */ config) => {
-    config.module.rules.push({
+    config.module?.rules?.push({
       test: /\.po$/,
       use: {
         loader: "@lingui/loader",
@@ -30,7 +36,7 @@ export default withSentryConfig(nextConfig, {
   org: "safetyculture-gw",
   project: "unified-library",
   authToken: env.SENTRY_AUTH_TOKEN,
-  release: env.VERCEL_GIT_COMMIT_SHA,
+  release: { setCommits: { auto: true } },
 
   // For all available options, see:
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/

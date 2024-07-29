@@ -1,16 +1,22 @@
 import { fixupPluginRules } from "@eslint/compat";
+// @ts-expect-error -- No types supplied
 import next from "@next/eslint-plugin-next";
 import tanstackQuery from "@tanstack/eslint-plugin-query";
+// @ts-expect-error -- No types supplied
 import jsxA11y from "eslint-plugin-jsx-a11y";
+// @ts-expect-error -- No types supplied
 import lingui from "eslint-plugin-lingui";
+// @ts-expect-error -- No types supplied
 import react from "eslint-plugin-react";
+// @ts-expect-error -- No types supplied
 import reactHooks from "eslint-plugin-react-hooks";
+// @ts-expect-error -- No types supplied
 import testingLibrary from "eslint-plugin-testing-library";
 import tseslint from "typescript-eslint";
-import { STUB_GLOB, TEST_GLOB } from "../utils/constants.js";
+import { STUB_GLOB, TEST_GLOB } from "../utils/constants.mjs";
 import { baseConfig } from "./base.mjs";
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
+/** @type {import("typescript-eslint").ConfigWithExtends[]} */
 const nextConfig = [
   ...baseConfig,
   // React rules
@@ -60,12 +66,7 @@ const nextConfig = [
     rules: testingLibrary.configs.react.rules,
   },
   // Tanstack Query
-  {
-    plugins: {
-      "@tanstack/query": tanstackQuery,
-    },
-    rules: tanstackQuery.configs.recommended.rules,
-  },
+  ...tanstackQuery.configs["flat/recommended"],
   // Lingui rules
   // NOTE: these rules are experimental and can be removed if found to be problematic
   {

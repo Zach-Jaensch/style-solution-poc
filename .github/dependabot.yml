@@ -25,8 +25,12 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
-      # `sc-web-ui` is not yet compatible.
+      # `sc-web-ui` is not yet compatible with newer versions.
       - dependency-name: "styled-components"
+        update-types: ["version-update:semver-major"]
+      # `@types/node` should match our Node.js version.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     commit-message:

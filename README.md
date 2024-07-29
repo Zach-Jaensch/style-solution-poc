@@ -7,10 +7,11 @@
   - [Setting up Node.js](#setting-up-nodejs)
   - [Setting up the package manager](#setting-up-the-package-manager)
   - [Installing packages](#installing-packages)
+  - [Setting up Turborepo](#setting-up-turborepo)
   - [Troubleshooting](#troubleshooting)
-- [Using this repository](#using-this-repository)
-  - [Running commands from packages](#running-commands-from-packages)
+- [Working in this repository](#working-in-this-repository)
   - [Running commands from the workspace](#running-commands-from-the-workspace)
+  - [Running commands from packages](#running-commands-from-packages)
 
 ## Apps
 
@@ -20,10 +21,12 @@
 
 ## Packages
 
-| Name                                                                  | Description                         |
-| --------------------------------------------------------------------- | ----------------------------------- |
-| [`@internal/eslint-config`](packages/eslint-config/README.md)         | A set of ESLint configurations.     |
-| [`@internal/typescript-config`](packages/typescript-config/README.md) | A set of TypeScript configurations. |
+| Name                                                                  | Description                                                |
+| --------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`@internal/commonality`](packages/commonality/README.md)             | Custom repository checks for Commonality.                  |
+| [`@internal/eslint-config`](packages/eslint-config/README.md)         | A set of ESLint configurations.                            |
+| [`@internal/typescript-config`](packages/typescript-config/README.md) | A set of TypeScript configurations.                        |
+| [`@internal/zod-schema`](packages/zod-schema/README.md)               | A collection of schemas to describe untyped external APIs. |
 
 ## Playwright tests
 
@@ -33,7 +36,7 @@
 
 ## Getting set up
 
-This guide is designed to get you up and running in this repo quickly.
+This guide is designed to get you up and running in this repository quickly.
 
 Packages and apps may have additional instructions.
 
@@ -74,57 +77,84 @@ package manager._
 > [!TIP]
 > This step will fail if you haven't completed the [prerequisites](#prerequisites).
 
-To install all packages for this repo, run:
+To install all packages for this repository, run:
 
 ```bash
 pnpm i
 ```
 
-At this stage, you should be able to run scripts in this repo. To confirm, try
-running Prettier:
+At this stage, you should be able to run scripts in this repository. To
+confirm, try running Prettier:
 
 ```bash
 pnpm prettier
 ```
 
-## Using this repository
+### Setting up Turborepo
 
-### Running commands from packages
+We use [Turborepo](https://turbo.build/repo/docs) for task caching, both
+locally and in the CI. To get the most from Turborepo, you should connect to
+the remote cache.
 
-If you `cd` into a an package (or app) folder, you can run any scripts in that
-package with:
-
-```bash
-pnpm [script-name]
-```
-
-For example, to run ESLint:
+First, log in to Turborepo (via Vercel):
 
 ```bash
-pnpm eslint
+pnpm turbo login
 ```
+
+Once logged in, you can connect your local project by selecting the
+SafetyCulture scope:
+
+```bash
+pnpm turbo link
+# Select "Yes"
+# Select "SafetyCulture Marketplace Global"
+```
+
+## Working in this repository
 
 ### Running commands from the workspace
 
-From the workspace, or the root of the repository, you can run commands with pnpm's
-`--filter` and `--recursive` options.
+From the workspace, or the root of the repository, you can run commands with
+Turborepos's `--filter` option.
 
 For example, to run ESLint for just the `unified-library` app:
 
 ```bash
 # Using `--filter`
-pnpm --filter unified-library-app eslint
+pnpm turbo --filter unified-library-app eslint
 
 # Using the `-F` alias
-pnpm -F unified-library-app eslint
+pnpm turbo -F unified-library-app eslint
 ```
 
-For example, to run ESLint in each package with an `eslint` script:
+The `--filter` option can be used multiple times, and also accepts
+partial matches:
+(i.e. `--filter "@internal/*"`)
 
 ```bash
-# Using `--recursive`
-pnpm --recursive eslint
+# Running a command on two packages only
+pnpm turbo --filter unified-library-app --filter @internal/eslint-config eslint
 
-# Using the `-r` alias
-pnpm --r eslint
+# Running a command on all packages wit the `@internal/` scope
+pnpm turbo --filter @internal/* eslint
+```
+
+### Running commands from packages
+
+> [!NOTE]
+> In most cases you'll find a script in the workspace `package.json` that will
+> do what you need.
+
+If you `cd` into a an package (or app) folder, you can run any scripts in that
+package with:
+
+```bash
+pnpm turbo [script-name]
+```
+
+For example, to run ESLint:
+
+```bash
+pnpm turbo eslint
 ```

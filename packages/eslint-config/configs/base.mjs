@@ -1,20 +1,25 @@
+import assert from "node:assert";
 import path from "node:path";
 import { fixupPluginRules } from "@eslint/compat";
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import { findWorkspaceDir } from "@pnpm/find-workspace-dir";
+// @ts-expect-error -- No types supplied
 import eslintComments from "eslint-plugin-eslint-comments";
+// @ts-expect-error -- No types supplied
 import importPlugin from "eslint-plugin-import";
+// @ts-expect-error -- No types supplied
 import jest from "eslint-plugin-jest";
 import tsdoc from "eslint-plugin-tsdoc";
 import unicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
-import { TEST_GLOB, TS_GLOB } from "../utils/constants.js";
+import { TEST_GLOB, TS_GLOB } from "../utils/constants.mjs";
 
 const workspaceDir = await findWorkspaceDir(import.meta.url);
+assert(workspaceDir);
 const gitignorePath = path.resolve(workspaceDir, ".gitignore");
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
+/** @type {import("typescript-eslint").ConfigWithExtends[]} */
 export const baseConfig = [
   includeIgnoreFile(gitignorePath),
   eslint.configs.recommended,

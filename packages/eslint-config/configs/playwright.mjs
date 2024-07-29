@@ -2,7 +2,7 @@ import playwright from "eslint-plugin-playwright";
 import tseslint from "typescript-eslint";
 import { baseConfig } from "./base.mjs";
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
+/** @type {import("typescript-eslint").ConfigWithExtends[]} */
 const playwrightConfig = [
   ...baseConfig,
   {
