@@ -37,6 +37,8 @@ export function DefaultWrapper({ children }: { children: ReactNode }) {
   );
 }
 
+export * from "@testing-library/react";
+
 /**
  * A custom render to setup providers. Extends regular render options with
  * `providerProps` to allow injecting different scenarios to test with.

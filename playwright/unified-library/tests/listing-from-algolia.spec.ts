@@ -70,8 +70,8 @@ test("can search content on algolia", async ({ page }) => {
 
   const searchForm = page.getByRole("search");
 
-  await searchForm.getByRole("searchbox").fill(searchQuery);
-  await searchForm.getByRole("searchbox").press("Enter");
+  await searchForm.getByRole("combobox").fill(searchQuery);
+  await searchForm.getByRole("combobox").press("Enter");
 
   // quick and dirty test to prove out the concept
   // For a proper test, we would get the list from the dom, and then validate each item
@@ -86,4 +86,106 @@ test("can search content on algolia", async ({ page }) => {
   for (const hit of mockData.hits) {
     await expect(page.getByText(hit.title, { exact: true })).toBeVisible();
   }
+});
+
+test("can search with autocomplete and use keyboard to select an option", async ({
+  page,
+}) => {
+  await page.route(/(algolianet.com)|(algolia.net)/, async (route) => {
+    const postData = route.request().postData();
+    assert(postData);
+    const options = searchOptionsSchema.parse(JSON.parse(postData));
+
+    // deep copy the mock data
+    const localData = testingSchema.parse(mockData);
+
+    localData.hits = localData.hits.map((hit) => {
+      hit.title = hit.title + options.query;
+      return hit;
+    });
+
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(localData),
+    });
+  });
+
+  await page.goto("/library");
+
+  const searchQuery = "test search+rescue";
+
+  const searchForm = page.getByRole("search");
+
+  await searchForm.getByRole("combobox").fill(searchQuery);
+
+  // ensure the test mock data is correct for this test
+  assert(mockData.hits[1]);
+
+  for (const hit of mockData.hits) {
+    await expect(
+      searchForm.getByRole("option", { name: hit.title + searchQuery }),
+    ).toBeVisible();
+  }
+
+  await searchForm.getByRole("combobox").press("ArrowDown");
+  await searchForm.getByRole("combobox").press("ArrowDown");
+  await searchForm.getByRole("combobox").press("Enter");
+
+  // Page not currently implemented, but this is a placeholder for the expected behavior
+  await expect(page.getByText("Page not found")).toBeVisible();
+  expect(new URL(page.url()).pathname).toEqual(
+    `/en-US/library/content/${mockData.hits[1].slug}`,
+  );
+});
+
+test("can search with autocomplete and use a mouse to select an option", async ({
+  page,
+}) => {
+  await page.route(/(algolianet.com)|(algolia.net)/, async (route) => {
+    const postData = route.request().postData();
+    assert(postData);
+    const options = searchOptionsSchema.parse(JSON.parse(postData));
+
+    // deep copy the mock data
+    const localData = testingSchema.parse(mockData);
+
+    localData.hits = localData.hits.map((hit) => {
+      hit.title = hit.title + options.query;
+      return hit;
+    });
+
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(localData),
+    });
+  });
+
+  await page.goto("/library");
+
+  const searchQuery = "test search+rescue";
+
+  const searchForm = page.getByRole("search");
+
+  await searchForm.getByRole("combobox").fill(searchQuery);
+
+  // ensure the test mock data is correct for this test
+  assert(mockData.hits[1]);
+
+  for (const hit of mockData.hits) {
+    await expect(
+      searchForm.getByRole("option", { name: hit.title + searchQuery }),
+    ).toBeVisible();
+  }
+
+  await searchForm
+    .getByRole("option", { name: mockData.hits[1].title + searchQuery })
+    .click();
+
+  // Page not currently implemented, but this is a placeholder for the expected behavior
+  await expect(page.getByText("Page not found")).toBeVisible();
+  expect(new URL(page.url()).pathname).toEqual(
+    `/en-US/library/content/${mockData.hits[1].slug}`,
+  );
 });

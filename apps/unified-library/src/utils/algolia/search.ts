@@ -2,10 +2,17 @@ import {
   searchOptionsSchema,
   searchResponseSchema,
 } from "@internal/zod-schema/algolia-search";
-import type { FetchQueryOptions, QueryClient } from "@tanstack/react-query";
+import type {
+  FetchQueryOptions,
+  QueryClient,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 import type { z } from "zod";
+import { fromZodError } from "zod-validation-error";
 import { getAlgoliaBaseQueryKey, getAlgoliaClient } from "./client";
+
+export type SearchResponse = z.infer<typeof searchResponseSchema>;
 
 async function searchAlgolia({
   indexName,
@@ -18,7 +25,13 @@ async function searchAlgolia({
     hitsPerPage,
   });
 
-  return searchResponseSchema.parse(result);
+  const parsedResponse = searchResponseSchema.safeParse(result);
+
+  if (!parsedResponse.success) {
+    throw fromZodError(parsedResponse.error);
+  }
+
+  return parsedResponse.data;
 }
 
 function searchAlgoliaQueryOptions(opts: z.infer<typeof searchOptionsSchema>) {
@@ -43,6 +56,13 @@ export function prefetchAlgoliaSearch(
 
 export function useAlgoliaSearch(
   opts: z.input<typeof searchOptionsSchema> = {},
+  queryOpts?: Omit<
+    UseQueryOptions<z.infer<typeof searchResponseSchema>>,
+    "queryKey" | "queryFn"
+  >,
 ) {
-  return useQuery(searchAlgoliaQueryOptions(searchOptionsSchema.parse(opts)));
+  return useQuery({
+    ...queryOpts,
+    ...searchAlgoliaQueryOptions(searchOptionsSchema.parse(opts)),
+  });
 }

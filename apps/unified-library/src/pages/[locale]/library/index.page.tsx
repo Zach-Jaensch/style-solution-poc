@@ -2,7 +2,6 @@ import { Trans, t } from "@lingui/macro";
 import { Typography, VStack } from "@safetyculture/sc-web-ui/react";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import Image from "next/image";
 import styled from "styled-components";
 import { z } from "zod";
 import { Breadcrumbs } from "#/components/breadcrumbs";
@@ -16,7 +15,7 @@ import { useTypedRouter } from "#/hooks/use-typed-router";
 import { ContentContainer } from "#/layouts/content-container";
 import { SidenavLayout } from "#/layouts/sidenav-layout";
 import type { PageWithLayout } from "#/layouts/types";
-import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
+import { loadCatalog, paramsWithLocaleSchema } from "#/pages-router-i18n";
 import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 import { mockRetrieveFeaturedTemplates } from "#/stubs/commercetools.stub";
 import {
@@ -51,9 +50,8 @@ const LandingBannerContainer = styled(VStack)`
   min-height: 15.625rem;
   align-items: center;
   justify-content: center;
-
-  overflow: hidden;
-  isolation: isolate;
+  background-image: url("/assets/banner-bg-gradient.png");
+  background-size: cover;
 `;
 
 LibraryPage.getLayout = (page) => {
@@ -71,14 +69,6 @@ LibraryPage.getLayout = (page) => {
       </ContentHeader>
 
       <LandingBannerContainer component="section" aria-label={t`page banner`}>
-        <Image
-          src="/assets/banner-bg-gradient.png"
-          alt={t`color gradient`}
-          style={{ zIndex: -1 }}
-          fill
-          aria-hidden
-          priority
-        />
         <Typography variant="headlineLarge" textAlign="center" component="h1">
           <Trans>Everything you need to get started with SafetyCulture</Trans>
         </Typography>
@@ -97,16 +87,16 @@ LibraryPage.getLayout = (page) => {
   );
 };
 
-const paramsSchema = z.object({
-  q: z.string().optional().default(""),
-});
-
-const ctxSchema = z.intersection(
-  ctxWithLocaleSchema,
+const paramsSchema = z.intersection(
   z.object({
-    params: paramsSchema,
+    q: z.string().optional().default(""),
   }),
+  paramsWithLocaleSchema,
 );
+
+const ctxSchema = z.object({
+  params: paramsSchema,
+});
 
 type Params = z.input<typeof ctxSchema>["params"];
 export type PageProps = z.infer<typeof pagePropsMinimumSchema>;

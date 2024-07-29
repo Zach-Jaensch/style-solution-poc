@@ -66,7 +66,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   pagePropsMinimumSchema.parse(pageProps);
 
   const mainRef = useRef<HTMLElement>(null);
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            throwOnError: true,
+          },
+        },
+      }),
+  );
   useLinguiInit(pageProps.translation);
 
   const getLayout = Component.getLayout ?? ((page) => page);

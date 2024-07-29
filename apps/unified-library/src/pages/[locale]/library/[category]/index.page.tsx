@@ -12,7 +12,7 @@ import { supportedLocales } from "#/constants/i18n";
 import { ContentContainer } from "#/layouts/content-container";
 import { SidenavLayout } from "#/layouts/sidenav-layout";
 import type { PageWithLayout } from "#/layouts/types";
-import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
+import { loadCatalog, paramsWithLocaleSchema } from "#/pages-router-i18n";
 import {
   PageDescription,
   PageTitle,
@@ -22,17 +22,17 @@ import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 import { mockRetrieveCategoryDescriptions } from "#/stubs/contentful.stub";
 import { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
 
-const paramsSchema = z.object({
-  q: z.string().optional().default(""),
-  category: z.string(),
-});
-
-const ctxSchema = z.intersection(
-  ctxWithLocaleSchema,
+const paramsSchema = z.intersection(
   z.object({
-    params: paramsSchema,
+    q: z.string().optional().default(""),
+    category: z.string(),
   }),
+  paramsWithLocaleSchema,
 );
+
+const ctxSchema = z.object({
+  params: paramsSchema,
+});
 
 const pagePropsSchema = z
   .object({

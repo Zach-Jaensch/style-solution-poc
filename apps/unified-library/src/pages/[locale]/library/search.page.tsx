@@ -9,7 +9,7 @@ import { SearchBar } from "#/components/search-bar/connected";
 import { ContentContainer } from "#/layouts/content-container";
 import { SidenavLayout } from "#/layouts/sidenav-layout";
 import type { PageWithLayout } from "#/layouts/types";
-import { ctxWithLocaleSchema, loadCatalog } from "#/pages-router-i18n";
+import { loadCatalog, paramsWithLocaleSchema } from "#/pages-router-i18n";
 import { mockRetrieveCategories } from "#/stubs/algolia.stub";
 import { prefetchAlgoliaSearch } from "#/utils/algolia/search";
 import type { pagePropsMinimumSchema } from "#/utils/base-page-props-schema";
@@ -40,16 +40,16 @@ LibrarySearchPage.getLayout = (page) => {
   );
 };
 
-const paramsSchema = z.object({
-  q: z.string().optional().default(""),
-});
-
-const ctxSchema = z.intersection(
-  ctxWithLocaleSchema,
+const paramsSchema = z.intersection(
   z.object({
-    params: paramsSchema,
+    q: z.string().optional().default(""),
   }),
+  paramsWithLocaleSchema,
 );
+
+const ctxSchema = z.object({
+  params: paramsSchema,
+});
 
 type Params = z.input<typeof ctxSchema>["params"];
 type PageProps = z.infer<typeof pagePropsMinimumSchema>;
