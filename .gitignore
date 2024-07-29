@@ -40,3 +40,7 @@ blob-report/
 playwright-report/
 playwright/.cache/
 test-results/
+
+# Translation files
+# Currently ignoring as they are built with the deployment, and we don't currently have a translation workflow
+apps/**/*.po
