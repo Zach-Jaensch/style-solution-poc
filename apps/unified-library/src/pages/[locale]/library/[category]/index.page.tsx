@@ -148,7 +148,7 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
     };
   }
   const pageTitle = matchedCategory.name;
-  const pageDescription = matchedCategory.description ?? null;
+  const pageDescription = matchedCategory.description;
 
   const searchResults = await fetchAlgoliaSearch(queryClient);
   const enrichedCategories = enrichCategories(

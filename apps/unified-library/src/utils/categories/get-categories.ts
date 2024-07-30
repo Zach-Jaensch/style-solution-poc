@@ -1,33 +1,37 @@
 import { CategoryType } from "@safetyculture/s12-apis-connect-web/s12/contentlibrary/v1/category_pb";
+import type { Category } from "@safetyculture/s12-apis-connect-web/s12/contentlibrary/v1/category_pb.js";
 import type { ListCategoriesPublicResponse } from "@safetyculture/s12-apis-connect-web/s12/contentlibrary/v1/response_pb";
 import type { QueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { publicUnifiedLibraryQueryService } from "#/utils/s12/public-unified-library";
 import { publicServerSideTransport } from "#/utils/s12/transport";
+import type { DTO } from "#/utils/s12/types";
 
-export interface Category {
-  name: string;
-  description: string | null;
-  slug: string;
-}
-
-export interface CategoryEnriched extends Category {
+export interface CategoryEnriched extends DTO<Category> {
   count: number;
 }
 
+const categorySchema = z.object({
+  name: z.string(),
+  description: z.string().default(""),
+  slug: z.string(),
+});
+
+export const categoriesSchema = z.array(categorySchema);
+
 export const enrichedCategoriesSchema = z.array(
-  z.object({
-    name: z.string(),
-    description: z.string().nullable(),
-    slug: z.string(),
-    count: z.number(),
-  }),
+  z.intersection(
+    categorySchema,
+    z.object({
+      count: z.number(),
+    }),
+  ),
 );
 
 export const getCategories = async (
   queryClient: QueryClient,
-): Promise<Category[]> => {
+): Promise<DTO<Category>[]> => {
   const { queryKey: listCategoriesQueryKey, queryFn: listCategoriesQueryFn } =
     publicUnifiedLibraryQueryService.listCategoriesPublic.createUseQueryOptions(
       { categoryType: CategoryType.INDUSTRY },
@@ -43,12 +47,16 @@ export const getCategories = async (
       },
     });
 
-  return listCategoriesResponse.categories;
+  const parsed = categoriesSchema.safeParse(listCategoriesResponse.categories);
+  if (!parsed.success) {
+    throw fromZodError(parsed.error);
+  }
+  return parsed.data;
 };
 
 export const enrichCategories = (
   facets: Record<string, number> | null,
-  categories: Category[],
+  categories: DTO<Category>[],
 ): CategoryEnriched[] | null => {
   if (!facets) {
     return null;
@@ -63,7 +71,7 @@ export const enrichCategories = (
         name: facetName,
         count: facetCount,
         slug: category.slug,
-        description: category.description ?? null,
+        description: category.description,
       });
     }
   });
