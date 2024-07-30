@@ -18,7 +18,7 @@
     "@algolia/client-search": "^4.24.0",
     "@internal/eslint-config": "workspace:*",
     "@internal/typescript-config": "workspace:*",
-    "@types/node": "^20.14.11",
+    "@types/node": "^20.14.13",
     "typescript": "^5.5.4",
     "zod": "^3.23.8"
   },
