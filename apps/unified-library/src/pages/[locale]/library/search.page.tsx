@@ -4,7 +4,7 @@ import type { GetServerSideProps } from "next";
 import { z } from "zod";
 import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
-import { CategoryPanel } from "#/components/category-panel/category-panel";
+import { CategoryPanel } from "#/components/category-panel";
 import { ContentHeader } from "#/components/content-header";
 import { SearchBar } from "#/components/search-bar/connected";
 import { ContentContainer } from "#/layouts/content-container";

@@ -1,7 +1,7 @@
 import { fireEvent, screen, within } from "@testing-library/react";
 import mockRouter from "next-router-mock";
 import { createDynamicRouteParser } from "next-router-mock/dynamic-routes";
-import { CategoryPanel } from "#/components/category-panel/category-panel";
+import { CategoryPanel } from "#/components/category-panel";
 import type { CategoryEnriched } from "#/utils/categories/get-categories";
 import { render } from "#/utils/test-utils";
 

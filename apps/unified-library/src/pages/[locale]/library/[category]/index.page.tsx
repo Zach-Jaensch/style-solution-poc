@@ -5,7 +5,7 @@ import Head from "next/head";
 import { z } from "zod";
 import { Breadcrumbs } from "#/components/breadcrumbs";
 import { createBreadCrumbs } from "#/components/breadcrumbs/utils";
-import { CategoryPanel } from "#/components/category-panel/category-panel";
+import { CategoryPanel } from "#/components/category-panel";
 import { ContentHeader } from "#/components/content-header";
 import { MockCardList } from "#/components/mock-card-list";
 import { SearchBar } from "#/components/search-bar/connected";

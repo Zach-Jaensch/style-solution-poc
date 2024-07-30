@@ -11,7 +11,7 @@ import {
   CategoryLink,
   Panel,
   PanelTitle,
-} from "./category-panel-styled";
+} from "./index-styled";
 
 const categoryQuerySchema = z.object({
   category: z.string().optional(),
