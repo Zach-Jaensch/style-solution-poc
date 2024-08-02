@@ -1,0 +1,49 @@
+{
+  "name": "@internal/vanilla-extract-component-lib",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./styled": {
+      "types": "./dist/styled.d.ts",
+      "import": "./dist/styled.js",
+      "require": "./dist/styled.cjs"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js",
+      "require": "./dist/theme.cjs"
+    },
+    "./button": {
+      "types": "./dist/button.d.ts",
+      "import": "./dist/button.js",
+      "require": "./dist/button.cjs"
+    },
+    "./style.css": {
+      "import": "./dist/style.css"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@internal/typescript-config": "workspace:*",
+    "@safetyculture/design-tokens": "3.1.1",
+    "@types/node": "^20.14.13",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@vanilla-extract/css": "^1.15.3",
+    "@vanilla-extract/recipes": "^0.5.3",
+    "@vanilla-extract/vite-plugin": "^4.0.13",
+    "@vitejs/plugin-react": "^4.3.1",
+    "react": "19.0.0-rc.0",
+    "typescript": "5.2.2",
+    "vite": "^5.3.5",
+    "vite-plugin-dts": "4.0.0-beta.2"
+  },
+  "peerDependencies": {
+    "@vanilla-extract/css": "^1.15.3",
+    "react": "*"
+  }
+}
