@@ -21,7 +21,6 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       entry: {
-        config: resolve(__dirname, "packages/react/config/index.ts"),
         theme: resolve(__dirname, "packages/theme/index.ts"),
         button: resolve(__dirname, "packages/react/button/index.ts"),
         styled: resolve(__dirname, "packages/react/styled/index.css.ts"),
@@ -32,7 +31,6 @@ export default defineConfig({
       // "@vanilla-extract/css"
       external: ["react", "react-dom", /^react\//],
       input: {
-        config: resolve(__dirname, "packages/react/config/index.ts"),
         theme: resolve(__dirname, "packages/theme/index.ts"),
         button: resolve(__dirname, "packages/react/button/index.ts"),
         styled: resolve(__dirname, "packages/react/styled/index.css.ts"),

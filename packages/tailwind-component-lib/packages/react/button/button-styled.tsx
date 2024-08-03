@@ -32,7 +32,7 @@ const button = tv({
     variation: {
       primary: [
         // Only fully migrated primary as an example
-        "text-white-default bg-accent-bg-default border-accent-bg-default",
+        "text-white-default bg-accent-bg-default border-accent-bg-default border",
         "enabled:hover:bg-accent-bg-hover",
         "enabled:focus-visible:bg-accent-bg-hover enabled:focus-visible:outline-2 enabled:focus-visible:outline-accent-bg-hover enabled:focus-visible:border-accent-bg-hover",
         "enabled:active:bg-accent-bg-pressed",

@@ -2,13 +2,6 @@ import { recipe } from "@vanilla-extract/recipes";
 import { theme } from "../styled/index.css";
 import pxToRem from "../utils/px-to-rem";
 import { DEFAULT_SIZE, DEFAULT_VARIATON } from "./constants";
-import type { Size } from "./types";
-
-export const iconSizeMap: Record<Size, string> = {
-  lg: pxToRem(20),
-  md: pxToRem(18),
-  sm: pxToRem(18),
-};
 
 export const button = recipe({
   base: {
