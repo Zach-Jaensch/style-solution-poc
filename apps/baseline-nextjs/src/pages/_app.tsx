@@ -1,12 +1,8 @@
-import {
-  ConfigProvider,
-  defaultConfig,
-} from "@internal/baseline-component-lib/config";
+import { ThemeProvider } from "@internal/baseline-component-lib/styled";
 import { GlobalStyle, maggie } from "@internal/baseline-component-lib/theme";
 import type { AppProps } from "next/app";
 import { Noto_Sans } from "next/font/google";
 import Head from "next/head";
-import { ThemeProvider } from "styled-components";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -24,13 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <GlobalStyle />
 
-      <ConfigProvider config={defaultConfig}>
-        <ThemeProvider theme={maggie}>
-          <main>
-            <Component {...pageProps} />
-          </main>
-        </ThemeProvider>
-      </ConfigProvider>
+      <ThemeProvider theme={maggie}>
+        <main>
+          <Component {...pageProps} />
+        </main>
+      </ThemeProvider>
     </div>
   );
 }

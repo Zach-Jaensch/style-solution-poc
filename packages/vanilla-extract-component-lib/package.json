@@ -45,5 +45,8 @@
   "peerDependencies": {
     "@vanilla-extract/css": "^1.15.3",
     "react": "*"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1"
   }
 }

@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./config": {
-      "types": "./dist/react/config/index.d.ts",
-      "import": "./dist/react/config/index.js",
-      "require": "./dist/cjs/react/config/index.js"
+    "./styled": {
+      "types": "./dist/react/styled/index.d.ts",
+      "import": "./dist/react/styled/index.js",
+      "require": "./dist/cjs/react/styled/index.js"
     },
     "./theme": {
       "types": "./dist/theme/index.d.ts",

@@ -1,20 +1,15 @@
+import cx from "classnames";
 import React, { forwardRef } from "react";
-import pxToRem from "../utils/px-to-rem";
 import { createPolymorphicComponent } from "../utils/types/polymorphic-component";
 import BaseButton from "./button";
 import { button } from "./button-styled.css";
 import { DEFAULT_SIZE } from "./constants";
 import type { Props, Size } from "./types";
 
-export const iconSizeMap: Record<Size, string> = {
-  lg: pxToRem(20),
-  md: pxToRem(18),
-  sm: pxToRem(18),
-};
-
 export const Button = forwardRef<HTMLButtonElement, Props>(
   (
     {
+      className,
       children,
       isLoading,
       disabled,
@@ -28,28 +23,31 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
   ) => {
     const startIcon =
       startIconProp &&
-      React.cloneElement<{ size: string }>(
-        startIconProp as React.ReactElement<{ size: string }>,
+      React.cloneElement<{ size: Size }>(
+        startIconProp as React.ReactElement<{ size: Size }>,
         {
-          size: iconSizeMap[size],
+          size,
         },
       );
 
     const endIcon =
       endIconProp &&
-      React.cloneElement<{ size: string }>(
-        endIconProp as React.ReactElement<{ size: string }>,
+      React.cloneElement<{ size: Size }>(
+        endIconProp as React.ReactElement<{ size: Size }>,
         {
-          size: iconSizeMap[size],
+          size,
         },
       );
 
     return (
       <BaseButton
-        className={button({
-          variation: !disabled ? variation : undefined,
-          size: !disabled ? size : undefined,
-        })}
+        className={cx(
+          className,
+          button({
+            variation: !disabled ? variation : undefined,
+            size: !disabled ? size : undefined,
+          }),
+        )}
         disabled={disabled ?? isLoading}
         isLoading={isLoading}
         ariaLabel={isLoading ? "loading" : undefined}

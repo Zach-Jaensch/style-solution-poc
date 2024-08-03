@@ -277,6 +277,10 @@ importers:
   packages/typescript-config: {}
 
   packages/vanilla-extract-component-lib:
+    dependencies:
+      classnames:
+        specifier: ^2.5.1
+        version: 2.5.1
     devDependencies:
       '@internal/typescript-config':
         specifier: workspace:*

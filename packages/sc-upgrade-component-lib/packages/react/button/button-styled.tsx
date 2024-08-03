@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import type { FlattenSimpleInterpolation } from "styled-components";
-import { SpinnerBase } from "../animations/spinner";
 import type { WithThemeProps } from "../styled";
 import styled, { css } from "../styled";
 import pxToRem from "../utils/px-to-rem";
@@ -223,13 +222,6 @@ export const StyledButton = styled(BaseButton)`
   ${buttonStyles}
 `;
 
-// We need to do this as spinner size and text are different
-// We need to make the button height the same, when it has text or spinner
-// At the moment, spinner only has fixed size for all button sizes.
-const SpinnerBaseStyled = styled(SpinnerBase)`
-  margin: ${pxToRem(3)} auto;
-`;
-
 export const Button = forwardRef<HTMLButtonElement, Props>(
   (
     {
@@ -271,7 +263,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
         ref={ref}
       >
         {isLoading ? (
-          <SpinnerBaseStyled data-anchor="button-spinner" />
+          <>Loading</>
         ) : (
           <>
             {startIcon}

@@ -1,16 +1,9 @@
 import React, { forwardRef } from "react";
 import { tv } from "tailwind-variants";
-import pxToRem from "../utils/px-to-rem";
 import { createPolymorphicComponent } from "../utils/types/polymorphic-component";
 import BaseButton from "./button";
 import { DEFAULT_SIZE, DEFAULT_VARIATON } from "./constants";
-import type { Props, Size } from "./types";
-
-export const iconSizeMap: Record<Size, string> = {
-  lg: pxToRem(20),
-  md: pxToRem(18),
-  sm: pxToRem(18),
-};
+import type { Props } from "./types";
 
 /*
   requires IDE configuration to get the tailwind IDE intellisense to work with tailwind-variants
@@ -38,6 +31,7 @@ const button = tv({
     },
     variation: {
       primary: [
+        // Only fully migrated primary as an example
         "text-white-default bg-accent-bg-default border-accent-bg-default",
         "enabled:hover:bg-accent-bg-hover",
         "enabled:focus-visible:bg-accent-bg-hover enabled:focus-visible:outline-2 enabled:focus-visible:outline-accent-bg-hover enabled:focus-visible:border-accent-bg-hover",
@@ -56,6 +50,7 @@ const button = tv({
 export const Button = forwardRef<HTMLButtonElement, Props>(
   (
     {
+      className,
       children,
       isLoading,
       disabled,
@@ -69,19 +64,19 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
   ) => {
     const startIcon =
       startIconProp &&
-      React.cloneElement<{ size: string }>(
-        startIconProp as React.ReactElement<{ size: string }>,
+      React.cloneElement<{ size: Props["size"] }>(
+        startIconProp as React.ReactElement<{ size: Props["size"] }>,
         {
-          size: iconSizeMap[size],
+          size,
         },
       );
 
     const endIcon =
       endIconProp &&
-      React.cloneElement<{ size: string }>(
-        endIconProp as React.ReactElement<{ size: string }>,
+      React.cloneElement<{ size: Props["size"] }>(
+        endIconProp as React.ReactElement<{ size: Props["size"] }>,
         {
-          size: iconSizeMap[size],
+          size,
         },
       );
 
@@ -90,6 +85,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
         className={button({
           variation: !disabled ? variation : undefined,
           size: !disabled ? size : undefined,
+          className,
         })}
         disabled={disabled ?? isLoading}
         isLoading={isLoading}
@@ -110,7 +106,5 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
     );
   },
 );
-
-export const Bu = React.memo(Button);
 
 export default createPolymorphicComponent<"button", Props>(Button);
