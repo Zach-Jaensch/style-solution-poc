@@ -3,9 +3,14 @@ import { Button as _TWButton } from "@internal/tailwind-component-lib/button";
 import { Button as _VEButton } from "@internal/vanilla-extract-component-lib/button";
 import styled from "styled-components";
 
-const Stack = styled.div`
-  display: grid;
-  grid-auto-flow: column;
+const HStack = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const VStack = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 `;
 
@@ -23,10 +28,20 @@ const TWButton = styled(_TWButton)`
 
 export default function Page() {
   return (
-    <Stack>
-      <SCButton onClick={console.log}>Styled components</SCButton>
-      <VEButton onClick={console.log}>Vanilla extract</VEButton>
-      <TWButton onClick={console.log}>Tailwind</TWButton>
-    </Stack>
+    <VStack>
+      <h1>Base components</h1>
+      <HStack>
+        <_SCButton onClick={console.log}>Styled components</_SCButton>
+        <_VEButton onClick={console.log}>Vanilla extract</_VEButton>
+        <_TWButton onClick={console.log}>Tailwind</_TWButton>
+      </HStack>
+
+      <h1>Overridden with styled-components</h1>
+      <HStack>
+        <SCButton onClick={console.log}>Styled components</SCButton>
+        <VEButton onClick={console.log}>Vanilla extract</VEButton>
+        <TWButton onClick={console.log}>Tailwind</TWButton>
+      </HStack>
+    </VStack>
   );
 }
