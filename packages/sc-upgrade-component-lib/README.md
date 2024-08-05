@@ -1,13 +1,13 @@
-# Baseline component lib
+# Upgrading styled-components component lib
 
-This package is a reflection of the current state of sc-web-ui using styled-components v5
+This package is a reflection of sc-web-ui using styled-components v6
 
 ## Installation
 
 To install this package, you can add the following to the dependencies in your app:
 
 ```json
-"@internal/baseline-component-lib": "workspace:*",
+"@internal/sc-upgrade-component-lib": "workspace:*",
 ```
 
 and run
@@ -21,7 +21,7 @@ pnpm install
 Here's a simple example of how to use this package:
 
 ```tsx
-import { Button } from "@internal/baseline-component-lib/button";
+import { Button } from "@internal/sc-upgrade-component-lib/button";
 
 export function SomeComponent() {
   function handleClick() {

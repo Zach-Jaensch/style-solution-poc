@@ -4,9 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "cl:dev": "turbo watch dev --filter=unified-library-app",
+    "baseline:dev": "turbo watch dev --filter=baseline-nextjs",
+    "overriding:dev": "turbo watch dev --filter=overriding-nextjs",
     "prettier": "prettier -c .",
-    "typecheck": "turbo typecheck --continue"
+    "tailwind:dev": "turbo watch dev --filter=tailwindcss-nextjs",
+    "typecheck": "turbo typecheck --continue",
+    "vanilla-extract:dev": "turbo watch dev --filter=vanilla-extract-nextjs"
   },
   "dependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",

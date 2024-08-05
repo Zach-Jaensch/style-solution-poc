@@ -1,13 +1,13 @@
-# Baseline component lib
+# vanilla-extract component lib
 
-This package is a reflection of the current state of sc-web-ui using styled-components v5
+This package is a reflection of sc-web-ui using vanilla-extract
 
 ## Installation
 
 To install this package, you can add the following to the dependencies in your app:
 
 ```json
-"@internal/baseline-component-lib": "workspace:*",
+"@internal/vanilla-extract-component-lib": "workspace:*",
 ```
 
 and run
@@ -21,7 +21,11 @@ pnpm install
 Here's a simple example of how to use this package:
 
 ```tsx
-import { Button } from "@internal/baseline-component-lib/button";
+// `pages/_app.tsx` or `app/layout.tsx`
+import "@internal/vanilla-extract-component-lib/style.css";
+
+// Any page file
+import { Button } from "@internal/vanilla-extract-component-lib/button";
 
 export function SomeComponent() {
   function handleClick() {
