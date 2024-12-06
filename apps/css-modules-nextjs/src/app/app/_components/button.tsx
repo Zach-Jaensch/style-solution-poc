@@ -1,5 +1,5 @@
 "use client";
-export { Button } from "@internal/baseline-component-lib/button";
+export { Button } from "@internal/css-modules-component-lib/button";
 
 // import { Button as _Button } from "@internal/baseline-component-lib/button";
 

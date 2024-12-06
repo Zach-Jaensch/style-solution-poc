@@ -1,7 +1,7 @@
 "use client";
 
-import { ThemeProvider } from "@internal/baseline-component-lib/styled";
-import { GlobalStyle, maggie } from "@internal/baseline-component-lib/theme";
+import { ThemeProvider } from "@internal/css-modules-component-lib/styled";
+import { GlobalStyle, maggie } from "@internal/css-modules-component-lib/theme";
 import { useServerInsertedHTML } from "next/navigation";
 import React, { useState } from "react";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
