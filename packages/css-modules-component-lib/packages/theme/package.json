@@ -1,0 +1,9 @@
+{
+  "name": "@sc-web-ui/theme",
+  "version": "0.1.0",
+  "description": "sc-web-ui theme",
+  "peerDependencies": {},
+  "dependencies": {
+    "@safetyculture/design-tokens": "3.1.1"
+  }
+}
