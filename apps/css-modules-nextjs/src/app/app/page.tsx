@@ -1,4 +1,4 @@
-import { Button } from "./_components/button";
+import { Button } from "@internal/css-modules-component-lib/button";
 
 async function handleClick() {
   "use server";
