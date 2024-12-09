@@ -1,26 +1,14 @@
 {
+  "extends": "@kaizen/package-bundler/tsconfig.base.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["es2021", "dom", "dom.iterable"],
-    "allowJs": false,
-    "jsx": "react",
-    "strict": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "baseUrl": "../",
-    "strictPropertyInitialization": false,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "useUnknownInCatchVariables": false,
-    "types": ["node"]
+    "baseUrl": "."
   },
-  "include": ["./*.d.ts", "./packages/**/*.ts", "./packages/**/*.tsx"],
-  "exclude": ["dist", "node_modules"]
+  "include": [
+    "./*.d.ts",
+    "./packages/**/*.ts",
+    "./packages/**/*.tsx",
+    "packages/react/button/button-styled.tsx"
+  ],
+  "exclude": ["dist", "node_modules"],
+  "files": ["./types.d.ts"]
 }

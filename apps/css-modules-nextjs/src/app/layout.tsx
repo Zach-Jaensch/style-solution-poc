@@ -1,11 +1,9 @@
-import { StyledComponentsRegistry } from "./_components/styled-reg";
+import "@internal/css-modules-component-lib/styles.css";
 
 export default function Root({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <StyledComponentsRegistry>
-        <body>{children}</body>
-      </StyledComponentsRegistry>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@internal/baseline-component-lib/styled";
-import { GlobalStyle, maggie } from "@internal/baseline-component-lib/theme";
+import "@internal/css-modules-component-lib/styles.css";
 import type { AppProps } from "next/app";
 import { Noto_Sans } from "next/font/google";
 import Head from "next/head";
@@ -18,13 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/assets/favicon.ico" />
       </Head>
 
-      <GlobalStyle />
-
-      <ThemeProvider theme={maggie}>
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </ThemeProvider>
+      <main>
+        <Component {...pageProps} />
+      </main>
     </div>
   );
 }

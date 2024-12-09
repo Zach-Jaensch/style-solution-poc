@@ -1,5 +1,5 @@
 {
-  "name": "baseline-nextjs",
+  "name": "css-modules-nextjs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.3.0",
-    "@internal/baseline-component-lib": "workspace:*",
+    "@internal/css-modules-component-lib": "workspace:*",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc.0",
     "react-dom": "19.0.0-rc.0",
