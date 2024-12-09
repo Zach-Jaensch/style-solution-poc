@@ -1,4 +1,4 @@
-# `baseline-nextjs` Next.js app
+# `css-modules-nextjs` Next.js app
 
 This is a [Next.js](https://nextjs.org/) project.
 
