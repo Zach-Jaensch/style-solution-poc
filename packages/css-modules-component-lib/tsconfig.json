@@ -1,0 +1,14 @@
+{
+  "extends": "@kaizen/package-bundler/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "./*.d.ts",
+    "./packages/**/*.ts",
+    "./packages/**/*.tsx",
+    "packages/react/button/button-styled.tsx"
+  ],
+  "exclude": ["dist", "node_modules"],
+  "files": ["./types.d.ts"]
+}

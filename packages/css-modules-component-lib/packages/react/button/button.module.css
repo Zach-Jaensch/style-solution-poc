@@ -1,0 +1,85 @@
+* {
+  --font-size-label-medium: 0.875rem;
+
+  --radii-sm: 0.5rem;
+
+  --space-s1: 0.25rem;
+  --space-s2: 0.5rem;
+  --space-s3: 0.75rem;
+  --space-s4: 1rem;
+
+  --colors-accent-bg-default: #6559ff;
+  --colors-accent-bg-hover: #7470f5;
+  --colors-accent-bg-pressed: #564be7;
+  --colors-white-default: #fff;
+}
+
+@layer components {
+  .button {
+    --button-size: 2.5rem;
+    --button-radius: var(--radii-sm);
+    --button-gap: var(--space-s1);
+    --button-padding-x: var(--space-s2);
+    --button-padding-y: var(--space-s3);
+    --button-border-color: transparent;
+    --button-color: var(--colors-white-default);
+    --button-bg-color: var(--colors-white-default);
+    --button-bg-hover: transparent;
+    --button-bg-pressed: transparent;
+
+    margin: 0;
+    border: 1px solid;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-label-medium);
+    line-height: 22px;
+    transition: background-color 200ms ease 0s;
+    user-select: none;
+    min-height: var(--button-size);
+    min-width: var(--button-size);
+    border-radius: var(--button-radius);
+    padding: var(--button-padding-x) var(--button-padding-y);
+    gap: var(--button-gap);
+    border-color: var(--button-border-color);
+    color: var(--button-color);
+    background-color: var(--button-bg-color);
+
+    &:not([disabled]):hover {
+      cursor: pointer;
+    }
+
+    &:disabled:hover {
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: var(--button-bg-hover);
+    }
+
+    &:pressed {
+      background-color: var(--button-bg-pressed);
+    }
+  }
+
+  .sm {
+    --button-size: 2rem;
+    --button-padding-y: var(--space-s1);
+  }
+
+  .md {
+    --button-size: 2.5rem;
+  }
+
+  .lg {
+    --button-size: 3rem;
+    --button-padding-x: var(--space-s4);
+    --button-padding-y: var(--space-s3);
+  }
+
+  .primary {
+    --button-bg-color: var(--colors-accent-bg-default);
+    --button-bg-hover: var(--colors-accent-bg-hover);
+    --button-bg-pressed: var(--colors-accent-bg-pressed);
+  }
+}
